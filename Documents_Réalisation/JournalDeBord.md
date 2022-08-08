@@ -1,7 +1,10 @@
 # Journal de Bord
 
 ## Rencontre 0: (8 août 2022)
-Écrire ici...
+- Mise en place de la structure du dépôt git
+- Mise en place du projet sur la plateforme de gestion de projets Trello
+- Nous avons décidé d'attribuer les rôles de chacun (scrum master et product manager) lors de la prochaine rencontre
+- Nous déterminerons également le guide de style qui sera utilisé tout au long de la réalisation du projet
 
 ## Rencontre 1: (11 août 2022)
 ## Rencontre 2: (15 août 2022)
