@@ -6,8 +6,13 @@
 - Nous avons décidé d'attribuer les rôles de chacun (scrum master et product manager) lors de la prochaine rencontre
 - Nous déterminerons également le guide de style qui sera utilisé tout au long de la réalisation du projet
 
-## Rencontre 1: (11 août 2022)
-## Rencontre 2: (15 août 2022)
+## Rencontre 1: (15 août 2022)
+- Rédaction du résumé d'équipe sur les principes agiles
+- Détermination des rôles (Éric - Product Manager, Julien - Scrum Master)
+- Rédaction des normes de programmation qui seront utilisées dans le projet
+- Ébauche vision du projet (conception de maquette)
+
+## Rencontre 2: (18 août 2022)
 ## Rencontre 3: (18 août 2022)
 ## Rencontre 4: (22 août 2022)
 ## Rencontre 5: (25 août 2022)
