@@ -35,3 +35,5 @@ bin/
 build/
 /bin1/
 java/build/**
+projetfinal/target/test-classes/com/groupe1/MainTest.class
+projetfinal/target/classes/com/groupe1/Main.class

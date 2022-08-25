@@ -13,6 +13,8 @@ public class Main
             // String nom_fichier = args[1];
             
             ArrayList<EmployeProjet> employe_projets = LecteurJson.lireFichier("feuilletemps.json");
+
+            System.out.println(employe_projets);
         }
     }
 
