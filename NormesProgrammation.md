@@ -1,4 +1,5 @@
 # Normes de programmation
+* Utilisation du programme Visual Studio Code
 
 ## Conventions de nommage des variables et langue
 * Privilégier l'usage du français dans la documentation, les commentaires les noms de variables et méthodes sauf

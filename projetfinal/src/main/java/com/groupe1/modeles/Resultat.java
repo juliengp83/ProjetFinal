@@ -17,8 +17,7 @@ import java.util.ArrayList;
    au bureau (code_projet inferieur à 1000) les jours ouvrables.
  */
 
-public class Resultat {
-    
+public class Resultat {    
     private int numero_employe;
     private ArrayList<Regle> regles;
     
@@ -36,11 +35,11 @@ public class Resultat {
         this.regles = regles;
     }
 
-    public int getNumero_employe() {
+    public int getNumeroEmploye() {
         return numero_employe;
     }
 
-    public void setNumero_employe(int numero_employe) {
+    public void setNumeroEmploye(int numero_employe) {
         this.numero_employe = numero_employe;
     }
 
@@ -51,7 +50,7 @@ public class Resultat {
     public void setRegles(ArrayList<Regle> regles) {
         this.regles = regles;
     }
-    
+
     public void ajouterRegle(Regle regle) {
         regles.add(regle);
     }

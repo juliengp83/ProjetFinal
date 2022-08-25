@@ -12,7 +12,7 @@ public class Main
 {
     public static void main( String[] args )
     {
-        if(args.length == 0){
+        if(args.length == 0) {
             // String nom_fichier = args[1];
             
             ArrayList<EmployeProjet> employe_projets = LecteurJson.lireFichier("feuilletemps.json");
@@ -20,7 +20,7 @@ public class Main
             System.out.println(employe_projets);
 
             Resultat resultat_traitement = TraitementFeuille.traitement(employe_projets);
-            boolean resultatEstEcrit = EcritureJson.ecrireFichier(resultat_traitement, "result.json");
+            boolean resultat_est_ecrit = EcritureJson.ecrireFichier(resultat_traitement, "result.json");
         }
     }
 

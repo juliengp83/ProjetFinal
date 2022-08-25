@@ -9,8 +9,6 @@ import com.groupe1.modeles.Regle;
 import com.groupe1.modeles.Resultat;
 
 public class TraitementFeuille {
-
-    
     public static Resultat traitement(ArrayList<EmployeProjet> employe_projets) {
         Resultat res = new Resultat();
 

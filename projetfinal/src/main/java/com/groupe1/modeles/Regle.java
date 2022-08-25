@@ -14,19 +14,19 @@ public class Regle {
         this.message = message;
     }
 
-    public int getId_regle() {
+    public int getIdRegle() {
         return id_regle;
     }
 
-    public void setId_regle(int id_regle) {
+    public void setIdRegle(int id_regle) {
         this.id_regle = id_regle;
     }
 
-    public boolean isEst_respectee() {
+    public boolean estRespectee() {
         return est_respectee;
     }
 
-    public void setEst_respectee(boolean est_respectee) {
+    public void setRespectee(boolean est_respectee) {
         this.est_respectee = est_respectee;
     }
 
