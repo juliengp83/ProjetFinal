@@ -3,7 +3,10 @@ package com.groupe1;
 import java.util.ArrayList;
 
 import com.groupe1.modeles.EmployeProjet;
+import com.groupe1.modeles.Resultat;
+import com.groupe1.utils.EcritureJson;
 import com.groupe1.utils.LecteurJson;
+import com.groupe1.utils.TraitementFeuille;
 
 public class Main 
 {
@@ -15,6 +18,9 @@ public class Main
             ArrayList<EmployeProjet> employe_projets = LecteurJson.lireFichier("feuilletemps.json");
 
             System.out.println(employe_projets);
+
+            Resultat resultat_traitement = TraitementFeuille.traitement(employe_projets);
+            boolean resultatEstEcrit = EcritureJson.ecrireFichier(resultat_traitement, "result.json");
         }
     }
 
