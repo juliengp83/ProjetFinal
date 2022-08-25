@@ -1,13 +1,19 @@
 package com.groupe1;
 
-/**
- * Hello world!
- *
- */
+import java.util.ArrayList;
+
+import com.groupe1.modeles.EmployeProjet;
+import com.groupe1.utils.LecteurJson;;
+
 public class Main 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        if(args.length == 0){
+            // String nom_fichier = args[1];
+            
+            ArrayList<EmployeProjet> employe_projets = LecteurJson.lireFichier("feuilletemps.json");
+        }
     }
+
 }
