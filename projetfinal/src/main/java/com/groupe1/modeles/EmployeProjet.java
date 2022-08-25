@@ -15,9 +15,9 @@ public class EmployeProjet {
     public EmployeProjet() {
     }
     
-    public EmployeProjet(int id_employeprojet, int numero_employe, int numero_projet, int id_feuille_temps,
+    public EmployeProjet(int id_employe_projet, int numero_employe, int numero_projet, int id_feuille_temps,
             int temps_travail, Date date_travail) {
-        this.id_employe_projet = id_employeprojet;
+        this.id_employe_projet = id_employe_projet;
         this.numero_employe = numero_employe;
         this.numero_projet = numero_projet;
         this.id_feuille_temps = id_feuille_temps;
@@ -25,12 +25,12 @@ public class EmployeProjet {
         this.date_travail = date_travail;
     }
 
-    public int getId_employeprojet() {
+    public int getId_employe_projet() {
         return id_employe_projet;
     }
 
-    public void setId_employeprojet(int id_employeprojet) {
-        this.id_employe_projet = id_employeprojet;
+    public void setId_employeprojet(int id_employe_projet) {
+        this.id_employe_projet = id_employe_projet;
     }
 
     public int getNumero_employe() {
@@ -78,7 +78,7 @@ public class EmployeProjet {
 
     @Override
     public String toString() {
-        return "EmployeProjet [date_travail=" + getDate_travail() + ", id_employeprojet=" + id_employe_projet
+        return "EmployeProjet [date_travail=" + getDate_travail() + ", id_employe_projet=" + id_employe_projet
                 + ", id_feuille_temps=" + id_feuille_temps + ", numero_employe=" + numero_employe + ", numero_projet="
                 + numero_projet + ", temps_travail=" + temps_travaille + "]";
     }
