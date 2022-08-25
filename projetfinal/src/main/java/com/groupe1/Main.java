@@ -3,7 +3,7 @@ package com.groupe1;
 import java.util.ArrayList;
 
 import com.groupe1.modeles.EmployeProjet;
-import com.groupe1.utils.LecteurJson;;
+import com.groupe1.utils.LecteurJson;
 
 public class Main 
 {
