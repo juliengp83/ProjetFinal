@@ -50,8 +50,8 @@ public class TraitementFeuille {
    
         Regle regle;
         String message;
-        int minutesTravailleesBureau = 0;
-        int tempsRequisEnMinutes = 60*38;
+        int minutes_travaillees_bureau = 0;
+        int temps_requis_en_minutes = 60*38;
         int numero_employe = employe_projets.get(0).getNumeroEmploye();
         if (numero_employe < 1000) {
             message = "Il s'agit d'un employé de l'administration donc il remplit forcément cette règle";
@@ -60,9 +60,9 @@ public class TraitementFeuille {
         else {
             for (EmployeProjet emp_p : employe_projets) {
                 if (emp_p.getNumeroProjet() < 900) 
-                    minutesTravailleesBureau += emp_p.getTempsTravail();
+                    minutes_travaillees_bureau += emp_p.getTempsTravail();
             }
-            if (minutesTravailleesBureau < tempsRequisEnMinutes) {
+            if (minutes_travaillees_bureau < temps_requis_en_minutes) {
                 message = "L'employé régulier n'a pas travaillé au moins 38 heures au bureau cette semaine.";
                 regle = new Regle(2, false, message);
             }
