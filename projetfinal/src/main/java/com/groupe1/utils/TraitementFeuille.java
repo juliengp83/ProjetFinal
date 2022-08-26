@@ -13,9 +13,10 @@ public class TraitementFeuille {
         Resultat res = new Resultat();
 
         Regle r = testRegle1();
-        res.ajouterRegle(r);
-        r = testRegle2();
-        res.ajouterRegle(r);
+        //res.ajouterRegle(r);
+        r = testRegle2(employe_projets);
+        //res.ajouterRegle(r);
+        /* 
         r = testRegle3();
         res.ajouterRegle(r);
         r = testRegle4();
@@ -26,6 +27,7 @@ public class TraitementFeuille {
         res.ajouterRegle(r);       
         r = testRegle7();
         res.ajouterRegle(r);       
+        */
         
         return res;
     }
@@ -41,11 +43,34 @@ public class TraitementFeuille {
         return regle;
     }
 
-    public static Regle testRegle2() {
+    // Méthode testée manuellement, fonctionne correctement
+    public static Regle testRegle2(ArrayList<EmployeProjet> employe_projets) {
         //Test #2 : Les employes normaux (numero_employe est SUPERIEUR à 1000) doivent travailler AU MOINS 38 heures au
         //bureau par semaine (code_projet inferieur à 900).
    
-        Regle regle = new Regle();
+        Regle regle;
+        String message;
+        int minutesTravailleesBureau = 0;
+        int tempsRequisEnMinutes = 60*38;
+        int numero_employe = employe_projets.get(0).getNumeroEmploye();
+        if (numero_employe < 1000) {
+            message = "Il s'agit d'un employé de l'administration donc il remplit forcément cette règle";
+            regle = new Regle(2, true, message);
+        }
+        else {
+            for (EmployeProjet emp_p : employe_projets) {
+                if (emp_p.getNumeroProjet() < 900) 
+                    minutesTravailleesBureau += emp_p.getTempsTravail();
+            }
+            if (minutesTravailleesBureau < tempsRequisEnMinutes) {
+                message = "L'employé régulier n'a pas travaillé au moins 38 heures au bureau cette semaine.";
+                regle = new Regle(2, false, message);
+            }
+            else {
+                message = "L'employé régulier a travaillé au moins 38 heures au bureau cette semaine.";
+                regle = new Regle(2, true, message);
+            }
+        }
 
         return regle;
     }

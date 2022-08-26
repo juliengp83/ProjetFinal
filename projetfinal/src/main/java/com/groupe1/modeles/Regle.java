@@ -37,9 +37,9 @@ public class Regle {
     public void setMessage(String message) {
         this.message = message;
     }
-    
+
     @Override
     public String toString() {
-        return "Regle [est_respectee=" + est_respectee + ", id_regle=" + id_regle + "]";
+        return "Regle [est_respectee=" + est_respectee + ", id_regle=" + id_regle + ", message=" + message + "]";
     }
 }
