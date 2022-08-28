@@ -1,6 +1,8 @@
 package com.groupe1.utils;
 
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -20,17 +22,19 @@ public class TraitementFeuille {
         r3 = testRegle3(employe_projets);
         //res.ajouterRegle(r);
         
-        /* 
-        res.ajouterRegle(r);
-        r = testRegle4();
-        res.ajouterRegle(r);
-        r = testRegle5();
-        res.ajouterRegle(r);       
-        r = testRegle6();
-        res.ajouterRegle(r);       
-        r = testRegle7();
-        res.ajouterRegle(r);       
-        */
+
+        // res.ajouterRegle(r);
+        // r = testRegle4();
+        // res.ajouterRegle(r);
+        // r = testRegle5();
+        // res.ajouterRegle(r);       
+
+        Regle r6 = testRegle6(employe_projets);
+
+        // res.ajouterRegle(r);       
+        // r = testRegle7();
+        // res.ajouterRegle(r);       
+
         
         return res;
     }
@@ -127,11 +131,34 @@ public class TraitementFeuille {
         return regle;
     }
 
-    public static Regle testRegle6() {
+    public static Regle testRegle6(ArrayList<EmployeProjet> employe_projets) {
         //Test #6 : Les employés normaux (numero_employe superieur à 1000) doivent faire un minimum de 6 heures au 
-        //bureau (code_projet inferieur à 1000) les jours ouvrables.
-   
-        Regle regle = new Regle();
+        //bureau (code_projet inferieur à 900) les jours ouvrables.
+
+        Regle regle;
+        String message;
+        int minutes_travaillees_bureau = 0;
+        int temps_requis_en_minutes = 60*6;
+        int numero_employe = employe_projets.get(0).getNumeroEmploye();
+
+        if (numero_employe < 1000) {
+            message = "Il s'agit d'un employé de l'administration donc il remplit forcément cette règle";
+            regle = new Regle(6, true, message);
+        } else {
+            for (EmployeProjet emp_p : employe_projets) {
+                if (emp_p.getNumeroProjet() < 900 && emp_p.getJourDeSemaineTravaille() >= 1 
+                    && emp_p.getJourDeSemaineTravaille() <= 5){
+                    minutes_travaillees_bureau += emp_p.getTempsTravail();
+                }
+            }
+            if(minutes_travaillees_bureau < temps_requis_en_minutes){
+                message = "L'employé a travaillé moins de 6 heures au bureau cette semaine durant les jours ouvrables.";
+                regle = new Regle(6, false, message);
+            } else {
+               message = "L'employé a travaillé plus de 6 heures au bureau cette semaine durant les jours ouvrables."; 
+               regle = new Regle(6, true, message);
+            }
+        }
 
         return regle;
     }

@@ -65,11 +65,24 @@ public class EmployeProjet {
         this.temps_travaille = temps_travaille;
     }
 
-    public String getDateTravail() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MMMMM-dd", Locale.CANADA_FRENCH);
+    public Date getDateTravail() {
+        return date_travail;
+    }
 
-        String date = simpleDateFormat.format(date_travail);
+    public String getDateTravailFormatter() {
+        SimpleDateFormat simple_date_format = new SimpleDateFormat("yyyy-MMMMM-dd", Locale.CANADA_FRENCH);
+
+        String date = simple_date_format.format(date_travail);
         return date;
+    }
+
+    public int getJourDeSemaineTravaille() {
+        SimpleDateFormat simple_date_format = new SimpleDateFormat("u");
+        String jour_semaine = simple_date_format.format(this.date_travail);
+
+        int jour_semaine_chiffre = Integer.parseInt(jour_semaine);
+
+        return jour_semaine_chiffre;
     }
 
     public void setDateTravail(Date date_travail) {
