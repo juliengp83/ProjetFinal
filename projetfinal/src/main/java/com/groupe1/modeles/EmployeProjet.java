@@ -1,6 +1,10 @@
 package com.groupe1.modeles;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalField;
+import java.time.temporal.WeekFields;
 import java.util.Date;
 import java.util.Locale;
 
@@ -85,6 +89,15 @@ public class EmployeProjet {
         return jour_semaine_chiffre;
     }
 
+    public int getNumeroSemaine() {
+        DateTimeFormatter aFormatter = DateTimeFormatter.ofPattern("yyyy-MMMMM-dd");
+        LocalDate date = LocalDate.parse(getDateTravailFormatter(), aFormatter);
+        WeekFields wf = WeekFields.of(Locale.getDefault());
+        TemporalField weekNum = wf.weekOfWeekBasedYear();
+        int numero_semaine = Integer.parseInt(String.format("%02d", date.get(weekNum)));
+
+        return numero_semaine;
+    }
     public void setDateTravail(Date date_travail) {
         this.date_travail = date_travail;
     }
