@@ -86,9 +86,10 @@ public class EmployeProjet {
         WeekFields wf = WeekFields.of(Locale.getDefault());
         TemporalField weekNum = wf.weekOfWeekBasedYear();
         int week = Integer.parseInt(String.format("%02d", date.get(weekNum)));
-    
+
         return week;
     }
+    
     @Override
     public String toString() {
         return "EmployeProjet [date_travail=" + getDateTravail() + ", id_employe_projet=" + id_employe_projet

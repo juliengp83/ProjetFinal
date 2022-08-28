@@ -13,14 +13,14 @@ public class TraitementFeuille {
         Resultat res = new Resultat();
 
         Regle r = testRegle1(employe_projets);
-        // res.ajouterRegle(r);
+        //res.ajouterRegle(r);
         r = testRegle2(employe_projets);
         // res.ajouterRegle(r);
         r = testRegle3(employe_projets);
         // res.ajouterRegle(r);
-        r = testRegle4();
+        r = testRegle4(employe_projets);
         // res.ajouterRegle(r);
-        r = testRegle5();
+        r = testRegle5(employe_projets);
         // res.ajouterRegle(r);
         r = testRegle6();
         // res.ajouterRegle(r);
@@ -132,7 +132,7 @@ public class TraitementFeuille {
         int numero_employe = employe_projets.get(0).getNumeroEmploye();
 
         if (numero_employe > 1000) {
-            message = "Il s'agit d'un employé normal qui n'est assujeti par le règle.";
+            message = "Il s'agit d'un employé normal qui n'est assujetti par le règle.";
         } else {
             for (EmployeProjet emp_p : employe_projets) {
                 if (emp_p.getNumeroProjet() > 1000) {
