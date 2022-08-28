@@ -12,12 +12,12 @@ public class TraitementFeuille {
     public static Resultat traitement(ArrayList<EmployeProjet> employe_projets) {
         Resultat res = new Resultat();
 
-        Regle r = testRegle1();
+        Regle r = testRegle2(employe_projets);
         //res.ajouterRegle(r);
         r = testRegle2(employe_projets);
 
-        //Regle r3 = testRegle3();
-        r = testRegle3(employe_projets);
+        Regle r3 = testRegle3(employe_projets);
+        r3 = testRegle3(employe_projets);
         //res.ajouterRegle(r);
         
         /* 
@@ -35,8 +35,6 @@ public class TraitementFeuille {
         return res;
     }
     
-    
-
     public static Regle testRegle1() {
         Regle regle;
 
