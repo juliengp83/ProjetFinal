@@ -15,9 +15,12 @@ public class TraitementFeuille {
         Regle r = testRegle1();
         //res.ajouterRegle(r);
         r = testRegle2(employe_projets);
+
+        //Regle r3 = testRegle3();
+        r = testRegle3(employe_projets);
         //res.ajouterRegle(r);
+        
         /* 
-        r = testRegle3();
         res.ajouterRegle(r);
         r = testRegle4();
         res.ajouterRegle(r);
@@ -32,6 +35,8 @@ public class TraitementFeuille {
         return res;
     }
     
+    
+
     public static Regle testRegle1() {
         Regle regle;
 
@@ -75,11 +80,34 @@ public class TraitementFeuille {
         return regle;
     }
 
-    public static Regle testRegle3() {
+    /**
+     * @param employe_projets
+     * @return
+     */
+    public static Regle testRegle3(ArrayList<EmployeProjet> employe_projets ) {
         //Test #3 : Aucun employé n'a le droit de passer plus de 43 heures au bureau (code_projet inferieur à 900).
         
-        Regle regle = new Regle();
-        
+        Regle regle;
+        String message;
+        int minutes_travaillees_bureau = 0;
+        int temps_requis_en_minutes = 60*43;
+
+                for (EmployeProjet emp_p : employe_projets)
+                {
+                    if (emp_p.getNumeroProjet() < 900)
+                    minutes_travaillees_bureau += emp_p.getTempsTravail(); 
+                }
+                if(minutes_travaillees_bureau > temps_requis_en_minutes) 
+                {
+                    message = "L'employé travaillé plus de 43 heures au bureau cette semaine.";
+                    regle = new Regle(3, false, message);
+                }
+                else
+                {
+                   message = "L'employé n'a pas travaillé plus de 43 heures au bureau cette semaine."; 
+                   regle = new Regle(3, true, message);
+                }
+        //Regle regle = new Regle();
         return regle;
     }
 
