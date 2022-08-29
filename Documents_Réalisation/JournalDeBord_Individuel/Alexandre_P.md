@@ -19,3 +19,7 @@
 * Créer la structure du projet avec maven
 * Organisation de notre package pour les modeles et utils
 * Création et test de la classe de lecture de fichier Json
+
+## 28 aout 2022
+* Ajouter la règle 6 à notre traitement de feuille
+* Modifier la classe EmployeProjet pour avoir plusieurs type de date en retour

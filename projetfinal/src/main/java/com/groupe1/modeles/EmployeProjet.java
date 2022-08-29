@@ -90,14 +90,14 @@ public class EmployeProjet {
     }
 
     public int getNumeroSemaine() {
-        DateTimeFormatter aFormatter = DateTimeFormatter.ofPattern("yyyy-MMMMM-dd");
-        LocalDate date = LocalDate.parse(getDateTravailFormatter(), aFormatter);
-        WeekFields wf = WeekFields.of(Locale.getDefault());
-        TemporalField weekNum = wf.weekOfWeekBasedYear();
-        int numero_semaine = Integer.parseInt(String.format("%02d", date.get(weekNum)));
+        SimpleDateFormat simple_date_format = new SimpleDateFormat("w");
+        String semaine = simple_date_format.format(this.date_travail);
 
-        return numero_semaine;
+        int semaine_chiffre = Integer.parseInt(semaine);
+
+        return semaine_chiffre;
     }
+
     public void setDateTravail(Date date_travail) {
         this.date_travail = date_travail;
     }
