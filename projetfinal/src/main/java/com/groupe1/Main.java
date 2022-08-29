@@ -12,16 +12,21 @@ public class Main
 {
     public static void main( String[] args )
     {
-        if(args.length == 0) {
-            // String nom_fichier = args[1];
+        if(args.length == 2) {
+            String nom_fichier_entree = args[0];
+            String nom_fichier_sortie = args[1];
             
-            ArrayList<EmployeProjet> employe_projets = LecteurJson.lireFichier("feuilletemps.json");
-
-            //System.out.println(employe_projets);
+            ArrayList<EmployeProjet> employe_projets = LecteurJson.lireFichier(nom_fichier_entree);
 
             Resultat resultat_traitement = TraitementFeuille.traitement(employe_projets);
-            boolean resultat_est_ecrit = EcritureJson.ecrireFichier(resultat_traitement, "result.json");
+            boolean resultat_est_ecrit = EcritureJson.ecrireFichier(resultat_traitement, nom_fichier_sortie);
 
+        } else if(args.length < 2) {
+            System.out.println("Vous n'avez pas entré assez d'arguments lors de l'exécution du programme." +
+            "Voici un exemple: java -jar leNomDuFichier.jar <fichier entrée> <fichier sortie>.");
+        } else {
+            System.out.println("Vous avez entré plus de 2 arguments lors de l'exécution du programme." +
+            "Voici un exemple: java -jar leNomDuFichier.jar <fichier entrée> <fichier sortie>.");
         }
     }
 
