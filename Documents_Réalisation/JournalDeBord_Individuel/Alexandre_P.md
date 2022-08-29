@@ -23,3 +23,8 @@
 ## 28 aout 2022
 * Ajouter la règle 6 à notre traitement de feuille
 * Modifier la classe EmployeProjet pour avoir plusieurs type de date en retour
+
+## 29 aout 2022
+* Ajouter la méthode d'écriture de fichier json
+* Rendre le Main plus clair et fonctionnel avec des arguments
+* Ajouter les dépendances maven pour avoir un build Jar avec les dépendances
