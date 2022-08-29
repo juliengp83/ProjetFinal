@@ -22,7 +22,6 @@
 			"id_feuille_temps": 1,
 			"temps_travaille": 60,
 			"date_travail": "2022-08-25"
-
 		},
 		{
 			"id_employe_projet": 4,
@@ -63,7 +62,6 @@
 			"id_feuille_temps": 1,
 			"temps_travaille": 60,
 			"date_travail": "2022-08-26"
-
 		},
 		{
 			"id_employe_projet": 9,
@@ -104,7 +102,6 @@
 			"id_feuille_temps": 1,
 			"temps_travaille": 60,
 			"date_travail": "2022-08-27"
-
 		},
 		{
 			"id_employe_projet": 14,
@@ -145,7 +142,6 @@
 			"id_feuille_temps": 1,
 			"temps_travaille": 60,
 			"date_travail": "2022-08-28"
-
 		},
 		{
 			"id_employe_projet": 19,

@@ -12,7 +12,7 @@
 			"numero_employe": 1500,
 			"numero_projet": 400,
 			"id_feuille_temps": 1,
-			"temps_travaille": 60,
+			"temps_travaille": 300,
 			"date_travail": "2022-08-25"
 		},
 		{
@@ -20,9 +20,8 @@
 			"numero_employe": 1500,
 			"numero_projet": 350,
 			"id_feuille_temps": 1,
-			"temps_travaille": 60,
+			"temps_travaille": 300,
 			"date_travail": "2022-08-25"
-
 		},
 		{
 			"id_employe_projet": 4,
@@ -63,7 +62,6 @@
 			"id_feuille_temps": 1,
 			"temps_travaille": 60,
 			"date_travail": "2022-08-26"
-
 		},
 		{
 			"id_employe_projet": 9,
