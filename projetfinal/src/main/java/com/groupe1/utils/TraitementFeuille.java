@@ -1,10 +1,6 @@
 package com.groupe1.utils;
 
-import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 import com.groupe1.modeles.EmployeProjet;
 import com.groupe1.modeles.Regle;
@@ -13,29 +9,31 @@ import com.groupe1.modeles.Resultat;
 public class TraitementFeuille {
     public static Resultat traitement(ArrayList<EmployeProjet> employe_projets) {
         Resultat res = new Resultat();
+        Regle r = new Regle();
 
-        Regle r = testRegle2(employe_projets);
-        //res.ajouterRegle(r);
+        res.setNumeroEmploye(employe_projets.get(0).getNumeroEmploye());
+
+        r = testRegle1(employe_projets);
+        res.ajouterRegle(r);
+
         r = testRegle2(employe_projets);
+        res.ajouterRegle(r);
 
-        Regle r3 = testRegle3(employe_projets);
-        r3 = testRegle3(employe_projets);
-        //res.ajouterRegle(r);
+        r = testRegle3(employe_projets);
+        res.ajouterRegle(r);
         
+        r = testRegle4(employe_projets);
+        res.ajouterRegle(r);
 
-        // res.ajouterRegle(r);
-        // r = testRegle4();
-        // res.ajouterRegle(r);
-        // r = testRegle5();
-        // res.ajouterRegle(r);       
+        r = testRegle5(employe_projets);
+        res.ajouterRegle(r);
+      
+        r = testRegle6(employe_projets);
+        res.ajouterRegle(r); 
 
-        Regle r6 = testRegle6(employe_projets);
+        r = testRegle7(employe_projets);
+        res.ajouterRegle(r);       
 
-        // res.ajouterRegle(r);       
-        // r = testRegle7();
-        // res.ajouterRegle(r);       
-
-        
         return res;
     }
     

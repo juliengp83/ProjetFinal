@@ -1,10 +1,6 @@
 package com.groupe1.modeles;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalField;
-import java.time.temporal.WeekFields;
 import java.util.Date;
 import java.util.Locale;
 

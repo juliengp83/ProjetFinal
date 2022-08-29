@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class Resultat {    
     private int numero_employe;
-    private ArrayList<Regle> regles;
+    private ArrayList<Regle> regles = new ArrayList<Regle>();
     
     public Resultat() {
         
@@ -52,7 +52,7 @@ public class Resultat {
     }
 
     public void ajouterRegle(Regle regle) {
-        regles.add(regle);
+        this.regles.add(regle);
     }
 
     @Override

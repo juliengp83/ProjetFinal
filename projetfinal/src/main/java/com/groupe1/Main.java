@@ -22,7 +22,6 @@ public class Main
             Resultat resultat_traitement = TraitementFeuille.traitement(employe_projets);
             boolean resultat_est_ecrit = EcritureJson.ecrireFichier(resultat_traitement, "result.json");
 
-            
         }
     }
 
