@@ -88,11 +88,11 @@ public class TraitementFeuille {
                 if (emp_p.getNumeroProjet() <= 900) 
                     minutes_travaillees_bureau += emp_p.getTempsTravail();
             }
+
             if (minutes_travaillees_bureau < temps_requis_en_minutes) {
                 message = "L'employé régulier n'a pas travaillé au moins 38 heures au bureau cette semaine.";
                 regle = new Regle(2, false, message);
-            }
-            else {
+            } else {
                 message = "L'employé régulier a travaillé au moins 38 heures au bureau cette semaine.";
                 regle = new Regle(2, true, message);
             }
@@ -113,22 +113,19 @@ public class TraitementFeuille {
         int minutes_travaillees_bureau = 0;
         int temps_requis_en_minutes = 60*43;
 
-                for (EmployeProjet emp_p : employe_projets)
-                {
+                for (EmployeProjet emp_p : employe_projets) {
                     if (emp_p.getNumeroProjet() <= 900)
                     minutes_travaillees_bureau += emp_p.getTempsTravail(); 
                 }
-                if(minutes_travaillees_bureau > temps_requis_en_minutes) 
-                {
+
+                if (minutes_travaillees_bureau > temps_requis_en_minutes) {
                     message = "L'employé travaillé plus de 43 heures au bureau cette semaine.";
                     regle = new Regle(3, false, message);
+                } else {
+                    message = "L'employé n'a pas travaillé plus de 43 heures au bureau cette semaine."; 
+                    regle = new Regle(3, true, message);
                 }
-                else
-                {
-                   message = "L'employé n'a pas travaillé plus de 43 heures au bureau cette semaine."; 
-                   regle = new Regle(3, true, message);
-                }
-        //Regle regle = new Regle();
+        
         return regle;
     }
 
@@ -152,7 +149,7 @@ public class TraitementFeuille {
                 }
             }
 
-            if (minutes_travaillees_bureau < temps_maximum_en_minutes) {
+            if (minutes_travaillees_bureau <= temps_maximum_en_minutes) {
                 message = "L'employé administratif a travaillé plus de 10 heures en télétravail cette semaine.";
                 respectee = false;
             }
@@ -189,12 +186,12 @@ public class TraitementFeuille {
         int numero_employe = employe_projets.get(0).getNumeroEmploye();
 
         if (numero_employe < 1000) {
-            message = "Il s'agit d'un employé de l'administration donc il remplit forcément cette règle";
+            message = "Il s'agit d'un employé de l'administration qui n'est pas assujetti a cette règle.";
             regle = new Regle(6, true, message);
         } else {
             for (EmployeProjet emp_p : employe_projets) {
                 if (emp_p.getNumeroProjet() <= 900 && emp_p.getJourDeSemaineTravaille() >= 1 
-                    && emp_p.getJourDeSemaineTravaille() <= 5){
+                    && emp_p.getJourDeSemaineTravaille() <= 5) {
                     minutes_travaillees_bureau += emp_p.getTempsTravail();
                 }
             }
@@ -242,33 +239,4 @@ public class TraitementFeuille {
         return regle; 
     }
 
-    public static Regle testRegle8(ArrayList<EmployeProjet> employe_projets) {
-        //Test #8: Les employés de l’administration ne doivent pas faire plus de 10 heures de télétravail par semaine. @emiletremblay3 
-        
-        Regle regle;
-        String message;
-        int minutes_travaillees_teletravail = 0;
-        int temps_max_en_minutes = 60*10;
-        int numero_employe = employe_projets.get(0).getNumeroEmploye();
-
-        if (numero_employe >= 1000) {
-            message = "Il s'agit d'un employé normal qui n'est pas assujetti a cette règle.";
-            regle = new Regle(8, true, message);
-        } else {
-            for (EmployeProjet emp_p : employe_projets) {
-                if (emp_p.getNumeroProjet() > 900) {
-                    minutes_travaillees_teletravail += emp_p.getTempsTravail();
-                }
-            }
-            if (minutes_travaillees_teletravail <= temps_max_en_minutes) {
-                message = "L'employé n'a pas travaillé plus de 10 heures en télétravail cette semaine.";
-                regle = new Regle(8, true, message); 
-            } else {
-                message = "L'employé a travaillé plus de 10 heures en télétravail cette semaine.";
-                regle = new Regle(8, false, message); 
-            }
-        }
-
-        return regle; 
-    }
 }
