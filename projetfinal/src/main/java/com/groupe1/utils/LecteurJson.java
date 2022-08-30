@@ -12,6 +12,14 @@ import com.google.gson.reflect.TypeToken;
 import com.groupe1.modeles.EmployeProjet;
 
 public class LecteurJson {
+
+    /** Cette fonction permet la lecture d'un fichier JSON représentant la feuille de temps hebdomadaire complète
+     *  d'un employé.
+     * 
+     * @param nom_fichier Le nom complet du fichier JSON contenant la feuille de temps dans le format structuré
+     * demandé 
+     * @return Une ArrayList<EmployeProjet> représentant les données entrées par l'employé pour la semaine entière
+     */
     public static ArrayList<EmployeProjet> lireFichier(String nom_fichier){
         Gson gson = new Gson();
 

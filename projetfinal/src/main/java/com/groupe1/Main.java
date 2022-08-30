@@ -19,13 +19,13 @@ public class Main
             ArrayList<EmployeProjet> employe_projets = LecteurJson.lireFichier(nom_fichier_entree);
 
             Resultat resultat_traitement = TraitementFeuille.traitement(employe_projets);
-            boolean resultat_est_ecrit = EcritureJson.ecrireFichier(resultat_traitement, nom_fichier_sortie);
+            EcritureJson.ecrireFichier(resultat_traitement, nom_fichier_sortie);
 
         } else if(args.length < 2) {
-            System.out.println("Vous n'avez pas entré assez d'arguments lors de l'exécution du programme." +
+            System.out.println("Vous n'avez pas entré assez d'arguments lors de l'exécution du programme.\n" +
             "Voici un exemple: java -jar leNomDuFichier.jar <fichier entrée> <fichier sortie>.");
         } else {
-            System.out.println("Vous avez entré plus de 2 arguments lors de l'exécution du programme." +
+            System.out.println("Vous avez entré plus de 2 arguments lors de l'exécution du programme.\n" +
             "Voici un exemple: java -jar leNomDuFichier.jar <fichier entrée> <fichier sortie>.");
         }
     }

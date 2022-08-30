@@ -7,6 +7,16 @@ import com.groupe1.modeles.Regle;
 import com.groupe1.modeles.Resultat;
 
 public class TraitementFeuille {
+
+    /** Cette fonction retourne un objet de type Resultat qui contient un numéro d'employé ainsi qu'un ArrayList<Regle>
+     *  représentant l'ensemble des règles de l'entreprise. Ces objets Regle contiendront le id_regle associé, si elle
+     *  est respectée ou non et un message détaillé.
+     * 
+     *  Cet objet Resultat servira ensuite à l'écriture du fichier de sortie.
+     * 
+     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la feuille de temps
+     * @return Un objet Resultat qui sera utilisé pour la sortie en format JSON
+     */
     public static Resultat traitement(ArrayList<EmployeProjet> employe_projets) {
         Resultat res = new Resultat();
         Regle r = new Regle();
@@ -37,10 +47,13 @@ public class TraitementFeuille {
         return res;
     }
     
+    /** Cette fonction valide la feuille de temps d'un employé par rapport à la règle #1 qui stipule que les employés
+     *  de l'administration doivent travailler au moins 36 heures au bureau par semaine.
+     * 
+     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la feuille de temps
+     * @return Un objet Regle contenant le id_regle, si elle est respectée ou non et un message détaillé
+     */
     public static Regle testRegle1(ArrayList<EmployeProjet> employe_projets) {
-        // Test #1 : Les employes de l'administration (numero_employe est INFERIEUR à 1000) doivent travailler AU MOINS 
-        // 36 heures au bureau par semaine (code_projet INFERIEUR OU EGAL à 900).
-        // faire les test
         Regle regle;
         boolean respectee = true;
         String message = "L'employé administratif a travaillé au moins 36 heures au bureau cette semaine.";
@@ -49,7 +62,7 @@ public class TraitementFeuille {
         int numero_employe = employe_projets.get(0).getNumeroEmploye();
 
         if (numero_employe > 1000) {
-            message = "Il s'agit d'un employé normal qui n'est pas assujetti a cette règle.";
+            message = "Il s'agit d'un employé régulier qui n'est pas assujetti à cette règle.";
         } else {
             for (EmployeProjet emp_p : employe_projets) {
                 if (emp_p.getNumeroProjet() <= 900) {
@@ -67,11 +80,13 @@ public class TraitementFeuille {
         return regle;
     }
 
-    // Méthode testée manuellement, fonctionne correctement
+    /** Cette fonction valide la feuille de temps d'un employé par rapport à la règle #2 qui stipule que les employés
+     *  réguliers doivent travailler au moins 38 heures au bureau par semaine.
+     * 
+     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la feuille de temps
+     * @return Un objet Regle contenant le id_regle, si elle est respectée ou non et un message détaillé
+     */
     public static Regle testRegle2(ArrayList<EmployeProjet> employe_projets) {
-        //Test #2 : Les employes normaux (numero_employe est SUPERIEUR à 1000) doivent travailler AU MOINS 38 heures au
-        //bureau par semaine (code_projet inferieur ou egal à 900).
-   
         Regle regle;
         String message;
         int minutes_travaillees_bureau = 0;
@@ -99,13 +114,13 @@ public class TraitementFeuille {
         return regle;
     }
 
-    /**
-     * @param employe_projets
-     * @return
+    /** Cette fonction valide la feuille de temps d'un employé par rapport à la règle #3 qui stipule qu'aucun employé
+     *  n'a le droit de passer plus de 43 heures au bureau par semaine.
+     * 
+     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la feuille de temps
+     * @return Un objet Regle contenant le id_regle, si elle est respectée ou non et un message détaillé 
      */
     public static Regle testRegle3(ArrayList<EmployeProjet> employe_projets ) {
-        //Test #3 : Aucun employé n'a le droit de passer plus de 43 heures au bureau (code_projet inferieur à 900).
-        
         Regle regle;
         String message;
         int minutes_travaillees_bureau = 0;
@@ -117,7 +132,7 @@ public class TraitementFeuille {
                 }
 
                 if (minutes_travaillees_bureau > temps_requis_en_minutes) {
-                    message = "L'employé travaillé plus de 43 heures au bureau cette semaine.";
+                    message = "L'employé a travaillé plus de 43 heures au bureau cette semaine.";
                     regle = new Regle(3, false, message);
                 } else {
                     message = "L'employé n'a pas travaillé plus de 43 heures au bureau cette semaine."; 
@@ -127,10 +142,13 @@ public class TraitementFeuille {
         return regle;
     }
 
+    /** Cette fonction valide la feuille de temps d'un employé par rapport à la règle #4 qui stipule que les employés
+     *  de l'administration ne peuvent faire plus que 10 heures de télétravail par semaine.
+     * 
+     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la feuille de temps
+     * @return Un objet Regle contenant le id_regle, si elle est respectée ou non et un message détaillé
+     */
     public static Regle testRegle4(ArrayList<EmployeProjet> employe_projets) {
-        //Test #4 : Les employés de l'administration (numero_employe est INFERIEUR a 1000) ne peuvent pas faire plus de
-        //10 heures de télétravail (code_projet SUPÉRIEUR à 900) par semaine.
-
         Regle regle;
         boolean respectee = true;
         String message = "L'employé administratif a travaillé moins 10 heures en télétravail cette semaine.";
@@ -139,7 +157,7 @@ public class TraitementFeuille {
         int numero_employe = employe_projets.get(0).getNumeroEmploye();
 
         if (numero_employe > 1000) {
-            message = "Il s'agit d'un employé normal qui n'est assujetti par le règle.";
+            message = "Il s'agit d'un employé régulier qui n'est pas assujetti à cette règle.";
         } else {
             for (EmployeProjet emp_p : employe_projets) {
                 if (emp_p.getNumeroProjet() > 900) {
@@ -157,15 +175,18 @@ public class TraitementFeuille {
         return regle;
     }   
 
+    /** Cette fonction valide la feuille de temps d'un employé par rapport à la règle #5 qui stipule que les employés
+     *  réguliers peuvent faire autant de télétravail qu'ils le souhaitent.
+     * 
+     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la feuille de temps
+     * @return Un objet Regle contenant le id_regle, si elle est respectée ou non et un message détaillé
+     */
     public static Regle testRegle5(ArrayList<EmployeProjet> employe_projets) {
-        //   Test #5 : Les employés normaux (numero_employe est SUPERIEUR à 1000) peuvent faire autant de télétravail 
-        //(code_projet supérieur à 900) qu'ils le souhaitent.
-   
-        String message = "L'employé normaux peuvent faire autant de télétravail qu'il veulent.";
+        String message = "L'employé régulier peut faire autant de télétravail qu'il le veut.";
         int numero_employe = employe_projets.get(0).getNumeroEmploye();
 
         if (numero_employe < 1000) {
-            message = "Il s'agit d'un employé administratif qui n'est pas assujetti a cette règle.";
+            message = "Il s'agit d'un employé administratif qui n'est pas assujetti à cette règle.";
         }
 
         Regle regle = new Regle(5, true, message);
@@ -173,10 +194,13 @@ public class TraitementFeuille {
         return regle;
     }
 
+    /** Cette fonction valide la feuille de temps d'un employé par rapport à la règle #6 qui stipule que les employés
+     *  réguliers doivent faire un minimum de 6 heures au bureau tout les jours ouvrables.
+     * 
+     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la feuille de temps
+     * @return Un objet Regle contenant le id_regle, si elle est respectée ou non et un message détaillé
+     */
     public static Regle testRegle6(ArrayList<EmployeProjet> employe_projets) {
-        //Test #6 : Les employés normaux (numero_employe superieur à 1000) doivent faire un minimum de 6 heures au 
-        //bureau (code_projet inferieur ou egal à 900) les jours ouvrables.
-
         Regle regle;
         String message;
         int minutes_travaillees_bureau = 0;
@@ -184,7 +208,7 @@ public class TraitementFeuille {
         int numero_employe = employe_projets.get(0).getNumeroEmploye();
 
         if (numero_employe < 1000) {
-            message = "Il s'agit d'un employé de l'administration qui n'est pas assujetti a cette règle.";
+            message = "Il s'agit d'un employé de l'administration qui n'est pas assujetti à cette règle.";
             regle = new Regle(6, true, message);
         } else {
             for (EmployeProjet emp_p : employe_projets) {
@@ -197,7 +221,7 @@ public class TraitementFeuille {
                 message = "L'employé a travaillé moins de 6 heures au bureau cette semaine durant les jours ouvrables.";
                 regle = new Regle(6, false, message);
             } else {
-               message = "L'employé a travaillé plus de 6 heures au bureau cette semaine durant les jours ouvrables."; 
+               message = "L'employé a travaillé 6 heures ou plus au bureau cette semaine durant les jours ouvrables."; 
                regle = new Regle(6, true, message);
             }
         }
@@ -205,10 +229,13 @@ public class TraitementFeuille {
         return regle;
     }
 
+    /** Cette fonction valide la feuille de temps d'un employé par rapport à la règle #7 qui stipule que les employés de
+     *  l'administration doivent faire un minimum de 4 heures au bureau pour tout les jours ouvrables.
+     * 
+     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la feuille de temps
+     * @return Un objet Regle contenant le id_regle, si elle est respectée ou non et un message détaillé
+     */
     public static Regle testRegle7(ArrayList<EmployeProjet> employe_projets) {
-        //Test #7 : Les employés de l'administration (numero_employe inferieur à 1000) doivent faire un minimum de 4 heures
-        //au bureau (code_projet inferieur ou egal à 900) les jours ouvrables. @emiletremblay3
-        
         Regle regle;
         String message;
         int minutes_travaillees_bureau = 0;
@@ -216,7 +243,7 @@ public class TraitementFeuille {
         int numero_employe = employe_projets.get(0).getNumeroEmploye();
 
         if (numero_employe >= 1000) {
-            message = "Il s'agit d'un employé normal qui n'est pas assujetti a cette règle.";
+            message = "Il s'agit d'un employé régulier qui n'est pas assujetti a cette règle.";
             regle = new Regle(7, true, message);
         } else {
             for (EmployeProjet emp_p : employe_projets) {
@@ -229,12 +256,11 @@ public class TraitementFeuille {
                 message = "L'employé a travaillé moins de 4 heures au bureau cette semaine durant les jours ouvrables.";
                 regle = new Regle(7, false, message);
             } else {
-               message = "L'employé a travaillé plus de 4 heures au bureau cette semaine durant les jours ouvrables."; 
+               message = "L'employé a travaillée 4 heures ou plus au bureau cette semaine durant les jours ouvrables."; 
                regle = new Regle(7, true, message);
             }
         }
 
         return regle; 
     }
-
 }

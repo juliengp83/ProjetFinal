@@ -13,15 +13,23 @@
 - Ébauche vision du projet (conception de maquette)
 
 ## Rencontre 2: (18 août 2022)
-## Rencontre 3: (18 août 2022)
-## Rencontre 4: (22 août 2022)
-## Rencontre 5: (25 août 2022)
-## Rencontre 6: (29 août 2022)
-## Rencontre 7: (1er septembre 2022)
+- Dans cette rencontre nous avons assisté Oleksandr avec son utilisation de GitHub avec VS Code en prévision du Sprint 1
+- Nous avons commencé à décortiquer le projet en Fonctionnalités et en Tâches sur Trello
+## Rencontre 3: (22 août 2022)
+- Nous avons développé le schéma relationnel que nous utiliserons pour le Sprint 1
+## Rencontre 4: (25 août 2022)
+- Nous avons passé la journée à développer un
+- Nous avons partagé les tâches pour le développement des fonctions de test
+## Rencontre 5: (29 août 2022)
+- Revue de code sur les fonctions que nous devions produire en asynchrone
+- Intégration de l'écriture des fichiers (objet vers JSON)
+- Sélection de la classe exécutable main du JAR pour le rendre exécutable et y inclure les dépendances.
+## Rencontre 6: (1er septembre 2022)
+## Rencontre 7: (5 septembre 2022)
 ## Rencontre 8: (8 septembre 2022)
 ## Rencontre 9: (12 septembre 2022)
 ## Rencontre 10: (15 septembre 2022)
 ## Rencontre 11: (19 septembre 2022)
 ## Rencontre 12: (22 septembre 2022)
 ## Rencontre 13: (26 septembre 2022)
-## Rencontre 14: (29 septembre 2022)
+## Rencontre 13: (29 septembre 2022)
