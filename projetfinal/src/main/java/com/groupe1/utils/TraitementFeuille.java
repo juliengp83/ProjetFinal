@@ -203,7 +203,7 @@ public class TraitementFeuille {
     public static Regle testRegle6(ArrayList<EmployeProjet> employe_projets) {
         Regle regle;
         String message;
-        int minutes_travaillees_bureau = 0;
+        int[] temps_quotidient_travaille;
         int temps_requis_en_minutes = 60*6;
         int numero_employe = employe_projets.get(0).getNumeroEmploye();
 
@@ -211,19 +211,16 @@ public class TraitementFeuille {
             message = "Il s'agit d'un employé de l'administration qui n'est pas assujetti à cette règle.";
             regle = new Regle(6, true, message);
         } else {
-            for (EmployeProjet emp_p : employe_projets) {
-                if (emp_p.getNumeroProjet() <= 900 && emp_p.getJourDeSemaineTravaille() >= 1 
-                    && emp_p.getJourDeSemaineTravaille() <= 5) {
-                    minutes_travaillees_bureau += emp_p.getTempsTravail();
+            temps_quotidient_travaille = calculTempsQuotidienJourSemaine(employe_projets);
+            for (int temps_travaille : temps_quotidient_travaille) {
+                if(temps_travaille < temps_requis_en_minutes){
+                    message = "L'employé a travaillé moins de 6 heures au bureau cette semaine durant un des jours ouvrables.";
+                    regle = new Regle(6, false, message);  
+                    return regle;
                 }
             }
-            if (minutes_travaillees_bureau < temps_requis_en_minutes) {
-                message = "L'employé a travaillé moins de 6 heures au bureau cette semaine durant les jours ouvrables.";
-                regle = new Regle(6, false, message);
-            } else {
-               message = "L'employé a travaillé 6 heures ou plus au bureau cette semaine durant les jours ouvrables."; 
-               regle = new Regle(6, true, message);
-            }
+            message = "L'employé a travaillé 6 heures ou plus au bureau cette semaine durant tous les jours ouvrables."; 
+            regle = new Regle(6, true, message);
         }
 
         return regle;
@@ -238,7 +235,7 @@ public class TraitementFeuille {
     public static Regle testRegle7(ArrayList<EmployeProjet> employe_projets) {
         Regle regle;
         String message;
-        int minutes_travaillees_bureau = 0;
+        int[] temps_quotidient_travaille;
         int temps_requis_en_minutes = 60*4;
         int numero_employe = employe_projets.get(0).getNumeroEmploye();
 
@@ -246,21 +243,30 @@ public class TraitementFeuille {
             message = "Il s'agit d'un employé régulier qui n'est pas assujetti a cette règle.";
             regle = new Regle(7, true, message);
         } else {
-            for (EmployeProjet emp_p : employe_projets) {
-                if (emp_p.getNumeroProjet() <= 900 && emp_p.getJourDeSemaineTravaille() >= 1 
-                    && emp_p.getJourDeSemaineTravaille() <= 5){
-                    minutes_travaillees_bureau += emp_p.getTempsTravail();
+            temps_quotidient_travaille = calculTempsQuotidienJourSemaine(employe_projets);
+            for (int temps_travaille : temps_quotidient_travaille) {
+                if(temps_travaille < temps_requis_en_minutes){
+                    message = "L'employé a travaillé moins de 4 heures au bureau cette semaine durant un des jours ouvrables.";
+                    regle = new Regle(6, false, message);  
+                    return regle;
                 }
             }
-            if (minutes_travaillees_bureau < temps_requis_en_minutes) {
-                message = "L'employé a travaillé moins de 4 heures au bureau cette semaine durant les jours ouvrables.";
-                regle = new Regle(7, false, message);
-            } else {
-               message = "L'employé a travaillée 4 heures ou plus au bureau cette semaine durant les jours ouvrables."; 
-               regle = new Regle(7, true, message);
-            }
+            message = "L'employé a travaillé 4 heures ou plus au bureau cette semaine durant tous les jours ouvrables."; 
+            regle = new Regle(6, true, message);
         }
 
         return regle; 
+    }
+
+    public static int[] calculTempsQuotidienJourSemaine(ArrayList<EmployeProjet> employe_projets) {
+        int[] temps_travaille_quotidiennement_bureau = new int[5];
+        for (int i = 0; i < 5; i++) {
+            for (EmployeProjet emp_p : employe_projets) {
+                if (emp_p.getNumeroProjet() <= 900 && emp_p.getJourDeSemaineTravaille() == i+1) {
+                    temps_travaille_quotidiennement_bureau[i] += emp_p.getTempsTravail();
+                }
+            }
+        }
+        return temps_travaille_quotidiennement_bureau;
     }
 }
