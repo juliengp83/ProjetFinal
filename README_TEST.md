@@ -3,97 +3,81 @@
 ## Règle 1
 ## Stipule que les employés de l'administration doivent travailler au moins 36 heures au bureau par semaine.
 - 1 employé ADMIN, horaire de 6 jours, projet < 900
--- J2 et J3 zéro heures
--- J4 à J7 9h/J Total = 36h
--- Résultat attendu true;
+- J2 et J3 zéro heures
+- J4 à J7 9h/J Total = 36h
+- Résultat attendu true;
 
 ## Règle 1 fail
 - 1 employé ADMIN, horaire de 4 jours, projet < 900
--- J4 à J7 5h/J Total = 20h
--- Résultat attendu False;
+- J4 à J7 5h/J Total = 20h
+- Résultat attendu False;
 
 ## Règle 2
 ## Stipule que les employés réguliers doivent travailler au moins 38 heures au bureau par semaine.
 - 1 employé RÉGULIER, horaire de 4 jours, projet < 900
--- J4 à J7 44h
--- Résultat attendu true;
+- J4 à J7 44h
+- Résultat attendu true;
 
 ## Règle 2 Fail
 - 1 employé RÉGULIER, horaire de 4 jours, projet < 900
--- J4 à J7 5h/J Total = 20h
--- Résultat attendu False;
+- J4 à J7 5h/J Total = 20h
+- Résultat attendu False;
 
 ## Règle 3
 ## Stipule qu'aucun employé n'a le droit de passer plus de 43 heures au bureau par semaine.
 - 1 employé, horaire de 4 jours, projet < 900
--- J4 à J7 9h/J Total = 36h
--- Résultat attendu true;
+- J4 à J7 9h/J Total = 36h
+- Résultat attendu true;
 
 ## Règle 3 fail
 - 1 employé, horaire de 4 jours, 
--- J4 à J7 5h/J Total = 66h
--- Résultat attendu False;
+- J4 à J7 5h/J Total = 66h
+- Résultat attendu False;
 
 ## Règle 4
 ## Stipule que les employés de l'administration ne peuvent faire plus que 10 heures de télétravail par semaine.
 - 1 employé ADMIN, horaire de 4 jours, projet > 900 9h, reste < 900
--- J4 à J7 9h/J Total = 36h
--- Résultat attendu true;
+- J4 à J7 9h/J Total = 36h
+- Résultat attendu true;
 
 ## Règle 4 fail
 - 1 employé ADMIN, horaire de 4 jours, projet > 900 20h
--- J4 à J7 5h/J 
--- Résultat attendu False;
+- J4 à J7 5h/J 
+- Résultat attendu False;
 
 ## Règle 5
 ## Stipule que les employés réguliers peuvent faire autant de télétravail qu'ils le souhaitent
 - 1 employé RÉGULIER, horaire de 4 jours, projet < 900 36h
--- J4 à J7 9h/J Total = 36h
--- Résultat attendu true;
+- J4 à J7 9h/J Total = 36h
+- Résultat attendu true;
 
 ## Règle 5 fail
--- impossible;
+- impossible;
 
 ## Règle 6
 ## Stipule que les employés réguliers doivent faire un minimum de 6 heures au bureau tout les jours ouvrables.
 - 1 employé RÉGULIER, horaire de 5 jours, projet > 900 8h, reste < 900
--- J4 à J7 9h/J Total = 40h
--- Résultat attendu true;
+- J4 à J7 9h/J Total = 40h
+- Résultat attendu true;
 
 ## Règle 6 fail
 - 1 employé RÉGULIER, horaire de 4 jours, projet > 900 36h
--- J4 à J7 5h/J 
--- Résultat attendu False;
+- J4 à J7 5h/J 
+- Résultat attendu False;
 
 # Règle 7
 ## Stipule que les employés de l'administration doivent faire un minimum de 4 heures au bureau pour tout les jours ouvrables.
-- 1 employé ADMIN, horaire de 5 jours, projet > 900 5h, reste < 900
--- J1 à J5 9h/J Total = 36h
--- Résultat attendu true;
+- 1 employé ADMIN travaillant 4 heures par jour sur un projet au bureau chaque jour ouvrable
+- Résultat attendu true;
 
 ## Règle 7 fail
-- 1 employé ADMIN, horaire de 4 jours, projet > 900 36h
--- J4 à J7 5h/J 
--- Résultat attendu False;
+- 1 employé ADMIN, horaire de 4 jours, projet < 900 36h
+- J4 à J7 5h/J 
+- Résultat attendu False;
 
-## Test AdminPassALL
+## Test PassALL
 - 1 employé ADMIN
--- horaire de 5 jours sur semaine (J1 à J5) = 7.5h/J = 37.5h
--- projet < 900 au Bureau
--- 2h J6 (Samedi) projet > 900;
+- horaire de 5 jours sur semaine (J1 à J5) = 7.5h/J = 37.5h
+- projet < 900 au Bureau
+- 2h J6 (Samedi) projet > 900;
 
-## Test AdminFailALL
-- 1 employé ADMIN
--- horaire de 5 jours sur semaine (J2 à J5) = 2h/j = 8h et 0 j1
--- projet < 900 au Bureau
--- 10h J6 (Samedi) projet > 900;
-
-## Test RegulierPassALL
-- 1 employé Régulier
--- horaire de 5 jours sur semaine (J1 à J5) = 8h/J = 40h
--- projet < 900 au Bureau
-
-## Test RegulierFailALL
-- 1 employé Régulier
--- horaire de 5 jours sur semaine (J2 à J5) = 2h/j = 8h et 0 j1
--- projet < 900 au Bureau

@@ -30,7 +30,8 @@ public class LecteurJson {
             employe_projets = gson.fromJson(lecteur_fichier, new TypeToken<List<EmployeProjet>>() {}.getType());
 
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("Une erreur est survenue, le fichier d'entrée que vous avez entré n'existe pas");
+            System.exit(-1);
         }
 
         return employe_projets;

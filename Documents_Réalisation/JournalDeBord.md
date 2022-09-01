@@ -25,6 +25,9 @@
 - Intégration de l'écriture des fichiers (objet vers JSON)
 - Sélection de la classe exécutable main du JAR pour le rendre exécutable et y inclure les dépendances.
 ## Rencontre 6: (1er septembre 2022)
+- Finalisation du projet
+- Correction des tests, gestion des exceptions
+- Ajout du dossier Release
 ## Rencontre 7: (5 septembre 2022)
 ## Rencontre 8: (8 septembre 2022)
 ## Rencontre 9: (12 septembre 2022)

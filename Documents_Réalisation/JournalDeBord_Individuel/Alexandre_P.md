@@ -28,3 +28,7 @@
 * Ajouter la méthode d'écriture de fichier json
 * Rendre le Main plus clair et fonctionnel avec des arguments
 * Ajouter les dépendances maven pour avoir un build Jar avec les dépendances
+
+## 1er septembre 2022
+* Regler quelque problème de test et de règles que nous avions
+* Finaliser les fichiers de test et le dossier release pour la fin du sprint 1

@@ -34,3 +34,5 @@
 
 ## 1er septembre
 * Compilation de la version 'finale' de notre jar et ajout dans le dossier Release.
+* Correction d'erreurs dans les tests, gestion des exceptions nom du fichier
+* Merge la branche de development
