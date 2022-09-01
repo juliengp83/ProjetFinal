@@ -40,6 +40,11 @@
 - Création des fichiers test json pour chaque règles
   
 ## 1er septembre 2022
+- Mise à jour environnement (JAVA_HOME, MVN)
+- Mise à jour des fichiers json de test par règle et validation des résultats
+- Revu et correction de méthodes
+- Gestion Trello
+
 ## 8 septembre 2022
 ## 12 septembre 2022
 ## 15 septembre 2022
