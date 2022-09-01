@@ -23,7 +23,7 @@ public class EcritureJson {
     public static boolean ecrireFichier(Resultat resultat, String nom_fichier_resultat) {
         Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
         try {
-        BufferedWriter ecriture = Files.newBufferedWriter(Paths.get(nom_fichier_resultat), StandardCharsets.UTF_8, StandardOpenOption.CREATE);
+        BufferedWriter ecriture = Files.newBufferedWriter(Paths.get(nom_fichier_resultat), StandardCharsets.UTF_8);
 
         gson.toJson(resultat, ecriture);
 

@@ -1,0 +1,40 @@
+{
+  "numero_employe": 500,
+  "regles": [
+    {
+      "id_regle": 1,
+      "est_respectee": false,
+      "message": "L'employé administratif n'a pas travaillé au moins 36 heures au bureau cette semaine."
+    },
+    {
+      "id_regle": 2,
+      "est_respectee": true,
+      "message": "Il s'agit d'un employé de l'administration donc il remplit forcément cette règle"
+    },
+    {
+      "id_regle": 3,
+      "est_respectee": true,
+      "message": "L'employé n'a pas travaillé plus de 43 heures au bureau cette semaine."
+    },
+    {
+      "id_regle": 4,
+      "est_respectee": true,
+      "message": "L'employé administratif a travaillé moins 10 heures en télétravail cette semaine."
+    },
+    {
+      "id_regle": 5,
+      "est_respectee": true,
+      "message": "Il s'agit d'un employé administratif qui n'est pas assujetti à cette règle."
+    },
+    {
+      "id_regle": 6,
+      "est_respectee": true,
+      "message": "Il s'agit d'un employé de l'administration qui n'est pas assujetti à cette règle."
+    },
+    {
+      "id_regle": 7,
+      "est_respectee": false,
+      "message": "L'employé a travaillé moins de 4 heures au bureau cette semaine durant un des jours ouvrables."
+    }
+  ]
+}

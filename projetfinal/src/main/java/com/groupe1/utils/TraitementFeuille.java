@@ -56,13 +56,14 @@ public class TraitementFeuille {
     public static Regle testRegle1(ArrayList<EmployeProjet> employe_projets) {
         Regle regle;
         boolean respectee = true;
-        String message = "L'employé administratif a travaillé au moins 36 heures au bureau cette semaine.";
+        String message;
         int minutes_travaillees_bureau = 0;
         int temps_requis_en_minutes = 60 * 36;
         int numero_employe = employe_projets.get(0).getNumeroEmploye();
 
         if (numero_employe > 1000) {
             message = "Il s'agit d'un employé régulier qui n'est pas assujetti à cette règle.";
+            regle = new Regle(1, respectee, message);
         } else {
             for (EmployeProjet emp_p : employe_projets) {
                 if (emp_p.getNumeroProjet() <= 900) {
@@ -73,10 +74,14 @@ public class TraitementFeuille {
             if (minutes_travaillees_bureau < temps_requis_en_minutes) {
                 message = "L'employé administratif n'a pas travaillé au moins 36 heures au bureau cette semaine.";
                 respectee = false;
+                regle = new Regle(1, respectee, message);
+            } else {
+                message = "L'employé administratif a travaillé au moins 36 heures au bureau cette semaine.";
+                respectee = true;
+                regle = new Regle(1, respectee, message);
             }
         }
 
-        regle = new Regle(1, respectee, message);
         return regle;
     }
 
@@ -165,7 +170,7 @@ public class TraitementFeuille {
                 }
             }
 
-            if (minutes_travaillees_bureau <= temps_maximum_en_minutes) {
+            if (minutes_travaillees_bureau > temps_maximum_en_minutes) {
                 message = "L'employé administratif a travaillé plus de 10 heures en télétravail cette semaine.";
                 respectee = false;
             }
@@ -247,12 +252,12 @@ public class TraitementFeuille {
             for (int temps_travaille : temps_quotidient_travaille) {
                 if(temps_travaille < temps_requis_en_minutes){
                     message = "L'employé a travaillé moins de 4 heures au bureau cette semaine durant un des jours ouvrables.";
-                    regle = new Regle(6, false, message);  
+                    regle = new Regle(7, false, message);  
                     return regle;
                 }
             }
             message = "L'employé a travaillé 4 heures ou plus au bureau cette semaine durant tous les jours ouvrables."; 
-            regle = new Regle(6, true, message);
+            regle = new Regle(7, true, message);
         }
 
         return regle; 
