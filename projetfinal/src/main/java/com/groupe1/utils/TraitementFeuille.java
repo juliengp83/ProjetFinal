@@ -208,7 +208,7 @@ public class TraitementFeuille {
     public static Regle testRegle6(ArrayList<EmployeProjet> employe_projets) {
         Regle regle;
         String message;
-        int[] temps_quotidient_travaille;
+        int[] temps_quotidien_travaille;
         int temps_requis_en_minutes = 60*6;
         int numero_employe = employe_projets.get(0).getNumeroEmploye();
 
@@ -216,8 +216,8 @@ public class TraitementFeuille {
             message = "Il s'agit d'un employé de l'administration qui n'est pas assujetti à cette règle.";
             regle = new Regle(6, true, message);
         } else {
-            temps_quotidient_travaille = calculTempsQuotidienJourSemaine(employe_projets);
-            for (int temps_travaille : temps_quotidient_travaille) {
+            temps_quotidien_travaille = calculTempsQuotidienJourSemaine(employe_projets);
+            for (int temps_travaille : temps_quotidien_travaille) {
                 if(temps_travaille < temps_requis_en_minutes){
                     message = "L'employé a travaillé moins de 6 heures au bureau cette semaine durant un des jours ouvrables.";
                     regle = new Regle(6, false, message);  
@@ -240,7 +240,7 @@ public class TraitementFeuille {
     public static Regle testRegle7(ArrayList<EmployeProjet> employe_projets) {
         Regle regle;
         String message;
-        int[] temps_quotidient_travaille;
+        int[] temps_quotidien_travaille;
         int temps_requis_en_minutes = 60*4;
         int numero_employe = employe_projets.get(0).getNumeroEmploye();
 
@@ -248,8 +248,8 @@ public class TraitementFeuille {
             message = "Il s'agit d'un employé régulier qui n'est pas assujetti a cette règle.";
             regle = new Regle(7, true, message);
         } else {
-            temps_quotidient_travaille = calculTempsQuotidienJourSemaine(employe_projets);
-            for (int temps_travaille : temps_quotidient_travaille) {
+            temps_quotidien_travaille = calculTempsQuotidienJourSemaine(employe_projets);
+            for (int temps_travaille : temps_quotidien_travaille) {
                 if(temps_travaille < temps_requis_en_minutes){
                     message = "L'employé a travaillé moins de 4 heures au bureau cette semaine durant un des jours ouvrables.";
                     regle = new Regle(7, false, message);  
@@ -263,6 +263,12 @@ public class TraitementFeuille {
         return regle; 
     }
 
+    /** Cette fonction calcule le temps travaillé en minutes pour chaque chaque jour ouvrable.
+     * 
+     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la feuille de temps
+     * @return Un tableau de int contenant la temps travaillé en minutes pour chaque jour ouvrable (lundi au vendredi)
+     *         l'indice 0 correspond à lundi et 4 à vendredi.
+     */
     public static int[] calculTempsQuotidienJourSemaine(ArrayList<EmployeProjet> employe_projets) {
         int[] temps_travaille_quotidiennement_bureau = new int[5];
         for (int i = 0; i < 5; i++) {
