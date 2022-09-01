@@ -1,0 +1,66 @@
+[
+		{
+			"id_employe_projet": 21,
+			"numero_employe": 1600,
+			"numero_projet": 901,
+			"id_feuille_temps": 1,
+			"temps_travaille": 60,
+			"date_travail": "2022-08-25"
+		},
+		{
+			"id_employe_projet": 22,
+			"numero_employe": 1600,
+			"numero_projet": 400,
+			"id_feuille_temps": 1,
+			"temps_travaille": 240,
+			"date_travail": "2022-08-25"
+		},
+		{
+			"id_employe_projet": 23,
+			"numero_employe": 1600,
+			"numero_projet": 901,
+			"id_feuille_temps": 1,
+			"temps_travaille": 240,
+			"date_travail": "2022-08-26"
+		},
+		{
+			"id_employe_projet": 29,
+			"numero_employe": 1600,
+			"numero_projet": 450,
+			"id_feuille_temps": 1,
+			"temps_travaille": 240,
+			"date_travail": "2022-08-26"
+		},
+		{
+			"id_employe_projet": 31,
+			"numero_employe": 1600,
+			"numero_projet": 901,
+			"id_feuille_temps": 1,
+			"temps_travaille": 60,
+			"date_travail": "2022-08-27"
+		},
+		{
+			"id_employe_projet": 32,
+			"numero_employe": 1600,
+			"numero_projet": 400,
+			"id_feuille_temps": 1,
+			"temps_travaille": 240,
+			"date_travail": "2022-08-27"
+		},
+		{
+			"id_employe_projet": 36,
+			"numero_employe": 1600,
+			"numero_projet": 350,
+			"id_feuille_temps": 1,
+			"temps_travaille": 240,
+			"date_travail": "2022-08-28"
+		},
+		{
+			"id_employe_projet": 40,
+			"numero_employe": 1600,
+			"numero_projet": 400,
+			"id_feuille_temps": 1,
+			"temps_travaille": 60,
+			"date_travail": "2022-08-28"
+		}
+]
