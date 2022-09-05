@@ -29,6 +29,10 @@
 - Correction des tests, gestion des exceptions
 - Ajout du dossier Release
 ## Rencontre 7: (5 septembre 2022)
+- Nous avons effectué un poker scrum afin de nous familiariser avec le concept et prioriser nos tâches
+- Nous avons contribué à définir le backlog du sprint 2 en regard des nouvelles exigences du client
+- Nous allons faire des lectures et regarder des vidéos sur sprint pour nous familiariser avec les concepts et le
+  templating engine Thymeleaf (ainsi que l'intégration avec Semantic UI);
 ## Rencontre 8: (8 septembre 2022)
 ## Rencontre 9: (12 septembre 2022)
 ## Rencontre 10: (15 septembre 2022)

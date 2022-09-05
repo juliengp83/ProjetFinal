@@ -36,3 +36,8 @@
 * Compilation de la version 'finale' de notre jar et ajout dans le dossier Release.
 * Correction d'erreurs dans les tests, gestion des exceptions nom du fichier
 * Merge la branche de development
+
+## 5 septembre
+* Participation au scrum poker avec l'équipe
+* Présentation de livres et vidéos sur Spring à l'équipe
+* Définition du backlog du sprint 2 (prioritisation, évaluation de temps)
