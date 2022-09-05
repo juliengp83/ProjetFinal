@@ -32,3 +32,8 @@
 ## 1er septembre 2022
 * Regler quelque problème de test et de règles que nous avions
 * Finaliser les fichiers de test et le dossier release pour la fin du sprint 1
+
+***
+## 5 septembre 2022
+* Rencontre pour le scrum poker
+* Modifier, ajouter et mettre à jour le back log du sprint 2 sur Trello
