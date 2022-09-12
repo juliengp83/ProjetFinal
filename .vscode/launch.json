@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-FeuilletempsApplication<projetfinal>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.groupe1.feuilletemps.FeuilletempsApplication",
+            "projectName": "projetfinal",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
