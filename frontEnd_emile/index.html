@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/semantic-dist/semantic.css" />
+    <link rel="stylesheet" href="styles/slideshow.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="styles/semantic-dist/semantic.js"></script>
+    <script src="scripts/script.js" defer></script>
+    <title>Employe</title>
+  </head>
+  <body id="body">
+    <!-- template carte -->
+    <div class="template" style="display: none">
+      <div class="ui raised link card carte-projet">
+        <div class="fields-container">
+          <div class="field-carte">
+            <label>Projet</label>
+            <div class="ui selection dropdown">
+              <input type="hidden" name="gender" />
+              <i class="dropdown icon"></i>
+              <div class="default text">Projet</div>
+              <div class="menu">
+                <div class="item" data-value="1">Preparation party</div>
+                <div class="item" data-value="0">Inventaire du stock</div>
+              </div>
+            </div>
+          </div>
+          <div class="field-carte">
+            <label>Temps de travail en minutes</label>
+            <div class="ui input">
+              <input type="number" placeholder="00" />
+            </div>
+          </div>
+          <div class="field-carte">
+            <div
+              class="ui vertical animated button btn_enlever_projet"
+              tabindex="0"
+            >
+              <div class="hidden content">Enlever</div>
+              <div class="visible content">
+                <i class="trash icon"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="background">
+      <div class="ui teal progress" id="progress_bar">
+        <div class="bar">
+          <div class="progress"></div>
+        </div>
+      </div>
+      <!-- Slideshow container -->
+      <div class="slideshow-container">
+        <!-- Full-width images with number and caption text -->
+        <div class="mySlides fade">
+          <div class="slide-content">
+            <h2>
+              Ajoutez les projets sur lesquels vous avez travaillé
+              <span style="color: rgb(34, 235, 235)">lundi</span>
+            </h2>
+            <a class="ui teal button btn_ajouter_projet">Ajouter un projet</a>
+            <div class="ui one cards"></div>
+          </div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="slide-content">
+            <h2>
+              Ajoutez les projets sur lesquels vous avez travaillé
+              <span style="color: rgb(34, 235, 235)">mardi</span>
+            </h2>
+            <a class="ui teal button btn_ajouter_projet">Ajouter un projet</a>
+            <div class="ui one cards"></div>
+          </div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="slide-content">
+            <h2>
+              Ajoutez les projets sur lesquels vous avez travaillé
+              <span style="color: rgb(34, 235, 235)">mercredi</span>
+            </h2>
+            <a class="ui teal button btn_ajouter_projet">Ajouter un projet</a>
+            <div class="ui one cards"></div>
+          </div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="slide-content">
+            <h2>
+              Ajoutez les projets sur lesquels vous avez travaillé
+              <span style="color: rgb(34, 235, 235)">jeudi</span>
+            </h2>
+            <a class="ui teal button btn_ajouter_projet">Ajouter un projet</a>
+            <div class="ui one cards"></div>
+          </div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="slide-content">
+            <h2>
+              Ajoutez les projets sur lesquels vous avez travaillé
+              <span style="color: rgb(34, 235, 235)">vendredi</span>
+            </h2>
+            <a class="ui teal button btn_ajouter_projet">Ajouter un projet</a>
+            <div class="ui one cards"></div>
+          </div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="slide-content">
+            <h2>
+              Ajoutez les projets sur lesquels vous avez travaillé
+              <span style="color: rgb(34, 235, 235)">samedi</span>
+            </h2>
+            <a class="ui teal button btn_ajouter_projet">Ajouter un projet</a>
+            <div class="ui one cards"></div>
+          </div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="slide-content">
+            <h2>
+              Ajoutez les projets sur lesquels vous avez travaillé
+              <span style="color: rgb(34, 235, 235)">dimanche</span>
+            </h2>
+            <a class="ui teal button btn_ajouter_projet">Ajouter un projet</a>
+            <div class="ui one cards"></div>
+          </div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="slide-content">
+            <a class="massive ui teal button" id="btn_soumettre">SOUMETTRE</a>
+          </div>
+        </div>
+
+        <!-- Next and previous buttons -->
+      </div>
+
+      <div class="next-prev-container">
+        <div>
+          <a class="big ui button" id="btn_precedent">Précédent</a>
+          <a class="big ui teal button" id="btn_suivant">Suivant</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
