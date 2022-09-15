@@ -41,3 +41,12 @@
 * Participation au scrum poker avec l'équipe
 * Présentation de livres et vidéos sur Spring à l'équipe
 * Définition du backlog du sprint 2 (prioritisation, évaluation de temps)
+
+## 5-11 septembre
+* Lecture du livre Spring in Action (6th Edition)
+* Lecture du livre Spring Security in Action
+
+## 12 septembre
+* Intégration de Spring Boot à notre application principale
+* Tentative d'appliquer Spring Security à notre projet pour l'authentification des users à l'aide d'une base de donnée 
+  Oracle

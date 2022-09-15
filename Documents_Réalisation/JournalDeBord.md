@@ -33,7 +33,10 @@
 - Nous avons contribué à définir le backlog du sprint 2 en regard des nouvelles exigences du client
 - Nous allons faire des lectures et regarder des vidéos sur sprint pour nous familiariser avec les concepts et le
   templating engine Thymeleaf (ainsi que l'intégration avec Semantic UI);
-## Rencontre 8: (8 septembre 2022)
+## Rencontre 8: (12 septembre 2022)
+- Début de l'intégration de Spring à notre projet, migration vers une application Spring Boot
+- Émile est en charge de l'interface du formulaire en semantic UI (avec JQuery)
+- 
 ## Rencontre 9: (12 septembre 2022)
 ## Rencontre 10: (15 septembre 2022)
 ## Rencontre 11: (19 septembre 2022)

@@ -1,4 +1,4 @@
-package com.groupe1.feuilletemps.web;
+package com.groupe1.feuilletemps.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +13,8 @@ public class LoginController {
         return "login";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST) 
-    public String welcomePage(@RequestParam String username, @RequestParam String password){
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public String welcomePage(@RequestParam String username, @RequestParam String password) {
 
         if (username.equals("employe") && password.isEmpty())
             return "employe";
