@@ -13,8 +13,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 public class Projet {
     
     @Id
@@ -23,11 +21,22 @@ public class Projet {
     private String nom_projet;
 
     @ManyToMany(mappedBy = "projets")
-    private Set<Employe> employes = new HashSet<Employe>();
+    private Set<Employe> employes;
+
+    public Projet(){
+        
+    }
 
     public Projet(Long numero_projet, String nom_projet) {
         this.numero_projet = numero_projet;
         this.nom_projet = nom_projet;
     }
     
+
+    public Projet(Long numero_projet, String nom_projet, Set<Employe> employes) {
+        this.numero_projet = numero_projet;
+        this.nom_projet = nom_projet;
+        this.employes = employes;
+    }
+
 }

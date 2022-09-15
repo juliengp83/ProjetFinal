@@ -29,14 +29,14 @@ public class FeuilletempsApplication {
 				repo_proj.save(projet3);
 
 				Employe employe1 = new Employe(1L, "Alex", "Pom", "1337 Avenue", "APom", "haxor");
-				Employe employe2 = new Employe(2L, "Eric", "Marquis", "666 Avenue", "EMarquis", "password");
+				Employe employe2 = new Employe(2L, "Eric", "Marquis", "666 Avenue", "EMarquis", "123");
 				Employe employe3 = new Employe(3L, "Julien", "GPoirier", "1337 Avenue", "JGpoirer", "jpeg");
 				Employe employe4 = new Employe(4L, "Emile", "Tremblay", "1010 Avenue", "ETremblay", "perdu");
 
 				employe1.ajouterProjet(projet3);
 				employe1.ajouterProjet(projet1);
 
-				employe2.ajouterProjet(projet2);
+				employe2.ajouterProjet(projet1);
 				employe2.ajouterProjet(projet3);
 
 				employe3.ajouterProjet(projet1);
@@ -53,4 +53,5 @@ public class FeuilletempsApplication {
 			}
 		};
 	}
+
 }

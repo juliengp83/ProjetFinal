@@ -20,8 +20,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 public class Employe {
 
     @Id
@@ -49,7 +47,11 @@ public class Employe {
             inverseJoinColumns = {
                 @JoinColumn(name = "numero_projet") }
     )
-    private Set<Projet> projets = new HashSet<Projet>();
+    private Set<Projet> projets;
+
+    public Employe(){
+
+    }
 
     public Employe(Long employe_id, String prenom, String nom, String addresse, String nom_utilisateur, String mot_de_passe) {
         this.employe_id = employe_id;
@@ -58,6 +60,7 @@ public class Employe {
         this.addresse = addresse;
         this.nom_utilisateur = nom_utilisateur;
         this.mot_de_passe = mot_de_passe;
+        this.projets = new HashSet<Projet>();
     }
 
     public void ajouterProjet(Projet projet){
