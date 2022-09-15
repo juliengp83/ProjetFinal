@@ -1,0 +1,16 @@
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle9Dialect
+    hibernate:
+      ddl-auto: create
+
+  datasource:
+      url: jdbc:oracle:thin:@//localhost:1521/xe
+      username: hr
+      password: hr
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+
+logging:
+    level:
+      '[org.hibernate.SQL]': DEBUG
+      '[orb.hibernate.type.descriptor.sql.BasicBinder]': TRACE
