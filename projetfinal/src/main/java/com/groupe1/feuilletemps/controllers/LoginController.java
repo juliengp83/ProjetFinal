@@ -1,6 +1,6 @@
 package com.groupe1.feuilletemps.controllers;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,7 +40,7 @@ public class LoginController {
             Employe e = employeRepository.findByNomUtilisateur(username);
             if (e != null) {
                 if (password.equals(e.getMotDePasse())) {
-                    List<Projet> projets = (List<Projet>) e.getProjets();
+                    Set<Projet> projets = e.getProjets();
                     model.addAttribute("projets", projets);
                     model.addAttribute("e", e);
                     return "employe";

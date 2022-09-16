@@ -80,7 +80,7 @@ function getJsonString() {
   $(".slide-content .carte-projet").each(function () {
     const projet_obj = {};
     // projet_obj.id_employe_projet = 1;
-    projet_obj.numero_employe = $("#employe-id").val();
+    projet_obj.numero_employe = $("#employe-id").html();
 
     projet_obj.numero_projet = parseInt(
       $(this).find(".ui.dropdown").dropdown("get value")
