@@ -9,9 +9,19 @@
     <script th:src="@{/scripts/jquery-3.6.0.min.js}"></script>
     <script th:src="@{/styles/semantic-dist/semantic.js}"></script>
     <script th:src="@{/scripts/script.js}" defer></script>
+
+    <!-- quick live server pour frontend -->
+    <!-- <link href="../static/styles/semantic-dist/semantic.css" rel="stylesheet" />
+    <link href="../static/styles/slideshow.css" rel="stylesheet" />
+    <script src="../static/scripts/jquery-3.6.0.min.js"></script>
+    <script src="../static/styles/semantic-dist/semantic.js"></script>
+    <script src="../static/scripts/script.js" defer></script> -->
+
     <title>Employe</title>
   </head>
   <body id="body">
+    <!-- id employe -->
+    <p style="display: none" th:text="${e.employeId}" id="employe-id"></p>
     <!-- template carte -->
     <div class="template" style="display: none">
       <div class="ui raised link card carte-projet">
@@ -23,15 +33,15 @@
               <i class="dropdown icon"></i>
               <div class="default text">Projet</div>
               <div class="menu">
-                <div class="item" data-value="1">Preparation party</div>
-                <div class="item" data-value="0">Inventaire du stock</div>
+                <div class="item" data-value="400">Preparation party</div>
+                <div class="item" data-value="3">Inventaire du stock</div>
               </div>
             </div>
           </div>
           <div class="field-carte">
             <label>Temps de travail en minutes</label>
             <div class="ui input">
-              <input type="number" placeholder="00" />
+              <input type="number" placeholder="00" name="temps_travail" />
             </div>
           </div>
           <div class="field-carte">
@@ -59,7 +69,7 @@
       <div class="slideshow-container">
         <!-- Full-width images with number and caption text -->
         <div class="mySlides fade">
-          <div class="slide-content">
+          <div class="slide-content" id="#slide-lundi">
             <h2>
               Ajoutez les projets sur lesquels vous avez travaillé
               <span style="color: rgb(34, 235, 235)">lundi</span>
@@ -70,7 +80,7 @@
         </div>
 
         <div class="mySlides fade">
-          <div class="slide-content">
+          <div class="slide-content" id="#slide-mardi">
             <h2>
               Ajoutez les projets sur lesquels vous avez travaillé
               <span style="color: rgb(34, 235, 235)">mardi</span>
@@ -81,7 +91,7 @@
         </div>
 
         <div class="mySlides fade">
-          <div class="slide-content">
+          <div class="slide-content" id="#slide-mercredi">
             <h2>
               Ajoutez les projets sur lesquels vous avez travaillé
               <span style="color: rgb(34, 235, 235)">mercredi</span>
@@ -92,7 +102,7 @@
         </div>
 
         <div class="mySlides fade">
-          <div class="slide-content">
+          <div class="slide-content" id="#slide-jeudi">
             <h2>
               Ajoutez les projets sur lesquels vous avez travaillé
               <span style="color: rgb(34, 235, 235)">jeudi</span>
@@ -103,7 +113,7 @@
         </div>
 
         <div class="mySlides fade">
-          <div class="slide-content">
+          <div class="slide-content" id="#slide-vendredi">
             <h2>
               Ajoutez les projets sur lesquels vous avez travaillé
               <span style="color: rgb(34, 235, 235)">vendredi</span>
@@ -114,7 +124,7 @@
         </div>
 
         <div class="mySlides fade">
-          <div class="slide-content">
+          <div class="slide-content" id="#slide-samedi">
             <h2>
               Ajoutez les projets sur lesquels vous avez travaillé
               <span style="color: rgb(34, 235, 235)">samedi</span>
@@ -125,7 +135,7 @@
         </div>
 
         <div class="mySlides fade">
-          <div class="slide-content">
+          <div class="slide-content" id="#slide-dimanche">
             <h2>
               Ajoutez les projets sur lesquels vous avez travaillé
               <span style="color: rgb(34, 235, 235)">dimanche</span>

@@ -1,5 +1,7 @@
 package com.groupe1.feuilletemps.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.groupe1.feuilletemps.Employe;
+import com.groupe1.feuilletemps.Projet;
 import com.groupe1.feuilletemps.data.EmployeRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +22,7 @@ public class LoginController {
     private final EmployeRepository employeRepository;
 
     @Autowired
-    public LoginController(EmployeRepository employeRepository)  {
+    public LoginController(EmployeRepository employeRepository) {
         this.employeRepository = employeRepository;
     }
 
@@ -33,22 +36,21 @@ public class LoginController {
 
         if (username.equals("gestionnaire") && password.equals("gestionnaire")) {
             return "gestionnaire";
-        }
-        else {     // TODO: Encrypter les mots de passe
+        } else { // TODO: Encrypter les mots de passe
             Employe e = employeRepository.findByNomUtilisateur(username);
             if (e != null) {
                 if (password.equals(e.getMotDePasse())) {
+                    List<Projet> projets = (List<Projet>) e.getProjets();
+                    model.addAttribute("projets", projets);
                     model.addAttribute("e", e);
                     return "employe";
-                }
-                else {
+                } else {
                     model.addAttribute("msg", "Mauvais mot de passe");
-                    return "login"; 
+                    return "login";
                 }
-            }
-            else {
+            } else {
                 model.addAttribute("msg", "Employé non trouvé");
-                return "login"; 
+                return "login";
             }
         }
     }
