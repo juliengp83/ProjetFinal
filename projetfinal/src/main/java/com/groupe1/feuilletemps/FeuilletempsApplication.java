@@ -28,10 +28,10 @@ public class FeuilletempsApplication {
 				repo_proj.save(projet2);
 				repo_proj.save(projet3);
 
-				Employe employe1 = new Employe(1L, "Alex", "Pom", "1337 Avenue", "APom", "haxor");
-				Employe employe2 = new Employe(2L, "Eric", "Marquis", "666 Avenue", "EMarquis", "123");
-				Employe employe3 = new Employe(3L, "Julien", "GPoirier", "1337 Avenue", "JGpoirer", "jpeg");
-				Employe employe4 = new Employe(4L, "Emile", "Tremblay", "1010 Avenue", "ETremblay", "perdu");
+				Employe employe1 = new Employe(1L, "Alex", "Pom", "1337 Avenue", "apom", "haxor");
+				Employe employe2 = new Employe(2L, "Eric", "Marquis", "666 Avenue", "emarquis", "123");
+				Employe employe3 = new Employe(3L, "Julien", "Gelineau Poirier", "1337 Avenue", "jgpoirer", "jpeg");
+				Employe employe4 = new Employe(4L, "Emile", "Tremblay", "1010 Avenue", "etremblay", "perdu");
 
 				employe1.ajouterProjet(projet3);
 				employe1.ajouterProjet(projet1);

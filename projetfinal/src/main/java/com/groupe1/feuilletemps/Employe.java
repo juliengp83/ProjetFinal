@@ -5,25 +5,20 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 public class Employe {
 
     @Id
-    private Long employe_id;
+    private Long employeId;
 
     @NotNull
     private String prenom;
@@ -35,10 +30,10 @@ public class Employe {
     private String addresse;
 
     @NotNull
-    private String nom_utilisateur;
+    private String nomUtilisateur;
 
     @NotNull
-    private String mot_de_passe;
+    private String motDePasse;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "EmployeProjet", 
@@ -53,13 +48,13 @@ public class Employe {
 
     }
 
-    public Employe(Long employe_id, String prenom, String nom, String addresse, String nom_utilisateur, String mot_de_passe) {
-        this.employe_id = employe_id;
+    public Employe(Long employeId, String prenom, String nom, String addresse, String nomUtilisateur, String motDePasse) {
+        this.employeId = employeId;
         this.prenom = prenom;
         this.nom = nom;
         this.addresse = addresse;
-        this.nom_utilisateur = nom_utilisateur;
-        this.mot_de_passe = mot_de_passe;
+        this.nomUtilisateur = nomUtilisateur;
+        this.motDePasse = motDePasse;
         this.projets = new HashSet<Projet>();
     }
 
