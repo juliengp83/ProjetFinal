@@ -95,7 +95,7 @@ body {
   flex-direction: column;
   align-items: center;
   background-color: var(--secondary-color);
-  width: 700px;
+  max-width: 700px;
 
   padding: 30px;
   border-radius: 30px;
@@ -106,7 +106,7 @@ body {
   color: var(--primary-color);
 }
 
-.ui.one.cards {
+.cards-container {
   height: 300px;
   max-width: 600px;
   overflow-y: auto;
@@ -114,6 +114,11 @@ body {
   margin-bottom: 20px;
 }
 
+/* .carte-vide {
+  width: 500px;
+  height: 500px;
+  opacity: 0;
+} */
 .carte-projet {
   height: 80px;
   width: 100%;

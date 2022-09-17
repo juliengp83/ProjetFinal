@@ -7,14 +7,17 @@ $("#btn_precedent").addClass("disabled");
 //---------------------on_click-----------------------
 
 $("#btn_suivant").on("click", function () {
-  $("#progress_bar").progress("increment");
+  checkProjetInput();
+  if (checkProjetInput()) {
+    $("#progress_bar").progress("increment");
 
-  plusSlides(1);
-  if ($("#progress_bar").progress("get percent") != 0) {
-    $("#btn_precedent").removeClass("disabled");
-  }
-  if ($("#progress_bar").progress("get percent") === 88) {
-    $("#btn_suivant").addClass("disabled");
+    plusSlides(1);
+    if ($("#progress_bar").progress("get percent") != 0) {
+      $("#btn_precedent").removeClass("disabled");
+    }
+    if ($("#progress_bar").progress("get percent") === 88) {
+      $("#btn_suivant").addClass("disabled");
+    }
   }
 });
 
@@ -28,15 +31,15 @@ $("#btn_precedent").on("click", function () {
 });
 
 $(".btn_ajouter_projet").on("click", function () {
-  $(".carte-projet")
+  $(".template .carte-projet")
     .first()
     .clone(true)
-    .appendTo($(this).next(".ui.one.cards"));
+    .appendTo($(this).next(".cards-container").find(" .ui.one.cards"));
   $(".ui.dropdown").dropdown();
 });
 
 $(".btn_enlever_projet").on("click", function () {
-  $(this).parents(".carte-projet").remove();
+  $(this).closest(".carte-projet").remove();
 });
 
 $("#btn_soumettre").on("click", function () {
@@ -73,28 +76,22 @@ function showSlides(n) {
   slides[slideIndex - 1].style.display = "block";
 }
 
+//--------------JSON_METHODS-------------
+
+// Cette fonction retourne un string Json de la liste d'objets ProjetEmploye
 function getJsonString() {
   const dates = getDatesArray();
   const projets = [];
 
   $(".slide-content .carte-projet").each(function () {
     const projet_obj = {};
-    // projet_obj.id_employe_projet = 1;
     projet_obj.numero_employe = $("#employe-id").html();
-
-    projet_obj.numero_projet = parseInt(
-      $(this).find(".ui.dropdown").dropdown("get value")
-    );
-
-    // projet_obj.id_feuille_temps = 2;
-
-    if ($(this).find("input[name='temps_travail']").val() === "") {
-      projet_obj.temps_travaille = 0;
-    } else {
-      projet_obj.temps_travaille = $(this)
-        .find("input[name='temps_travail']")
-        .val();
-    }
+    projet_obj.numero_projet = $(this)
+      .find(".ui.dropdown")
+      .dropdown("get text");
+    projet_obj.temps_travaille = $(this)
+      .find("input[name='temps_travail']")
+      .val();
 
     switch ($(this).closest(".slide-content").attr("id")) {
       case "#slide-lundi":
@@ -145,3 +142,23 @@ function getDatesArray() {
   dates.push(dates.shift());
   return dates;
 }
+
+//-----ERROR_CHECK_METHODS------
+
+function checkProjetInput() {
+  let ok = true;
+  $(".mySlides[style='display: block;'] .carte-projet").each(function () {
+    if ($(this).find(".ui.dropdown").dropdown("get text") === "Projet") {
+      $(this).find(".ui.dropdown").addClass("error");
+      if (ok) {
+        ok = false;
+      }
+    }
+  });
+  return ok;
+}
+
+$(".ui.dropdown").click(function (e) {
+  e.preventDefault();
+  $(this).removeClass("error");
+});
