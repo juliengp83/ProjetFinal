@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.groupe1.feuilletemps.Employe;
 import com.groupe1.feuilletemps.Projet;
 import com.groupe1.feuilletemps.data.EmployeRepository;
+import com.groupe1.feuilletemps.utils.AES;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,10 +37,10 @@ public class LoginController {
 
         if (username.equals("gestionnaire") && password.equals("gestionnaire")) {
             return "gestionnaire";
-        } else { // TODO: Encrypter les mots de passe
+        } else { 
             Employe e = employeRepository.findByNomUtilisateur(username);
             if (e != null) {
-                if (password.equals(e.getMotDePasse())) {
+                if (password.equals(AES.decrypt(e.getMotDePasse(), "bBgLrINTjBINrm7"))) {
                     Set<Projet> projets = e.getProjets();
                     model.addAttribute("projets", projets);
                     model.addAttribute("e", e);

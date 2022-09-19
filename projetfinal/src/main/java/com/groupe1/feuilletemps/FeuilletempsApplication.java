@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.groupe1.feuilletemps.data.EmployeRepository;
 import com.groupe1.feuilletemps.data.ProjetRepository;
+import com.groupe1.feuilletemps.utils.AES;
 
 @SpringBootApplication
 public class FeuilletempsApplication {
@@ -20,6 +21,7 @@ public class FeuilletempsApplication {
 		return new CommandLineRunner() {
 			@Override
 			public void run(String... args) throws Exception {
+				AES.setKey("bBgLrINTjBINrm7");
 				Projet projet1 = new Projet(999L, "Tennis");
 				Projet projet2 = new Projet(500L, "Bowling");
 				Projet projet3 = new Projet(100L, "Tetris");
@@ -28,10 +30,10 @@ public class FeuilletempsApplication {
 				repo_proj.save(projet2);
 				repo_proj.save(projet3);
 
-				Employe employe1 = new Employe(1L, "Alex", "Pom", "1337 Avenue", "apom", "haxor");
-				Employe employe2 = new Employe(2L, "Eric", "Marquis", "666 Avenue", "emarquis", "123");
-				Employe employe3 = new Employe(3L, "Julien", "Gelineau Poirier", "1337 Avenue", "jgpoirer", "jpeg");
-				Employe employe4 = new Employe(4L, "Emile", "Tremblay", "1010 Avenue", "etremblay", "perdu");
+				Employe employe1 = new Employe(1L, "Alex", "Pom", "1337 Avenue", "apom", AES.encrypt("haxor", "bBgLrINTjBINrm7"));
+				Employe employe2 = new Employe(2L, "Eric", "Marquis", "666 Avenue", "emarquis", AES.encrypt("123", "bBgLrINTjBINrm7"));
+				Employe employe3 = new Employe(3L, "Julien", "Gelineau Poirier", "1337 Avenue", "jgpoirer", AES.encrypt("jpeg", "bBgLrINTjBINrm7"));
+				Employe employe4 = new Employe(4L, "Emile", "Tremblay", "1010 Avenue", "etremblay", AES.encrypt("perdu", "bBgLrINTjBINrm7"));
 
 				employe1.ajouterProjet(projet3);
 				employe1.ajouterProjet(projet1);
