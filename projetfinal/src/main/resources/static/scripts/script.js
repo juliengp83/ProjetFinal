@@ -43,7 +43,7 @@ $(".btn_enlever_projet").on("click", function () {
 });
 
 $("#btn_soumettre").on("click", function () {
-  alert(getJsonString());
+  getJsonString();
 });
 
 //---------------------------SLIDESHOW-------------------------------
@@ -86,12 +86,12 @@ function getJsonString() {
   $(".slide-content .carte-projet").each(function () {
     const projet_obj = {};
     projet_obj.numero_employe = parseInt($("#employe-id").html());
-    projet_obj.numero_projet = parseInt($(this)
-      .find(".ui.dropdown")
-      .dropdown("get value"));
-    projet_obj.temps_travaille = $(this)
-      .find("input[name='temps_travail']")
-      .val();
+    projet_obj.numero_projet = parseInt(
+      $(this).find(".ui.dropdown").dropdown("get value")
+    );
+    projet_obj.temps_travaille = parseInt(
+      $(this).find("input[name='temps_travail']").val()
+    );
 
     switch ($(this).closest(".slide-content").attr("id")) {
       case "#slide-lundi":
@@ -121,8 +121,17 @@ function getJsonString() {
     projets.push(projet_obj);
   });
 
-  let json_string = JSON.stringify(projets);
-  return json_string;
+  $.ajax({
+    type: "POST",
+    url: "submitjson", //do not put the full url,you need use an absolute url
+    dataType: "json",
+    data: JSON.stringify(projets), //put search js object directly here
+    contentType: "application/json",
+    success: function (data) {
+      console.log("ok");
+      // do what ever you want with data
+    },
+  });
 }
 
 // Cette fonction cree un tableau contenant la valeur (en commencant par lundi) de "date_travail" pour creer le fichier json
