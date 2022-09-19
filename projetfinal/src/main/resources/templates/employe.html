@@ -32,10 +32,13 @@
               <input type="hidden" name="gender" />
               <i class="dropdown icon"></i>
               <div class="default text">Projet</div>
-              <div class="menu">
+              <div class="menu" th:each="projet : ${projets}">
+                <div class="item" th:text="${projet.nom_projet}"></div>
+              </div>
+              <!-- <div class="menu">
                 <div class="item" data-value="400">Preparation party</div>
                 <div class="item" data-value="3">Inventaire du stock</div>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="field-carte">

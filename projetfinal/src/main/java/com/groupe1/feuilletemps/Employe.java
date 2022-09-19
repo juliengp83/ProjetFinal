@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -38,7 +39,7 @@ public class Employe {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "EmployeProjet", 
             joinColumns = {
-                @JoinColumn(name = "employe_id") }, 
+                @JoinColumn(name = "employeId") }, 
             inverseJoinColumns = {
                 @JoinColumn(name = "numero_projet") }
     )

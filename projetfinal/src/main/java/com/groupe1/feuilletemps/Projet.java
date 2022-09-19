@@ -17,7 +17,7 @@ public class Projet {
 
     private String nom_projet;
 
-    @ManyToMany(mappedBy = "projets")
+    @ManyToMany()
     private Set<Employe> employes;
 
     public Projet(){

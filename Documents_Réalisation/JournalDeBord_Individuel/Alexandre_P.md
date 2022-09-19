@@ -48,3 +48,6 @@
 
 ## 14 septembre
 * Toujours plus de temps pour apprendre Spring
+
+## 15 septembre
+* Ajout des beans de employe et projet, ajouter les repos CRUD, etc.
