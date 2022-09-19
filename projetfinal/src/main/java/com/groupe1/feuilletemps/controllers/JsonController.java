@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class JsonController {
     @RequestMapping(value = "/submitjson", method = RequestMethod.POST)
-    public ResponseEntity<?> posted(@RequestBody String projetsString) {
+    public ResponseEntity<Resultat> posted(@RequestBody String projetsString) {
         Gson gson = new Gson();
 
         ArrayList<EmployeProjet> employe_projets = new ArrayList<>();
