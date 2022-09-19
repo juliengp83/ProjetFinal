@@ -127,8 +127,8 @@ function getJsonString() {
     dataType: "json",
     data: JSON.stringify(projets), //put search js object directly here
     contentType: "application/json",
-    success: function (data) {
-      console.log("ok");
+    success: function (res) {
+      console.log(res);
       // do what ever you want with data
     },
   });
