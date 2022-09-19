@@ -85,10 +85,10 @@ function getJsonString() {
 
   $(".slide-content .carte-projet").each(function () {
     const projet_obj = {};
-    projet_obj.numero_employe = $("#employe-id").html();
-    projet_obj.numero_projet = $(this)
+    projet_obj.numero_employe = parseInt($("#employe-id").html());
+    projet_obj.numero_projet = parseInt($(this)
       .find(".ui.dropdown")
-      .dropdown("get text");
+      .dropdown("get value"));
     projet_obj.temps_travaille = $(this)
       .find("input[name='temps_travail']")
       .val();

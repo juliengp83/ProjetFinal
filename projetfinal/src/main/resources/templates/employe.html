@@ -32,8 +32,8 @@
               <input type="hidden" name="gender" />
               <i class="dropdown icon"></i>
               <div class="default text">Projet</div>
-              <div class="menu" th:each="projet : ${projets}">
-                <div class="item" th:text="${projet.nom_projet}"></div>
+              <div class="menu">
+                <div class="item" th:each="projet : ${projets}" th:text="${projet.nom_projet}" th:attr="data-value=${projet.numero_projet}"></div>
               </div>
               <!-- <div class="menu">
                 <div class="item" data-value="400">Preparation party</div>

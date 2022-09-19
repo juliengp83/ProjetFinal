@@ -9,6 +9,16 @@
             "projectName": "projetfinal",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-FeuilletempsApplication<feuilletemps>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.groupe1.feuilletemps.FeuilletempsApplication",
+            "projectName": "feuilletemps",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
