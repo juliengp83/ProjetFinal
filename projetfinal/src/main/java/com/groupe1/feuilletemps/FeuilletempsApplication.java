@@ -22,13 +22,23 @@ public class FeuilletempsApplication {
 			@Override
 			public void run(String... args) throws Exception {
 				AES.setKey("bBgLrINTjBINrm7");
-				Projet projet1 = new Projet(999L, "Tennis");
+				Projet projet1 = new Projet(1000L, "Tennis");
 				Projet projet2 = new Projet(500L, "Bowling");
 				Projet projet3 = new Projet(100L, "Tetris");
+				Projet p995 = new Projet(995L,"Congé parental"); 
+				Projet p996 = new Projet(996L,"Transport en voiture");
+				Projet p997 = new Projet(997L, "Transport en commun");
+				Projet p998 = new Projet( 998L, "Congé férié");
+				Projet p999 = new Projet(999L,"Congé de maladie");
 
 				repo_proj.save(projet1);
 				repo_proj.save(projet2);
 				repo_proj.save(projet3);
+				repo_proj.save(p995);
+				repo_proj.save(p996);
+				repo_proj.save(p997);
+				repo_proj.save(p998);
+				repo_proj.save(p999);
 
 				Employe employe1 = new Employe(1L, "Alex", "Pom", "1337 Avenue", "apom", AES.encrypt("haxor", "bBgLrINTjBINrm7"));
 				Employe employe2 = new Employe(2L, "Eric", "Marquis", "666 Avenue", "emarquis", AES.encrypt("123", "bBgLrINTjBINrm7"));
@@ -40,6 +50,11 @@ public class FeuilletempsApplication {
 
 				employe2.ajouterProjet(projet1);
 				employe2.ajouterProjet(projet3);
+				employe2.ajouterProjet(p995);
+				employe2.ajouterProjet(p996);
+				employe2.ajouterProjet(p997);
+				employe2.ajouterProjet(p998);
+				employe2.ajouterProjet(p999);
 
 				employe3.ajouterProjet(projet1);
 				employe3.ajouterProjet(projet2);

@@ -8,276 +8,251 @@ import com.groupe1.feuilletemps.modeles.Resultat;
 
 public class TraitementFeuille {
 
-    /** Cette fonction retourne un objet de type Resultat qui contient un numéro d'employé ainsi qu'un ArrayList<Regle>
-     *  représentant l'ensemble des règles de l'entreprise. Ces objets Regle contiendront le id_regle associé, si elle
-     *  est respectée ou non et un message détaillé.
+    static int ADMIN_TEMPS_REQUIS_HEBDOMADAIRE_EN_MINUTES = 60 * 36;
+    static int ADMIN_TEMPS_MAXIMUN_TELETRAVAIL_EN_MINUTES = 60 * 10;
+    static int ADMIN_TEMPS_REQUIS_QUOTIDIEN_BUREAU = 60 * 4;
+    static int REGULIER_TEMPS_REQUIS_HEBDOMADAIRE_EN_MINUTES = 60 * 38;
+    static int REGULIER_TEMPS_REQUIS_QUOTIDIEN_BUREAU = 60 * 6;
+    static int TEMPS_MAXIMUM_BUREAU_EN_MINUTES = 60 * 43;
+    static int JOUR_COMPLET = 60 * 7; 
+
+    /**
+     * Cette fonction retourne un objet de type Resultat qui contient un numéro
+     * d'employé ainsi qu'un ArrayList<Regle>
+     * représentant l'ensemble des règles de l'entreprise. Ces objets Regle
+     * contiendront le id_regle associé, si elle
+     * est respectée ou non et un message détaillé.
      * 
-     *  Cet objet Resultat servira ensuite à l'écriture du fichier de sortie.
+     * Cet objet Resultat servira ensuite à l'écriture du fichier de sortie.
      * 
-     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la feuille de temps
+     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la
+     *                        feuille de temps
      * @return Un objet Resultat qui sera utilisé pour la sortie en format JSON
      */
     public static Resultat traitement(ArrayList<EmployeProjet> employe_projets) {
         Resultat res = new Resultat();
         Regle r = new Regle();
 
-        res.setNumeroEmploye(employe_projets.get(0).getNumeroEmploye());
+        int numero_employe = employe_projets.get(0).getNumeroEmploye();
+        int minutes_travaillees = 0;
+        String categorie;
 
-        r = testRegle1(employe_projets);
+        res.setNumeroEmploye(numero_employe);
+
+        // Les règles spécifique a une catégorie d'employée
+        if (numero_employe < 1000) // Employee admin
+        {
+            // Regle 1: temps minimum au bureau
+            minutes_travaillees = minutesTravailleesBureau(employe_projets);
+            r = tempsMinimumHebdomadaire(minutes_travaillees, ADMIN_TEMPS_REQUIS_HEBDOMADAIRE_EN_MINUTES);
+            res.ajouterRegle(r);
+
+            // Regle 4: temp maximum en télétravail
+            minutes_travaillees = minutesTeletravail(employe_projets);
+            categorie = "en télétravail";
+            r = tempsMaximumHebdomadaire(minutes_travaillees, ADMIN_TEMPS_MAXIMUN_TELETRAVAIL_EN_MINUTES, categorie);
+            res.ajouterRegle(r);
+
+            // Regle 7: temp minimum quotidien
+            int[] temps_quotidien_travaille = calculTempsQuotidienJourSemaine(employe_projets);
+            r = tempsMinimumQuotidien(temps_quotidien_travaille, ADMIN_TEMPS_REQUIS_QUOTIDIEN_BUREAU);
+            res.ajouterRegle(r);
+
+        } else { // Employee regulier
+
+            // ancienne regle 2: devient temps minimum au bureau.
+            minutes_travaillees = minutesTravailleesBureau(employe_projets);
+            r = tempsMinimumHebdomadaire(minutes_travaillees, REGULIER_TEMPS_REQUIS_HEBDOMADAIRE_EN_MINUTES);
+            res.ajouterRegle(r);
+
+            // ancienne regle 6: devient temps minimum quotidient
+            int[] temps_quotidien_travaille = calculTempsQuotidienJourSemaine(employe_projets);
+            r = tempsMinimumQuotidien(temps_quotidien_travaille, REGULIER_TEMPS_REQUIS_QUOTIDIEN_BUREAU);
+            res.ajouterRegle(r);
+        }
+        // Règles pour tous les employées
+        minutes_travaillees = minutesTravailleesBureau(employe_projets);
+        categorie = "au bureau";
+        r = tempsMaximumHebdomadaire(minutes_travaillees, TEMPS_MAXIMUM_BUREAU_EN_MINUTES, categorie);
         res.ajouterRegle(r);
 
-        r = testRegle2(employe_projets);
-        res.ajouterRegle(r);
 
-        r = testRegle3(employe_projets);
-        res.ajouterRegle(r);
-        
-        r = testRegle4(employe_projets);
-        res.ajouterRegle(r);
-
-        r = testRegle5(employe_projets);
-        res.ajouterRegle(r);
-      
-        r = testRegle6(employe_projets);
-        res.ajouterRegle(r); 
-
-        r = testRegle7(employe_projets);
-        res.ajouterRegle(r);       
 
         return res;
     }
     
-    /** Cette fonction valide la feuille de temps d'un employé par rapport à la règle #1 qui stipule que les employés
-     *  de l'administration doivent travailler au moins 36 heures au bureau par semaine.
+    /**
+     * Cette fonction fait cumul le nombre de minutes de travail au bureau pour un employé
      * 
-     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la feuille de temps
-     * @return Un objet Regle contenant le id_regle, si elle est respectée ou non et un message détaillé
+     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la
+     *                        feuille de temps
+     * @return Un int, minutes_travaillees_bureau qui sera utilsé pour validation.
      */
-    public static Regle testRegle1(ArrayList<EmployeProjet> employe_projets) {
-        Regle regle;
-        boolean respectee = true;
-        String message;
+    public static int minutesTravailleesBureau(ArrayList<EmployeProjet> employe_projets) {
         int minutes_travaillees_bureau = 0;
-        int temps_requis_en_minutes = 60 * 36;
-        int numero_employe = employe_projets.get(0).getNumeroEmploye();
 
-        if (numero_employe > 1000) {
-            message = "Il s'agit d'un employé régulier qui n'est pas assujetti à cette règle.";
-            regle = new Regle(1, respectee, message);
-        } else {
-            for (EmployeProjet emp_p : employe_projets) {
-                if (emp_p.getNumeroProjet() <= 900) {
-                    minutes_travaillees_bureau += emp_p.getTempsTravail();
-                }
-            }
-
-            if (minutes_travaillees_bureau < temps_requis_en_minutes) {
-                message = "L'employé administratif n'a pas travaillé au moins 36 heures au bureau cette semaine.";
-                respectee = false;
-                regle = new Regle(1, respectee, message);
-            } else {
-                message = "L'employé administratif a travaillé au moins 36 heures au bureau cette semaine.";
-                respectee = true;
-                regle = new Regle(1, respectee, message);
+        for (EmployeProjet emp_p : employe_projets) {
+            if (emp_p.getNumeroProjet() <= 900) {
+                minutes_travaillees_bureau += emp_p.getTempsTravail();
             }
         }
+        return minutes_travaillees_bureau;
+    }
 
+    /**
+     * Cette fonction fait cumul le nombre de minutes de télétravail (> 900) pour un employé
+     * Ajout de l'exclusion des numéros de projet inclu entre 995 et 999
+     * 
+     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la
+     *                        feuille de temps
+     * @return minutes_teletravail en int
+     */
+    public static int minutesTeletravail(ArrayList<EmployeProjet> employe_projets) {
+        int minutes_teletravail = 0;
+        int i = 0;
+        for (EmployeProjet emp_p : employe_projets) {
+            i = emp_p.getNumeroProjet();
+            if (i > 900) {
+                if (i <= 995 && i >= 999) {
+                    minutes_teletravail += emp_p.getTempsTravail();
+                }
+            }
+        }
+        return minutes_teletravail;
+    }
+
+    /**
+     * Cette fonction valide si la feuille de temps de l'employé respecte le minimum
+     * hebdomadaire d'heures requises pour un employé.
+     * 
+     * @param minutes_travaillees Le cumul du temps travaillées pour la semaine.
+     * @param temps_requis        Le nombre de minutes de travail requises.
+     * 
+     * @return Un objet Regle contenant le id_regle, si elle est respectée ou non et
+     *         un message détaillé
+     */
+    public static Regle tempsMinimumHebdomadaire(int minutes_travaillees, int temps_requis) {
+        Regle regle;
+        boolean est_respectee = true;
+        String message;
+
+        if (minutes_travaillees < temps_requis) {
+            message = "L'employé n'a pas travaillé au moins les " + temps_requis / 60
+                    + " heures requises cette semaine.";
+            est_respectee = false;
+        } else {
+            message = "L'employé a travaillé au moins les " + temps_requis / 60
+                    + "  heures requises cette semaine.";
+            est_respectee = true;
+        }
+        regle = new Regle(1, est_respectee, message);
         return regle;
     }
 
-    /** Cette fonction valide la feuille de temps d'un employé par rapport à la règle #2 qui stipule que les employés
-     *  réguliers doivent travailler au moins 38 heures au bureau par semaine.
+    /**
+     * Cette fonction valide si l'employé respecte le plafond hebdomadaire maximum d'heure
+     * pour la catégorie.
      * 
-     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la feuille de temps
-     * @return Un objet Regle contenant le id_regle, si elle est respectée ou non et un message détaillé
+     * @param minutes_travaillees Le cumul du temps travaillées pour la semaine.
+     * @param temps_maximum       Le maximum permis pour la catégorie.
+     * @param categorie           Un string qui contient le nom de la catégorie.
+     * 
+     * @return Un objet Regle contenant le id_regle, si elle est respectée ou non et
+     *         un message détaillé
      */
-    public static Regle testRegle2(ArrayList<EmployeProjet> employe_projets) {
+    public static Regle tempsMaximumHebdomadaire(int minutes_travaillees, int temps_maximum, String categorie) {
+        Regle regle;
+        boolean est_respectee = true;
+        String message = "L'employé a travaillé moins de " + temps_maximum / 60
+                + " heures " + categorie + " cette semaine.";
+
+        if (minutes_travaillees > temps_maximum) {
+            message = "L'employé a travaillé plus de " + temps_maximum / 60
+                    + "  heures " + categorie + " cette semaine.";
+            est_respectee = false;
+        }
+
+        regle = new Regle(4, est_respectee, message);
+        return regle;
+    }
+
+    /**
+     * Cette fonction valide la feuille de temps d'un employé par rapport à la règle
+     * que les employés de doivent faire un minimum d'heures au bureau pour tout les
+     * jours ouvrables.
+     * 
+     * @param temps_quotidien_travaille Un tableau du cumul quotidien des heures les
+     *                                  jours de semaine
+     * @param temps_requis              Le nombre de minutes de travail requises
+     *                                  quotidiennement.
+     * 
+     * @return Un objet Regle contenant le id_regle, si elle est respectée ou non et
+     *         un message détaillé
+     */
+    public static Regle tempsMinimumQuotidien(int[] temps_quotidien_travaille, int temps_requis) {
         Regle regle;
         String message;
-        int minutes_travaillees_bureau = 0;
-        int temps_requis_en_minutes = 60*38;
-        int numero_employe = employe_projets.get(0).getNumeroEmploye();
-        if (numero_employe < 1000) {
-            message = "Il s'agit d'un employé de l'administration donc il remplit forcément cette règle";
-            regle = new Regle(2, true, message);
-        }
-        else {
-            for (EmployeProjet emp_p : employe_projets) {
-                if (emp_p.getNumeroProjet() <= 900) 
-                    minutes_travaillees_bureau += emp_p.getTempsTravail();
-            }
 
-            if (minutes_travaillees_bureau < temps_requis_en_minutes) {
-                message = "L'employé régulier n'a pas travaillé au moins 38 heures au bureau cette semaine.";
-                regle = new Regle(2, false, message);
-            } else {
-                message = "L'employé régulier a travaillé au moins 38 heures au bureau cette semaine.";
-                regle = new Regle(2, true, message);
+        for (int temps_travaille : temps_quotidien_travaille) {
+            if (temps_travaille < temps_requis) {
+                message = "L'employé a travaillé moins de " + temps_requis/60
+                        + " heures au bureau cette semaine durant un des jours ouvrables.";
+                regle = new Regle(7, false, message);
+                return regle;
             }
         }
+        message = "L'employé a travaillé " + temps_requis/60
+                + " heures ou plus au bureau cette semaine durant tous les jours ouvrables.";
+        regle = new Regle(7, true, message);
 
         return regle;
     }
 
-    /** Cette fonction valide la feuille de temps d'un employé par rapport à la règle #3 qui stipule qu'aucun employé
-     *  n'a le droit de passer plus de 43 heures au bureau par semaine.
+    /**
+     * Cette fonction calcule le temps travaillé en minutes pour chaque chaque jour
+     * ouvrable.
      * 
-     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la feuille de temps
-     * @return Un objet Regle contenant le id_regle, si elle est respectée ou non et un message détaillé 
-     */
-    public static Regle testRegle3(ArrayList<EmployeProjet> employe_projets ) {
-        Regle regle;
-        String message;
-        int minutes_travaillees_bureau = 0;
-        int temps_requis_en_minutes = 60*43;
-
-                for (EmployeProjet emp_p : employe_projets) {
-                    if (emp_p.getNumeroProjet() <= 900)
-                    minutes_travaillees_bureau += emp_p.getTempsTravail(); 
-                }
-
-                if (minutes_travaillees_bureau > temps_requis_en_minutes) {
-                    message = "L'employé a travaillé plus de 43 heures au bureau cette semaine.";
-                    regle = new Regle(3, false, message);
-                } else {
-                    message = "L'employé n'a pas travaillé plus de 43 heures au bureau cette semaine."; 
-                    regle = new Regle(3, true, message);
-                }
-        
-        return regle;
-    }
-
-    /** Cette fonction valide la feuille de temps d'un employé par rapport à la règle #4 qui stipule que les employés
-     *  de l'administration ne peuvent faire plus que 10 heures de télétravail par semaine.
-     * 
-     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la feuille de temps
-     * @return Un objet Regle contenant le id_regle, si elle est respectée ou non et un message détaillé
-     */
-    public static Regle testRegle4(ArrayList<EmployeProjet> employe_projets) {
-        Regle regle;
-        boolean respectee = true;
-        String message = "L'employé administratif a travaillé moins 10 heures en télétravail cette semaine.";
-        int minutes_travaillees_bureau = 0;
-        int temps_maximum_en_minutes = 60 * 10;
-        int numero_employe = employe_projets.get(0).getNumeroEmploye();
-
-        if (numero_employe > 1000) {
-            message = "Il s'agit d'un employé régulier qui n'est pas assujetti à cette règle.";
-        } else {
-            for (EmployeProjet emp_p : employe_projets) {
-                if (emp_p.getNumeroProjet() > 900) {
-                    minutes_travaillees_bureau += emp_p.getTempsTravail();
-                }
-            }
-
-            if (minutes_travaillees_bureau > temps_maximum_en_minutes) {
-                message = "L'employé administratif a travaillé plus de 10 heures en télétravail cette semaine.";
-                respectee = false;
-            }
-        }
-
-        regle = new Regle(4, respectee, message);
-        return regle;
-    }   
-
-    /** Cette fonction valide la feuille de temps d'un employé par rapport à la règle #5 qui stipule que les employés
-     *  réguliers peuvent faire autant de télétravail qu'ils le souhaitent.
-     * 
-     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la feuille de temps
-     * @return Un objet Regle contenant le id_regle, si elle est respectée ou non et un message détaillé
-     */
-    public static Regle testRegle5(ArrayList<EmployeProjet> employe_projets) {
-        String message = "L'employé régulier peut faire autant de télétravail qu'il le veut.";
-        int numero_employe = employe_projets.get(0).getNumeroEmploye();
-
-        if (numero_employe < 1000) {
-            message = "Il s'agit d'un employé administratif qui n'est pas assujetti à cette règle.";
-        }
-
-        Regle regle = new Regle(5, true, message);
-
-        return regle;
-    }
-
-    /** Cette fonction valide la feuille de temps d'un employé par rapport à la règle #6 qui stipule que les employés
-     *  réguliers doivent faire un minimum de 6 heures au bureau tout les jours ouvrables.
-     * 
-     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la feuille de temps
-     * @return Un objet Regle contenant le id_regle, si elle est respectée ou non et un message détaillé
-     */
-    public static Regle testRegle6(ArrayList<EmployeProjet> employe_projets) {
-        Regle regle;
-        String message;
-        int[] temps_quotidien_travaille;
-        int temps_requis_en_minutes = 60*6;
-        int numero_employe = employe_projets.get(0).getNumeroEmploye();
-
-        if (numero_employe < 1000) {
-            message = "Il s'agit d'un employé de l'administration qui n'est pas assujetti à cette règle.";
-            regle = new Regle(6, true, message);
-        } else {
-            temps_quotidien_travaille = calculTempsQuotidienJourSemaine(employe_projets);
-            for (int temps_travaille : temps_quotidien_travaille) {
-                if(temps_travaille < temps_requis_en_minutes){
-                    message = "L'employé a travaillé moins de 6 heures au bureau cette semaine durant un des jours ouvrables.";
-                    regle = new Regle(6, false, message);  
-                    return regle;
-                }
-            }
-            message = "L'employé a travaillé 6 heures ou plus au bureau cette semaine durant tous les jours ouvrables."; 
-            regle = new Regle(6, true, message);
-        }
-
-        return regle;
-    }
-
-    /** Cette fonction valide la feuille de temps d'un employé par rapport à la règle #7 qui stipule que les employés de
-     *  l'administration doivent faire un minimum de 4 heures au bureau pour tout les jours ouvrables.
-     * 
-     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la feuille de temps
-     * @return Un objet Regle contenant le id_regle, si elle est respectée ou non et un message détaillé
-     */
-    public static Regle testRegle7(ArrayList<EmployeProjet> employe_projets) {
-        Regle regle;
-        String message;
-        int[] temps_quotidien_travaille;
-        int temps_requis_en_minutes = 60*4;
-        int numero_employe = employe_projets.get(0).getNumeroEmploye();
-
-        if (numero_employe >= 1000) {
-            message = "Il s'agit d'un employé régulier qui n'est pas assujetti a cette règle.";
-            regle = new Regle(7, true, message);
-        } else {
-            temps_quotidien_travaille = calculTempsQuotidienJourSemaine(employe_projets);
-            for (int temps_travaille : temps_quotidien_travaille) {
-                if(temps_travaille < temps_requis_en_minutes){
-                    message = "L'employé a travaillé moins de 4 heures au bureau cette semaine durant un des jours ouvrables.";
-                    regle = new Regle(7, false, message);  
-                    return regle;
-                }
-            }
-            message = "L'employé a travaillé 4 heures ou plus au bureau cette semaine durant tous les jours ouvrables."; 
-            regle = new Regle(7, true, message);
-        }
-
-        return regle; 
-    }
-
-    /** Cette fonction calcule le temps travaillé en minutes pour chaque chaque jour ouvrable.
-     * 
-     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la feuille de temps
-     * @return Un tableau de int contenant la temps travaillé en minutes pour chaque jour ouvrable (lundi au vendredi)
+     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la
+     *                        feuille de temps
+     * @return Un tableau de int contenant la temps travaillé en minutes pour chaque
+     *         jour ouvrable (lundi au vendredi)
      *         l'indice 0 correspond à lundi et 4 à vendredi.
      */
     public static int[] calculTempsQuotidienJourSemaine(ArrayList<EmployeProjet> employe_projets) {
         int[] temps_travaille_quotidiennement_bureau = new int[5];
         for (int i = 0; i < 5; i++) {
             for (EmployeProjet emp_p : employe_projets) {
-                if (emp_p.getNumeroProjet() <= 900 && emp_p.getJourDeSemaineTravaille() == i+1) {
+                if (emp_p.getJourDeSemaineTravaille() == i + 1) {
                     temps_travaille_quotidiennement_bureau[i] += emp_p.getTempsTravail();
                 }
             }
         }
         return temps_travaille_quotidiennement_bureau;
     }
+
+    //TODO n'est pas terminé
+    public static int[] minutesParProjetSpecial(ArrayList<EmployeProjet> employe_projets) {
+        int[] minutes_par_projet_special = new int[5];
+        //{995,996,997,998,999};
+        int i = 0;
+        for (EmployeProjet emp_p : employe_projets) {
+            i = emp_p.getNumeroProjet();
+            if (i >= 995 && i <= 999) {
+                switch(i){
+                case 995:
+                    minutes_par_projet_special[0] += emp_p.getTempsTravail();
+                case 996:
+                    minutes_par_projet_special[1] += emp_p.getTempsTravail();
+                case 997:
+                    minutes_par_projet_special[2] += emp_p.getTempsTravail();
+                case 998:
+                    minutes_par_projet_special[3] += emp_p.getTempsTravail();
+                case 999:
+                    minutes_par_projet_special[4] += emp_p.getTempsTravail();
+                }
+            }
+        }
+        return minutes_par_projet_special;
+    }
+
 }
