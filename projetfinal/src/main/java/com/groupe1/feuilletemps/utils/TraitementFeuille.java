@@ -14,7 +14,7 @@ public class TraitementFeuille {
     static int REGULIER_TEMPS_REQUIS_HEBDOMADAIRE_EN_MINUTES = 60 * 38;
     static int REGULIER_TEMPS_REQUIS_QUOTIDIEN_BUREAU = 60 * 6;
     static int TEMPS_MAXIMUM_BUREAU_EN_MINUTES = 60 * 43;
-    static int JOUR_COMPLET = 60 * 7; 
+    static int JOUR_COMPLET = 60 * 7;
 
     /**
      * Cette fonction retourne un objet de type Resultat qui contient un numéro
@@ -76,13 +76,12 @@ public class TraitementFeuille {
         r = tempsMaximumHebdomadaire(minutes_travaillees, TEMPS_MAXIMUM_BUREAU_EN_MINUTES, categorie);
         res.ajouterRegle(r);
 
-
-
         return res;
     }
-    
+
     /**
-     * Cette fonction fait cumul le nombre de minutes de travail au bureau pour un employé
+     * Cette fonction fait cumul le nombre de minutes de travail au bureau pour un
+     * employé
      * 
      * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la
      *                        feuille de temps
@@ -100,7 +99,8 @@ public class TraitementFeuille {
     }
 
     /**
-     * Cette fonction fait cumul le nombre de minutes de télétravail (> 900) pour un employé
+     * Cette fonction fait cumul le nombre de minutes de télétravail (> 900) pour un
+     * employé
      * Ajout de l'exclusion des numéros de projet inclu entre 995 et 999
      * 
      * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la
@@ -150,7 +150,8 @@ public class TraitementFeuille {
     }
 
     /**
-     * Cette fonction valide si l'employé respecte le plafond hebdomadaire maximum d'heure
+     * Cette fonction valide si l'employé respecte le plafond hebdomadaire maximum
+     * d'heure
      * pour la catégorie.
      * 
      * @param minutes_travaillees Le cumul du temps travaillées pour la semaine.
@@ -195,13 +196,13 @@ public class TraitementFeuille {
 
         for (int temps_travaille : temps_quotidien_travaille) {
             if (temps_travaille < temps_requis) {
-                message = "L'employé a travaillé moins de " + temps_requis/60
+                message = "L'employé a travaillé moins de " + temps_requis / 60
                         + " heures au bureau cette semaine durant un des jours ouvrables.";
                 regle = new Regle(7, false, message);
                 return regle;
             }
         }
-        message = "L'employé a travaillé " + temps_requis/60
+        message = "L'employé a travaillé " + temps_requis / 60
                 + " heures ou plus au bureau cette semaine durant tous les jours ouvrables.";
         regle = new Regle(7, true, message);
 
@@ -230,25 +231,25 @@ public class TraitementFeuille {
         return temps_travaille_quotidiennement_bureau;
     }
 
-    //TODO n'est pas terminé
+    // TODO n'est pas terminé
     public static int[] minutesParProjetSpecial(ArrayList<EmployeProjet> employe_projets) {
         int[] minutes_par_projet_special = new int[5];
-        //{995,996,997,998,999};
+        // {995,996,997,998,999};
         int i = 0;
         for (EmployeProjet emp_p : employe_projets) {
             i = emp_p.getNumeroProjet();
             if (i >= 995 && i <= 999) {
-                switch(i){
-                case 995:
-                    minutes_par_projet_special[0] += emp_p.getTempsTravail();
-                case 996:
-                    minutes_par_projet_special[1] += emp_p.getTempsTravail();
-                case 997:
-                    minutes_par_projet_special[2] += emp_p.getTempsTravail();
-                case 998:
-                    minutes_par_projet_special[3] += emp_p.getTempsTravail();
-                case 999:
-                    minutes_par_projet_special[4] += emp_p.getTempsTravail();
+                switch (i) {
+                    case 995:
+                        minutes_par_projet_special[0] += emp_p.getTempsTravail();
+                    case 996:
+                        minutes_par_projet_special[1] += emp_p.getTempsTravail();
+                    case 997:
+                        minutes_par_projet_special[2] += emp_p.getTempsTravail();
+                    case 998:
+                        minutes_par_projet_special[3] += emp_p.getTempsTravail();
+                    case 999:
+                        minutes_par_projet_special[4] += emp_p.getTempsTravail();
                 }
             }
         }

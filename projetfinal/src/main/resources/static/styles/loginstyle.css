@@ -23,6 +23,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   background-color: var(--secondary-color);
+  border-radius: 30px;
 }
 
 .background form:first-child {

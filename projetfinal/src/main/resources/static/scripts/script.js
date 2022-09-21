@@ -1,8 +1,12 @@
-//setup jquery start
+//global values
+let slideIndex = 1;
+
+//setup start
 $("#progress_bar").progress({
   total: 8,
 });
 $("#btn_precedent").addClass("disabled");
+showSlides(slideIndex);
 
 //---------------------on_click-----------------------
 
@@ -10,24 +14,15 @@ $("#btn_suivant").on("click", function () {
   checkProjetInput();
   if (checkProjetInput()) {
     $("#progress_bar").progress("increment");
-
     plusSlides(1);
-    if ($("#progress_bar").progress("get percent") != 0) {
-      $("#btn_precedent").removeClass("disabled");
-    }
-    if ($("#progress_bar").progress("get percent") === 88) {
-      $("#btn_suivant").addClass("disabled");
-    }
+    toggleActifInactif();
   }
 });
 
 $("#btn_precedent").on("click", function () {
   $("#progress_bar").progress("decrement");
   plusSlides(-1);
-  if ($("#progress_bar").progress("get percent") === 0) {
-    $("#btn_precedent").addClass("disabled");
-  }
-  $("#btn_suivant").removeClass("disabled");
+  toggleActifInactif();
 });
 
 $(".btn_ajouter_projet").on("click", function () {
@@ -44,30 +39,34 @@ $(".btn_enlever_projet").on("click", function () {
 
 $("#btn_soumettre").on("click", function () {
   const projets = getListeProjetEmploye();
-  console.log(projets);
-  getResultat(projets);
+  if (projets.length <= 0) {
+    alert("Erreur, votre formulaire est vide!");
+  } else {
+    console.log(projets);
+    getResultat(projets);
+  }
 });
 
 $("#btn_non_attention").on("click", function () {
   $("#container-resultats").css("display", "none");
-  $("#progress_bar").progress("reset");
   plusSlides(-7);
-  $("#btn_suivant").removeClass("disabled");
-  $("#btn_precedent").addClass("disabled");
+  toggleActifInactif();
 });
 
 $("#btn_oui_attention").on("click", function () {
   const projets = getListeProjetEmploye();
   submitJson(projets);
   $("#container-resultats").css("display", "none");
-  $("#progress_bar").progress("complete");
-  $("#btn_precedent").addClass("disabled");
   plusSlides(1);
+  toggleActifInactif();
+});
+
+$(".ui.dropdown").click(function (e) {
+  e.preventDefault();
+  $(this).removeClass("error");
 });
 
 //---------------------------SLIDESHOW-------------------------------
-let slideIndex = 1;
-showSlides(slideIndex);
 
 // Next/previous controls
 function plusSlides(n) {
@@ -95,7 +94,35 @@ function showSlides(n) {
   slides[slideIndex - 1].style.display = "block";
 }
 
-//--------------JSON_METHODS-------------
+//--------------METHODS-------------
+
+// Cette fonction active ou desactive les boutons SUIVANT et PRECEDENT selon la valeur du slideIndex
+function toggleActifInactif() {
+  switch (slideIndex) {
+    case 1:
+      $("#progress_bar").progress("reset");
+      $("#btn_precedent").addClass("disabled");
+      $("#btn_suivant").removeClass("disabled");
+      break;
+    case 8:
+      $("#progress_bar").progress("set percent", 88);
+      $("#btn_suivant").addClass("disabled");
+      break;
+    case 9:
+      $("#progress_bar").progress("complete");
+      $("#btn_suivant").addClass("disabled");
+      $("#btn_precedent").addClass("disabled");
+      break;
+    default:
+      if ($("#btn_precedent").hasClass("disabled")) {
+        $("#btn_precedent").removeClass("disabled");
+      }
+      if ($("#btn_suivant").hasClass("disabled")) {
+        $("#btn_suivant").removeClass("disabled");
+      }
+      break;
+  }
+}
 // Cette fonction cree un tableau contenant la valeur (en commencant par lundi) de "date_travail" pour creer la liste EmployeProjet
 function getDates() {
   const date_now = new Date();
@@ -159,7 +186,7 @@ function getListeProjetEmploye() {
 
   return projets;
 }
-// Cette fonction envoie la liste de ProjetEmploye au JsonController
+// Cette fonction envoie la liste de ProjetEmploye au JsonController pour recevoir une confirmation Resultat
 function getResultat(projets) {
   $.ajax({
     type: "POST",
@@ -182,7 +209,7 @@ function getResultat(projets) {
 }
 /**
  * @todo creer la methode reliee dans JsonController
- * Cette fonction envoie une liste ProjetEmploye avec regles non-respectees au JsonController
+ * Cette fonction envoie une liste ProjetEmploye au JsonController pour l'inserer dans la database
  */
 function submitJson(projets) {
   $.ajax({
@@ -208,8 +235,6 @@ function confirmeRegles(regles) {
   }
   return all_ok;
 }
-//-----ERROR_CHECK_METHODS------
-
 // Cette fonction empeche l'user de passer a la Slide suivante si il n'a pas choisi de projets dans le dropdown
 function checkProjetInput() {
   let ok = true;
@@ -223,8 +248,3 @@ function checkProjetInput() {
   });
   return ok;
 }
-
-$(".ui.dropdown").click(function (e) {
-  e.preventDefault();
-  $(this).removeClass("error");
-});
