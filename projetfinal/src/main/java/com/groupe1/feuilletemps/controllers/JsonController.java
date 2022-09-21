@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.google.gson.Gson;
 import com.groupe1.feuilletemps.modeles.EmployeProjet;
 import com.groupe1.feuilletemps.modeles.Resultat;
 import com.groupe1.feuilletemps.utils.EcritureJson;
@@ -29,9 +28,8 @@ public class JsonController {
         // Validation de l'objet représentant le formulaire
         Resultat resultat = TraitementFeuille.traitement(employe_projets);
 
-        // Transformation en Json pour le renvoi à la page
+        // Transformation du Resultat en Json pour le renvoi à la page
         String jsonResultat = EcritureJson.ecrireJsonString(resultat);
-        new Gson().toJson(resultat.getRegles());
         return ResponseEntity.ok(jsonResultat);
     }
 
