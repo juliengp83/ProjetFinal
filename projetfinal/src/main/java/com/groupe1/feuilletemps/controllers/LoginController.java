@@ -40,7 +40,7 @@ public class LoginController {
         } else { 
             Employe e = employeRepository.findByNomUtilisateur(username);
             if (e != null) {
-                if (password.equals(AES.decrypt(e.getMotDePasse(), "bBgLrINTjBINrm7"))) {
+                if (AES.encrypt(password, "bBgLrINTjBINrm7").equals(e.getMotDePasse())) {
                     Set<Projet> projets = e.getProjets();
                     model.addAttribute("projets", projets);
                     model.addAttribute("e", e);

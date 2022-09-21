@@ -1,7 +1,6 @@
 package com.groupe1.feuilletemps.controllers;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -10,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.groupe1.feuilletemps.modeles.EmployeProjet;
-import com.groupe1.feuilletemps.modeles.Regle;
 import com.groupe1.feuilletemps.modeles.Resultat;
+import com.groupe1.feuilletemps.utils.EcritureJson;
+import com.groupe1.feuilletemps.utils.LecteurJson;
 import com.groupe1.feuilletemps.utils.TraitementFeuille;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,17 +22,17 @@ import lombok.extern.slf4j.Slf4j;
 public class JsonController {
     @RequestMapping(value = "/getresultat", method = RequestMethod.POST)
     public ResponseEntity<String> posted(@RequestBody String projetsString) {
-        Gson gson = new Gson();
-
-        ArrayList<EmployeProjet> employe_projets = new ArrayList<>();
-
-        employe_projets = gson.fromJson(projetsString, new TypeToken<List<EmployeProjet>>() {
-        }.getType());
+        // Transformation du formulaire en objet
+        ArrayList<EmployeProjet> employe_projets = LecteurJson.lireStringJson(projetsString);
         log.info(employe_projets.toString());
 
+        // Validation de l'objet représentant le formulaire
         Resultat resultat = TraitementFeuille.traitement(employe_projets);
-        String json = new Gson().toJson(resultat.getRegles());
-        return ResponseEntity.ok(json);
+
+        // Transformation en Json pour le renvoi à la page
+        String jsonResultat = EcritureJson.ecrireJsonString(resultat);
+        new Gson().toJson(resultat.getRegles());
+        return ResponseEntity.ok(jsonResultat);
     }
 
     // TODO: coder cette methode
