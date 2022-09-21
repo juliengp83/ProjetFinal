@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.groupe1.feuilletemps.modeles.EmployeProjet;
+import com.groupe1.feuilletemps.modeles.Regle;
 import com.groupe1.feuilletemps.modeles.Resultat;
 import com.groupe1.feuilletemps.utils.TraitementFeuille;
 
@@ -20,8 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 public class JsonController {
-    @RequestMapping(value = "/submitjson", method = RequestMethod.POST)
-    public ResponseEntity<Resultat> posted(@RequestBody String projetsString) {
+    @RequestMapping(value = "/getresultat", method = RequestMethod.POST)
+    public ResponseEntity<String> posted(@RequestBody String projetsString) {
         Gson gson = new Gson();
 
         ArrayList<EmployeProjet> employe_projets = new ArrayList<>();
@@ -31,7 +32,16 @@ public class JsonController {
         log.info(employe_projets.toString());
 
         Resultat resultat = TraitementFeuille.traitement(employe_projets);
-
-        return ResponseEntity.ok(resultat);
+        String json = new Gson().toJson(resultat.getRegles());
+        return ResponseEntity.ok(json);
     }
+
+    // TODO: coder cette methode
+    // Cette methode doit inserer les employeProjets en arguments dans la database
+    @RequestMapping(value = "/submitjson", method = RequestMethod.POST)
+    public ResponseEntity<Boolean> submit(@RequestBody String projetsString) {
+        boolean x = true;
+        return ResponseEntity.ok(x);
+    }
+
 }

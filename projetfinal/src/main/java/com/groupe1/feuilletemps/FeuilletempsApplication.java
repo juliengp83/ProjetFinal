@@ -25,11 +25,11 @@ public class FeuilletempsApplication {
 				Projet projet1 = new Projet(1000L, "Tennis");
 				Projet projet2 = new Projet(500L, "Bowling");
 				Projet projet3 = new Projet(100L, "Tetris");
-				Projet p995 = new Projet(995L,"Congé parental"); 
-				Projet p996 = new Projet(996L,"Transport en voiture");
+				Projet p995 = new Projet(995L, "Congé parental");
+				Projet p996 = new Projet(996L, "Transport en voiture");
 				Projet p997 = new Projet(997L, "Transport en commun");
-				Projet p998 = new Projet( 998L, "Congé férié");
-				Projet p999 = new Projet(999L,"Congé de maladie");
+				Projet p998 = new Projet(998L, "Congé férié");
+				Projet p999 = new Projet(999L, "Congé de maladie");
 
 				repo_proj.save(projet1);
 				repo_proj.save(projet2);
@@ -40,10 +40,14 @@ public class FeuilletempsApplication {
 				repo_proj.save(p998);
 				repo_proj.save(p999);
 
-				Employe employe1 = new Employe(1L, "Alex", "Pom", "1337 Avenue", "apom", AES.encrypt("haxor", "bBgLrINTjBINrm7"));
-				Employe employe2 = new Employe(2L, "Eric", "Marquis", "666 Avenue", "emarquis", AES.encrypt("123", "bBgLrINTjBINrm7"));
-				Employe employe3 = new Employe(3L, "Julien", "Gelineau Poirier", "1337 Avenue", "jgpoirer", AES.encrypt("jpeg", "bBgLrINTjBINrm7"));
-				Employe employe4 = new Employe(4L, "Emile", "Tremblay", "1010 Avenue", "etremblay", AES.encrypt("perdu", "bBgLrINTjBINrm7"));
+				Employe employe1 = new Employe(1L, "Alex", "Pom", "1337 Avenue", "apom",
+						AES.encrypt("haxor", "bBgLrINTjBINrm7"));
+				Employe employe2 = new Employe(2L, "Eric", "Marquis", "666 Avenue", "emarquis",
+						AES.encrypt("123", "bBgLrINTjBINrm7"));
+				Employe employe3 = new Employe(3L, "Julien", "Gelineau Poirier", "1337 Avenue", "jgpoirer",
+						AES.encrypt("jpeg", "bBgLrINTjBINrm7"));
+				Employe employe4 = new Employe(4L, "Emile", "Tremblay", "1010 Avenue", "etremblay",
+						AES.encrypt("perdu", "bBgLrINTjBINrm7"));
 
 				employe1.ajouterProjet(projet3);
 				employe1.ajouterProjet(projet1);
@@ -67,6 +71,20 @@ public class FeuilletempsApplication {
 				repo_emp.save(employe2);
 				repo_emp.save(employe3);
 				repo_emp.save(employe4);
+
+				// ajout d'un employe admin et regulier juste pour tester rapidement
+				Employe admin = new Employe(1000L, "Emile", "Tremblay", "2020 Avenue", "admin",
+						AES.encrypt("", "bBgLrINTjBINrm7"));
+				admin.ajouterProjet(projet1);
+				admin.ajouterProjet(projet2);
+				admin.ajouterProjet(projet3);
+				repo_emp.save(admin);
+				Employe regulier = new Employe(1001L, "Emile", "Tremblay", "3030 Avenue", "reg",
+						AES.encrypt("", "bBgLrINTjBINrm7"));
+				regulier.ajouterProjet(projet1);
+				regulier.ajouterProjet(projet2);
+				regulier.ajouterProjet(projet3);
+				repo_emp.save(regulier);
 			}
 		};
 	}

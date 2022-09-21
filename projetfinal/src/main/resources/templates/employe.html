@@ -33,7 +33,12 @@
               <i class="dropdown icon"></i>
               <div class="default text">Projet</div>
               <div class="menu">
-                <div class="item" th:each="projet : ${projets}" th:text="${projet.nom_projet}" th:attr="data-value=${projet.numero_projet}"></div>
+                <div
+                  class="item"
+                  th:each="projet : ${projets}"
+                  th:text="${projet.nom_projet}"
+                  th:attr="data-value=${projet.numero_projet}"
+                ></div>
               </div>
             </div>
           </div>
@@ -54,6 +59,19 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+    <!-- container pour les resultats (s'affiche si des regles ne sont pas respectees apres Soumettre) -->
+    <div id="container-resultats">
+      <div>
+        <h1>Attention!</h1>
+        <h4>Une ou plusieurs règles n'ont pas été respectées:</h4>
+        <div class="container-regles"></div>
+        <h4>Souhaitez-vous quand même soumettre votre formulaire?</h4>
+        <div class="oui-non">
+          <a class="ui teal button" id="btn_non_attention">Non</a>
+          <a class="ui button" id="btn_oui_attention">Oui</a>
         </div>
       </div>
     </div>
@@ -163,6 +181,12 @@
         <div class="mySlides fade">
           <div class="slide-content">
             <a class="massive ui teal button" id="btn_soumettre">SOUMETTRE</a>
+          </div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="slide-content">
+            <i class="check circle icon"></i>
           </div>
         </div>
 
