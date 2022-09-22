@@ -31,11 +31,11 @@ public class EntreeProjet {
 
     private int tempsTravaille;
 
-    private Date dateTravail;
+    private Date dateTravaille;
 
-    public EntreeProjet(Projet projet, int tempsTravaille, Date dateTravail) {
+    public EntreeProjet(Projet projet, int tempsTravaille, Date dateTravaille) {
         this.projet = projet;
         this.tempsTravaille = tempsTravaille;
-        this.dateTravail = dateTravail;
+        this.dateTravaille = dateTravaille;
     }
 }

@@ -1,5 +1,6 @@
 package com.groupe1.feuilletemps.modeles;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -52,5 +53,15 @@ public class FeuilleDeTemps {
         this.dateSemaine = dateSemaine;
         this.estValidee = estValidee;
         this.estApprouvee = estApprouvee;
+        this.entreesProjets = new ArrayList<>();
+    }
+
+    public FeuilleDeTemps(Employe employe, Date dateSemaine, @NotNull boolean estValidee, @NotNull boolean estApprouvee,
+            List<EntreeProjet> entreesProjets) {
+        this.employe = employe;
+        this.dateSemaine = dateSemaine;
+        this.estValidee = estValidee;
+        this.estApprouvee = estApprouvee;
+        this.entreesProjets = entreesProjets;
     }
 }
