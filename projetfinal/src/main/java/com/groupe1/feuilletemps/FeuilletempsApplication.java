@@ -50,6 +50,8 @@ public class FeuilletempsApplication {
 						AES.encrypt("jpeg", "bBgLrINTjBINrm7"));
 				Employe employe4 = new Employe(4L, "Emile", "Tremblay", "1010 Avenue", "etremblay",
 						AES.encrypt("perdu", "bBgLrINTjBINrm7"));
+				Employe employe5 = new Employe(5L, "Oleksandr", "Pleshko", "5580 Avenue", "opleshko",
+						AES.encrypt("olekp", "bBgLrINTjBINrm7"));		
 
 				employe1.ajouterProjet(projet3);
 				employe1.ajouterProjet(projet1);
@@ -69,10 +71,14 @@ public class FeuilletempsApplication {
 				employe4.ajouterProjet(projet3);
 				employe4.ajouterProjet(projet1);
 
+				employe5.ajouterProjet(projet1);
+				employe5.ajouterProjet(projet3);
+
 				repo_emp.save(employe1);
 				repo_emp.save(employe2);
 				repo_emp.save(employe3);
 				repo_emp.save(employe4);
+				repo_emp.save(employe5);
 
 				// ajout d'un employe admin et regulier juste pour tester rapidement
 				Employe admin = new Employe(1000L, "Emile", "Tremblay", "2020 Avenue", "admin",
