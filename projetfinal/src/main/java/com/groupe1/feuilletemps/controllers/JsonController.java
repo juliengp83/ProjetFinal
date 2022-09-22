@@ -37,7 +37,7 @@ public class JsonController {
     private static boolean est_validee = true;
 
     public JsonController(EmployeRepository repo_emp, ProjetRepository repo_projet,
-                          FeuilleDeTempsRepository repo_feuille, EntreeProjetRepository repo_entree_projet) {
+            FeuilleDeTempsRepository repo_feuille, EntreeProjetRepository repo_entree_projet) {
         this.repo_emp = repo_emp;
         this.repo_projet = repo_projet;
         this.repo_feuille = repo_feuille;
@@ -47,7 +47,7 @@ public class JsonController {
     @RequestMapping(value = "/getresultat", method = RequestMethod.POST)
     public ResponseEntity<String> posted(@RequestBody String projetsString) {
         // On assume que le formulaire respecte les regles
-        est_validee = true; 
+        est_validee = true;
         // Transformation du formulaire en objet
         ArrayList<EmployeProjet> employe_projets = LecteurJson.lireStringJson(projetsString);
 
@@ -76,7 +76,7 @@ public class JsonController {
         } else {
             ajouterFeuilleTemps(projetsString, est_validee);
         }
-  
+
         return ResponseEntity.ok(true);
     }
 
