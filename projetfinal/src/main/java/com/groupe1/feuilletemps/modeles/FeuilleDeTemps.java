@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Type;
@@ -21,13 +22,14 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
+@Table(name = "FEUILLE_TEMPS")
 public class FeuilleDeTemps {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen_feuilledetemps")
     @SequenceGenerator(name = "gen_feuilledetemps", sequenceName = "SEQ_FEUILLEDETEMPS", allocationSize = 1)
     @OrderColumn
-    private Long idFeuilleTemps;
+    private Long id;
 
     @ManyToOne()
     private Employe employe;

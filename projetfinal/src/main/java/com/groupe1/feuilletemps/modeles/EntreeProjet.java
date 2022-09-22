@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,13 +17,14 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
+@Table(name = "ENTREE_PROJET")
 public class EntreeProjet {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen_entreeprojet")
     @SequenceGenerator(name = "gen_entreeprojet", sequenceName = "SEQ_ENTREEPROJET", allocationSize = 1)
     @OrderColumn
-    private Long idEntreeProjet;
+    private Long id;
 
     @OneToOne
     private Projet projet;
