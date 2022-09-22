@@ -1,6 +1,5 @@
 //global values
 let slideIndex = 1;
-
 //setup start
 $("#progress_bar").progress({
   total: 8,
@@ -42,7 +41,7 @@ $("#btn_soumettre").on("click", function () {
   if (projets.length <= 0) {
     alert("Erreur, votre formulaire est vide!");
   } else {
-    console.log(projets);
+    // console.log(projets);
     getResultat(projets);
   }
 });
@@ -123,27 +122,19 @@ function toggleActifInactif() {
       break;
   }
 }
-// Cette fonction cree un tableau contenant la valeur (en commencant par lundi) de "date_travail" pour creer la liste EmployeProjet
+// Cette fonction cree un tableau contenant la valeur de "date_travail" pour creer la liste EmployeProjet
 function getDates() {
-  const date_now = new Date();
-  const d = [];
+  const dates = [];
   for (let i = 0; i < 7; i++) {
-    let day = new Date();
-    if (i <= date_now.getDay()) {
-      day.setDate(day.getDate() - date_now.getDay() + i);
-    } else {
-      day.setDate(day.getDate() - date_now.getDay() + i - 7);
-    }
-    d.push(day);
+    const date = new Date();
+    date.setDate(date.getDate() - date.getDay() - 7 + i);
+    dates.push(date);
   }
-  //cette ligne de code met le dimanche en dernier au lieu de premier dans la liste
-  d.push(d.shift());
-  return d;
+  return dates;
 }
 // Cette fonction retourne la liste d'objets ProjetEmploye
 function getListeProjetEmploye() {
   const dates = getDates();
-  // console.log(dates);
   const projets = [];
 
   $(".slide-content .carte-projet").each(function () {
@@ -157,27 +148,28 @@ function getListeProjetEmploye() {
     );
 
     switch ($(this).closest(".slide-content").attr("id")) {
-      case "#slide-lundi":
+      case "#slide-dimanche":
         projet_obj.date_travail = dates[0];
         break;
-      case "#slide-mardi":
+      case "#slide-lundi":
         projet_obj.date_travail = dates[1];
         break;
-      case "#slide-mercredi":
+      case "#slide-mardi":
         projet_obj.date_travail = dates[2];
         break;
-      case "#slide-jeudi":
+      case "#slide-mercredi":
         projet_obj.date_travail = dates[3];
         break;
-      case "#slide-vendredi":
+      case "#slide-jeudi":
         projet_obj.date_travail = dates[4];
         break;
-      case "#slide-samedi":
+      case "#slide-vendredi":
         projet_obj.date_travail = dates[5];
         break;
-      case "#slide-dimanche":
+      case "#slide-samedi":
         projet_obj.date_travail = dates[6];
         break;
+
       default:
         break;
     }
@@ -197,7 +189,7 @@ function getResultat(projets) {
     success: function (regles) {
       let ok = confirmeRegles(regles);
       if (ok) {
-        submitJson(projets);
+        submitJson(projets, true);
         $("#progress_bar").progress("complete");
         $("#btn_precedent").addClass("disabled");
         plusSlides(1);

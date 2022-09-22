@@ -1,0 +1,26 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* colors */
+body {
+  --primary-color: #fffdff;
+  --secondary-color: #383145;
+  --accent-color: teal;
+}
+
+#body {
+  background-image: url("../images/blob-scene-haikei2.svg");
+  background-size: cover;
+
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-rows: 1fr;
+}
+
+#content {
+  grid-area: 1 / 2 / 2 / 3;
+  margin-top: 200px;
+}

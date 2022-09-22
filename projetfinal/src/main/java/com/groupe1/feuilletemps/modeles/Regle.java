@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Regle {
     private int id_regle;
-    private boolean est_respectee;
+    private boolean respectee;
     private String message;
 }

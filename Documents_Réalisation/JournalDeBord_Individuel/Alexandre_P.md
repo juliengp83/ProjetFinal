@@ -51,3 +51,9 @@
 
 ## 15 septembre
 * Ajout des beans de employe et projet, ajouter les repos CRUD, etc.
+
+## 19 septembre
+* Scrum pour parler de ce qui faut faire durant la semaine et planner la rencontre le lundi
+
+## 22 septembre
+* Creation de l'entité feuille de temps et planner le fonctionnement de tout ca

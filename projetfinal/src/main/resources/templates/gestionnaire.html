@@ -1,15 +1,76 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Application feuille de temps</title>
+    <link th:href="@{/styles/semantic-dist/semantic.css}" rel="stylesheet" />
+    <link th:href="@{/styles/employestyle.css}" rel="stylesheet" />
+    <script th:src="@{/scripts/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/styles/semantic-dist/semantic.js}"></script>
+    <!-- <script th:src="@{/scripts/script.js}" defer></script> -->
 
-<head>
-  <title>Application feuille de temps</title>
-  <link th:href="@{/styles/semantic-dist/semantic.css}" rel="stylesheet" />
-</head>
+    <!-- quick live server pour frontend -->
+    <link href="../static/styles/semantic-dist/semantic.css" rel="stylesheet" />
+    <link href="../static/styles/gestionstyle.css" rel="stylesheet" />
+    <script src="../static/scripts/jquery-3.6.0.min.js"></script>
+    <script src="../static/styles/semantic-dist/semantic.js"></script>
+    <script src="../static/scripts/gestionscript.js" defer></script>
+  </head>
 
-<body>
-
-  <h2>Page gestionnaire</h2>
-
-</body>
-
+  <body id="body">
+    <div id="content">
+      <div class="ui menu">
+        <a class="item active" id="menu-all"> Tous </a>
+        <a class="item" id="menu-approved"> Approuvés </a>
+        <a class="item" id="menu-unapproved"> Non-approuvés </a>
+        <a class="item" id="menu-unsent"> Non-envoyés </a>
+        <div class="right menu">
+          <div class="item">
+            <div class="ui selection dropdown">
+              <input type="hidden" name="gender" />
+              <i class="dropdown icon"></i>
+              <div class="default text">semaine</div>
+              <div class="menu">
+                <div class="item" data-value="1">semaine 1</div>
+                <div class="item" data-value="0">semaine 2</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui segment">
+        <div class="ui cards">
+          <a class="ui green card card-approved">
+            <div class="content">
+              <div class="header">Emile Tremblay</div>
+              <div class="meta">ID: 1001</div>
+            </div>
+            <div class="extra content">
+              <i class="check icon"></i>
+              Formulaire approuvé
+            </div>
+          </a>
+          <a class="ui orange card card-unapproved">
+            <div class="content">
+              <div class="header">Eric Marquis</div>
+              <div class="meta">ID: 1021</div>
+            </div>
+            <div class="extra content">
+              <i class="exclamation icon"></i>
+              Formulaire à approuver
+            </div>
+          </a>
+          <a class="ui grey card card-unsent">
+            <div class="content">
+              <div class="header">Alex Pom</div>
+              <div class="meta">ID: 1051</div>
+            </div>
+            <div class="extra content">
+              <i class="ellipsis horizontal icon"></i>
+              En attente du formulaire
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
