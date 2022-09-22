@@ -8,13 +8,13 @@ import com.groupe1.feuilletemps.modeles.Resultat;
 
 public class TraitementFeuille {
 
-    static int ADMIN_TEMPS_REQUIS_HEBDOMADAIRE_EN_MINUTES = 60 * 36;
-    static int ADMIN_TEMPS_MAXIMUN_TELETRAVAIL_EN_MINUTES = 60 * 10;
-    static int ADMIN_TEMPS_REQUIS_QUOTIDIEN_BUREAU = 60 * 4;
-    static int REGULIER_TEMPS_REQUIS_HEBDOMADAIRE_EN_MINUTES = 60 * 38;
-    static int REGULIER_TEMPS_REQUIS_QUOTIDIEN_BUREAU = 60 * 6;
-    static int TEMPS_MAXIMUM_BUREAU_EN_MINUTES = 60 * 43;
-    static int JOUR_COMPLET = 60 * 7;
+    private static final int ADMIN_TEMPS_REQUIS_HEBDOMADAIRE_EN_MINUTES = 60 * 36;
+    private static final int ADMIN_TEMPS_MAXIMUN_TELETRAVAIL_EN_MINUTES = 60 * 10;
+    private static final int ADMIN_TEMPS_REQUIS_QUOTIDIEN_BUREAU = 60 * 4;
+    private static final int REGULIER_TEMPS_REQUIS_HEBDOMADAIRE_EN_MINUTES = 60 * 38;
+    private static final int REGULIER_TEMPS_REQUIS_QUOTIDIEN_BUREAU = 60 * 6;
+    private static final int TEMPS_MAXIMUM_BUREAU_EN_MINUTES = 60 * 43;
+    private static final int JOUR_COMPLET = 60 * 7;
 
     /**
      * Cette fonction retourne un objet de type Resultat qui contient un numéro

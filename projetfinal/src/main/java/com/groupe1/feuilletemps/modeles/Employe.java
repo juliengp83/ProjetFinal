@@ -1,4 +1,4 @@
-package com.groupe1.feuilletemps;
+package com.groupe1.feuilletemps.modeles;
 
 import java.util.HashSet;
 import java.util.Set;

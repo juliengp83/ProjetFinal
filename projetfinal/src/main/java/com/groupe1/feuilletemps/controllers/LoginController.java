@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.groupe1.feuilletemps.Employe;
-import com.groupe1.feuilletemps.Projet;
 import com.groupe1.feuilletemps.data.EmployeRepository;
+import com.groupe1.feuilletemps.modeles.Employe;
+import com.groupe1.feuilletemps.modeles.Projet;
 import com.groupe1.feuilletemps.utils.AES;
 
 import lombok.extern.slf4j.Slf4j;

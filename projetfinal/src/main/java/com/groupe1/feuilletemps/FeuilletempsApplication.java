@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 
 import com.groupe1.feuilletemps.data.EmployeRepository;
 import com.groupe1.feuilletemps.data.ProjetRepository;
+import com.groupe1.feuilletemps.modeles.Employe;
+import com.groupe1.feuilletemps.modeles.Projet;
 import com.groupe1.feuilletemps.utils.AES;
 
 @SpringBootApplication
