@@ -22,9 +22,9 @@ public class FeuilletempsApplication {
 			@Override
 			public void run(String... args) throws Exception {
 				AES.setKey("bBgLrINTjBINrm7");
-				Projet projet1 = new Projet(1000L, "Tennis");
-				Projet projet2 = new Projet(500L, "Bowling");
-				Projet projet3 = new Projet(100L, "Tetris");
+				Projet projet1 = new Projet(1000L, "minutes_teletravail");
+				Projet projet2 = new Projet(500L, "minutes_travaillees_bureau");
+				Projet projet3 = new Projet(100L, "minutes_travaillees_bureau*2");
 				Projet p995 = new Projet(995L, "Congé parental");
 				Projet p996 = new Projet(996L, "Transport en voiture");
 				Projet p997 = new Projet(997L, "Transport en commun");
@@ -42,10 +42,10 @@ public class FeuilletempsApplication {
 
 				Employe employe1 = new Employe(1L, "Alex", "Pom", "1337 Avenue", "apom",
 						AES.encrypt("haxor", "bBgLrINTjBINrm7"));
-				Employe employe2 = new Employe(2L, "Eric", "Marquis", "666 Avenue", "emarquis",
-						AES.encrypt("123", "bBgLrINTjBINrm7"));
-				Employe employe3 = new Employe(3L, "Julien", "Gelineau Poirier", "1337 Avenue", "jgpoirer",
-						AES.encrypt("jpeg", "bBgLrINTjBINrm7"));
+				Employe employe2 = new Employe(1112L, "employe", "Marquis", "666 Avenue", "emarquis",
+						AES.encrypt("employe", "bBgLrINTjBINrm7"));
+				Employe employe3 = new Employe(3L, "admin", "Gelineau Poirier", "1337 Avenue", "jgpoirer",
+						AES.encrypt("admin", "bBgLrINTjBINrm7"));
 				Employe employe4 = new Employe(4L, "Emile", "Tremblay", "1010 Avenue", "etremblay",
 						AES.encrypt("perdu", "bBgLrINTjBINrm7"));
 
@@ -54,11 +54,11 @@ public class FeuilletempsApplication {
 
 				employe2.ajouterProjet(projet1);
 				employe2.ajouterProjet(projet3);
-				employe2.ajouterProjet(p995);
-				employe2.ajouterProjet(p996);
-				employe2.ajouterProjet(p997);
-				employe2.ajouterProjet(p998);
-				employe2.ajouterProjet(p999);
+				//employe2.ajouterProjet(p995);
+				//employe2.ajouterProjet(p996);
+				//employe2.ajouterProjet(p997);
+				//employe2.ajouterProjet(p998);
+				//employe2.ajouterProjet(p999);
 
 				employe3.ajouterProjet(projet1);
 				employe3.ajouterProjet(projet2);
