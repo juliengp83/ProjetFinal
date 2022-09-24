@@ -218,7 +218,7 @@ function confirmeRegles(regles) {
   let all_ok = true;
 
   for (const regle of regles) {
-    if (!regle.est_respectee) {
+    if (!regle.respectee) {
       const str =
         '<p style="color: red;">- ' + JSON.stringify(regle.message) + "</p>";
       $("#container-resultats").find(".container-regles").append(str);

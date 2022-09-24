@@ -42,12 +42,12 @@ public class FeuilletempsApplication {
 				repo_proj.save(p998);
 				repo_proj.save(p999);
 
-				Employe employe1 = new Employe(1L, "Alex", "Pom", "1337 Avenue", "apom",
-						AES.encrypt("haxor", "bBgLrINTjBINrm7"));
-				Employe employe2 = new Employe(1112L, "employe", "Marquis", "666 Avenue", "emarquis",
-						AES.encrypt("employe", "bBgLrINTjBINrm7"));
-				Employe employe3 = new Employe(3L, "admin", "Gelineau Poirier", "1337 Avenue", "jgpoirer",
-						AES.encrypt("admin", "bBgLrINTjBINrm7"));
+				Employe employe1 = new Employe(1L, "Alex", "Pom", "1337 Avenue",
+					"apom", AES.encrypt("haxor", "bBgLrINTjBINrm7"));
+				Employe employe2 = new Employe(1112L, "Employe", "Marquis", "666 Avenue",
+					"employe", AES.encrypt("employe", "bBgLrINTjBINrm7"));
+				Employe employe3 = new Employe(3L, "Administrateur", "Gelineau Poirier", "1337 Avenue",
+					"admin",	AES.encrypt("admin", "bBgLrINTjBINrm7"));
 				Employe employe4 = new Employe(4L, "Emile", "Tremblay", "1010 Avenue", "etremblay",
 						AES.encrypt("perdu", "bBgLrINTjBINrm7"));
 				Employe employe5 = new Employe(5L, "Oleksandr", "Pleshko", "5580 Avenue", "opleshko",
@@ -58,22 +58,27 @@ public class FeuilletempsApplication {
 
 				employe2.ajouterProjet(projet1);
 				employe2.ajouterProjet(projet3);
-				//employe2.ajouterProjet(p995);
-				//employe2.ajouterProjet(p996);
-				//employe2.ajouterProjet(p997);
-				//employe2.ajouterProjet(p998);
-				//employe2.ajouterProjet(p999);
+				employe2.ajouterProjet(p995);
+				employe2.ajouterProjet(p996);
+				employe2.ajouterProjet(p997);
+				employe2.ajouterProjet(p998);
+				employe2.ajouterProjet(p999);
 
 				employe3.ajouterProjet(projet1);
 				employe3.ajouterProjet(projet2);
 				employe3.ajouterProjet(projet3);
+				employe3.ajouterProjet(p995);
+				employe3.ajouterProjet(p996);
+				employe3.ajouterProjet(p997);
+				employe3.ajouterProjet(p998);
+				employe3.ajouterProjet(p999);
 
 				employe4.ajouterProjet(projet3);
 				employe4.ajouterProjet(projet1);
 
 				employe5.ajouterProjet(projet1);
 				employe5.ajouterProjet(projet3);
-
+			
 				repo_emp.save(employe1);
 				repo_emp.save(employe2);
 				repo_emp.save(employe3);
