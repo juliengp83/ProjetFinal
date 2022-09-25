@@ -44,11 +44,44 @@
 - Mise à jour des fichiers json de test par règle et validation des résultats
 - Revu et correction de méthodes
 - Gestion Trello
-
-## 8 septembre 2022
+  
+## 5 septembre 2022
+- Rencontre d'équipe
+- Scrumpoker avec printscreen
+- Mise à jour Trello
+- Division des tâches de base
+ 
 ## 12 septembre 2022
+- Rencontre d'équipe
+- Mise à jour Trello
+- Discussion et validation de de l'utilisation de Spring
+- Réflexion et précision sur le contenue des pages
+
 ## 15 septembre 2022
+- Rencontre d'équipe
+- Mise àa jour Trello 
+- Test Spring security
+- Test Spring Data 
+- Config ORACLE
+
 ## 19 septembre 2022
+- Rencontre d'équipe
+- Mise à jour Trello 
+- Refactorisation des règles de traitement feuille
+- Test suite à la Refactorisation
+  
 ## 22 septembre 2022
+- Rencontre d'équipe
+- Mise à jour Trello 
+- Refactorisation des règles de traitement feuille
+- Ajout des règles 995 à 999
+- Test des règles 995 à 999
+  
+## 25 septembre 2022
+- Rencontre d'équipe
+- Modification des critères des règles 998 et 999
+- Préparation de la présentation du 26
+- Burndown chart
+  
 ## 26 septembre 2022
 ## 29 septembre 2022
