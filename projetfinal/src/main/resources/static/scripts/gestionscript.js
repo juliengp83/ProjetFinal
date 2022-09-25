@@ -1,4 +1,19 @@
-$(".ui.dropdown").dropdown();
+// $('#search-select')
+//   .dropdown();
+
+$(".ui.dropdown").dropdown({
+  action: "activate",
+  onChange: function (value, text, $selectedItem) {
+    $.ajax({
+      type: "GET",
+      url: "getfeuilles?selectedWeek=" + value,
+      //data: value,
+      success: function (x) {
+        console.log(x);
+      },
+    });
+  },
+});
 $("#table-container").hide();
 // $("#table-approved").hide();
 // $("#table-unapproved").hide();

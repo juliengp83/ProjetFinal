@@ -61,5 +61,4 @@ public class Employe {
     public void ajouterProjet(Projet projet){
         this.projets.add(projet);
     }
-
 }
