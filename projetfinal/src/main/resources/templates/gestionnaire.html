@@ -3,20 +3,195 @@
   <head>
     <title>Application feuille de temps</title>
     <link th:href="@{/styles/semantic-dist/semantic.css}" rel="stylesheet" />
-    <link th:href="@{/styles/employestyle.css}" rel="stylesheet" />
+    <link th:href="@{/styles/gestionstyle.css}" rel="stylesheet" />
     <script th:src="@{/scripts/jquery-3.6.0.min.js}"></script>
     <script th:src="@{/styles/semantic-dist/semantic.js}"></script>
-    <!-- <script th:src="@{/scripts/script.js}" defer></script> -->
+    <script th:src="@{/scripts/gestionscript.js}" defer></script>
 
     <!-- quick live server pour frontend -->
-    <link href="../static/styles/semantic-dist/semantic.css" rel="stylesheet" />
+    <!-- <link href="../static/styles/semantic-dist/semantic.css" rel="stylesheet" />
     <link href="../static/styles/gestionstyle.css" rel="stylesheet" />
     <script src="../static/scripts/jquery-3.6.0.min.js"></script>
     <script src="../static/styles/semantic-dist/semantic.js"></script>
-    <script src="../static/scripts/gestionscript.js" defer></script>
+    <script src="../static/scripts/gestionscript.js" defer></script> -->
   </head>
 
   <body id="body">
+    <div id="table-container">
+      <div id="table-approved">
+        <i class="big close icon"></i>
+        <div class="table-projets">
+          <table class="ui celled table">
+            <thead>
+              <tr>
+                <th>Projet</th>
+                <th>Temps travaillé (minutes)</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="nom_projet">
+                  {FeuilleDeTemps.entreesProjet[0].projet.nom_projet}
+                </td>
+                <td data-label="tempsTravaille">
+                  {FeuilleDeTemps.entreesProjet[0].tempsTravaille}
+                </td>
+                <td data-label="dateTravaille">
+                  {FeuilleDeTemps.entreesProjet[0].dateTravaille}
+                </td>
+              </tr>
+              <tr>
+                <td data-label="nom_projet">
+                  {FeuilleDeTemps.entreesProjet[1].projet.nom_projet}
+                </td>
+                <td data-label="tempsTravaille">
+                  {FeuilleDeTemps.entreesProjet[1].tempsTravaille}
+                </td>
+                <td data-label="dateTravaille">
+                  {FeuilleDeTemps.entreesProjet[1].dateTravaille}
+                </td>
+              </tr>
+              <tr>
+                <td data-label="nom_projet">
+                  {FeuilleDeTemps.entreesProjet[2].projet.nom_projet}
+                </td>
+                <td data-label="tempsTravaille">
+                  {FeuilleDeTemps.entreesProjet[2].tempsTravaille}
+                </td>
+                <td data-label="dateTravaille">
+                  {FeuilleDeTemps.entreesProjet[2].dateTravaille}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div id="table-unapproved">
+        <i class="big close icon"></i>
+        <div class="table-projets">
+          <table class="ui celled table">
+            <thead>
+              <tr>
+                <th>Projet</th>
+                <th>Temps travaillé (minutes)</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="nom_projet">
+                  {FeuilleDeTemps.entreesProjet[0].projet.nom_projet}
+                </td>
+                <td data-label="tempsTravaille">
+                  {FeuilleDeTemps.entreesProjet[0].tempsTravaille}
+                </td>
+                <td data-label="dateTravaille">
+                  {FeuilleDeTemps.entreesProjet[0].dateTravaille}
+                </td>
+              </tr>
+              <tr>
+                <td data-label="nom_projet">
+                  {FeuilleDeTemps.entreesProjet[1].projet.nom_projet}
+                </td>
+                <td data-label="tempsTravaille">
+                  {FeuilleDeTemps.entreesProjet[1].tempsTravaille}
+                </td>
+                <td data-label="dateTravaille">
+                  {FeuilleDeTemps.entreesProjet[1].dateTravaille}
+                </td>
+              </tr>
+              <tr>
+                <td data-label="nom_projet">
+                  {FeuilleDeTemps.entreesProjet[2].projet.nom_projet}
+                </td>
+                <td data-label="tempsTravaille">
+                  {FeuilleDeTemps.entreesProjet[2].tempsTravaille}
+                </td>
+                <td data-label="dateTravaille">
+                  {FeuilleDeTemps.entreesProjet[2].dateTravaille}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <a class="ui teal button" id="btn_approuver">Approuver</a>
+      </div>
+      <div id="table-unapproved-errors">
+        <i class="big close icon"></i>
+        <div class="table-projets">
+          <table class="ui celled table">
+            <thead>
+              <tr>
+                <th>Projet</th>
+                <th>Temps travaillé (minutes)</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="nom_projet">
+                  {FeuilleDeTemps.entreesProjet[0].projet.nom_projet}
+                </td>
+                <td data-label="tempsTravaille">
+                  {FeuilleDeTemps.entreesProjet[0].tempsTravaille}
+                </td>
+                <td data-label="dateTravaille">
+                  {FeuilleDeTemps.entreesProjet[0].dateTravaille}
+                </td>
+              </tr>
+              <tr>
+                <td data-label="nom_projet">
+                  {FeuilleDeTemps.entreesProjet[1].projet.nom_projet}
+                </td>
+                <td data-label="tempsTravaille">
+                  {FeuilleDeTemps.entreesProjet[1].tempsTravaille}
+                </td>
+                <td data-label="dateTravaille">
+                  {FeuilleDeTemps.entreesProjet[1].dateTravaille}
+                </td>
+              </tr>
+              <tr>
+                <td data-label="nom_projet">
+                  {FeuilleDeTemps.entreesProjet[2].projet.nom_projet}
+                </td>
+                <td data-label="tempsTravaille">
+                  {FeuilleDeTemps.entreesProjet[2].tempsTravaille}
+                </td>
+                <td data-label="dateTravaille">
+                  {FeuilleDeTemps.entreesProjet[2].dateTravaille}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="message">
+          <h4>
+            Une ou plusieurs règles ne sont pas respectées par ce formulaire.
+          </h4>
+          <h4>
+            S'il vous plaît contactez {employe.nom} via
+            <a href="mailto:">{employe.adresseCourriel}</a> avant d'approuver le
+            formulaire.
+          </h4>
+        </div>
+        <a class="ui button">Approuver quand même</a>
+      </div>
+      <div id="table-unsent">
+        <i class="big close icon"></i>
+        <div class="message">
+          <h4>
+            {employe.nom} n'a pas encore remplie son formulaire pour cette
+            semaine.
+          </h4>
+          <h4>
+            Contactez {employe.nom} via
+            <a href="mailto:">{employe.adresseCourriel}</a> pour lui demander de
+            remplir son formulaire.
+          </h4>
+        </div>
+      </div>
+    </div>
     <div id="content">
       <div class="ui menu">
         <a class="item active" id="menu-all"> Tous </a>
@@ -53,6 +228,16 @@
             <div class="content">
               <div class="header">Eric Marquis</div>
               <div class="meta">ID: 1021</div>
+            </div>
+            <div class="extra content">
+              <i class="exclamation icon"></i>
+              Formulaire à approuver
+            </div>
+          </a>
+          <a class="ui red card card-errors-unapproved">
+            <div class="content">
+              <div class="header">Julien Poirier</div>
+              <div class="meta">ID: 1061</div>
             </div>
             <div class="extra content">
               <i class="exclamation icon"></i>

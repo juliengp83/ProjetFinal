@@ -18,22 +18,18 @@
             <input
               type="text"
               name="username"
-              placeholder="Entrez votre nom d'utilisateur"
+              placeholder="Nom d'utilisateur"
             />
           </div>
           <div class="field">
             <label>Mot de passe</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Entrez votre mot de passe"
-            />
+            <input type="password" name="password" placeholder="Mot de passe" />
           </div>
           <input class="ui teal button" type="submit" value="Se connecter" />
         </form>
       </div>
       <div align="center">
-        <p style="color: red" th:text="${msg}"></p>
+        <p style="color: rgb(255, 138, 138)" th:text="${msg}"></p>
       </div>
     </div>
   </body>
