@@ -36,6 +36,9 @@ public class LoginController {
     public String welcomePage(@RequestParam String username, @RequestParam String password, Model model) {
 
         if (username.equals("gestionnaire") && password.equals("gestionnaire")) {
+            Iterable<Employe> employes = employeRepository.findAll();
+            model.addAttribute("employes", employes);
+
             return "gestionnaire";
         } else { 
             Employe e = employeRepository.findByNomUtilisateur(username);

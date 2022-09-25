@@ -26,7 +26,7 @@ public class FeuilletempsApplication {
 				AES.setKey("bBgLrINTjBINrm7");
 				Projet projet1 = new Projet(1000L, "minutes_teletravail");
 				Projet projet2 = new Projet(500L, "minutes_travaillees_bureau");
-				Projet projet3 = new Projet(100L, "minutes_travaillees_bureau*2");
+				Projet projet3 = new Projet(100L, "minutes_travaillees_bureau2");
 				Projet p995 = new Projet(995L, "Congé parental");
 				Projet p996 = new Projet(996L, "Transport en voiture");
 				Projet p997 = new Projet(997L, "Transport en commun");
@@ -42,16 +42,16 @@ public class FeuilletempsApplication {
 				repo_proj.save(p998);
 				repo_proj.save(p999);
 
-				Employe employe1 = new Employe(1L, "Alex", "Pom", "1337 Avenue",
-					"apom", AES.encrypt("haxor", "bBgLrINTjBINrm7"));
-				Employe employe2 = new Employe(1112L, "Employe", "Marquis", "666 Avenue",
-					"employe", AES.encrypt("employe", "bBgLrINTjBINrm7"));
-				Employe employe3 = new Employe(3L, "Administrateur", "Gelineau Poirier", "1337 Avenue",
-					"admin",	AES.encrypt("admin", "bBgLrINTjBINrm7"));
-				Employe employe4 = new Employe(4L, "Emile", "Tremblay", "1010 Avenue", "etremblay",
-						AES.encrypt("perdu", "bBgLrINTjBINrm7"));
-				Employe employe5 = new Employe(5L, "Oleksandr", "Pleshko", "5580 Avenue", "opleshko",
-						AES.encrypt("olekp", "bBgLrINTjBINrm7"));		
+				Employe employe1 = new Employe(1L, "Hamdael", "Steelbeard", "hamdael@julexmile.com",
+					"hamdael", AES.encrypt("steelbeard123", "bBgLrINTjBINrm7"));
+				Employe employe2 = new Employe(1112L, "Thralmig", "Deepbrew", "thralmig@julexmile.com",
+					"thralmig", AES.encrypt("thralmig123", "bBgLrINTjBINrm7"));
+				Employe employe3 = new Employe(3L, "Mundaeth", "Dragonbender", "Mundaeth",
+					"mundaeth",	AES.encrypt("mundaeth123", "bBgLrINTjBINrm7"));
+				Employe employe4 = new Employe(4L, "Thromdol", "Hillbreaker", "thromdol@julexmile.com",
+				    "thromdol", AES.encrypt("thromdol", "bBgLrINTjBINrm7"));
+				Employe employe5 = new Employe(5L, "Valgid", "Honordigger", "valgid@julexmile.com", 
+					"valgid", AES.encrypt("valgid123", "bBgLrINTjBINrm7"));		
 
 				employe1.ajouterProjet(projet3);
 				employe1.ajouterProjet(projet1);

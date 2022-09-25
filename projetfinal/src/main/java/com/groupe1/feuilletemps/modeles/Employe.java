@@ -27,7 +27,7 @@ public class Employe {
     private String nom;
 
     @NotNull
-    private String addresse;
+    private String courriel;
 
     @NotNull
     private String nomUtilisateur;
@@ -48,11 +48,11 @@ public class Employe {
 
     }
 
-    public Employe(Long employeId, String prenom, String nom, String addresse, String nomUtilisateur, String motDePasse) {
+    public Employe(Long employeId, String prenom, String nom, String courriel, String nomUtilisateur, String motDePasse) {
         this.employeId = employeId;
         this.prenom = prenom;
         this.nom = nom;
-        this.addresse = addresse;
+        this.courriel = courriel;
         this.nomUtilisateur = nomUtilisateur;
         this.motDePasse = motDePasse;
         this.projets = new HashSet<Projet>();
