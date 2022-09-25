@@ -24,9 +24,9 @@ public class FeuilletempsApplication {
 			@Override
 			public void run(String... args) throws Exception {
 				AES.setKey("bBgLrINTjBINrm7");
-				Projet projet1 = new Projet(1000L, "minutes_teletravail");
-				Projet projet2 = new Projet(500L, "minutes_travaillees_bureau");
-				Projet projet3 = new Projet(100L, "minutes_travaillees_bureau*2");
+				Projet projet1 = new Projet(1000L, "Télétravail");
+				Projet projet2 = new Projet(500L, "Bureau");
+				Projet projet3 = new Projet(100L, "Bureau2");
 				Projet p995 = new Projet(995L, "Congé parental");
 				Projet p996 = new Projet(996L, "Transport en voiture");
 				Projet p997 = new Projet(997L, "Transport en commun");

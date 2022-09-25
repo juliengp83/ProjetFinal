@@ -33,16 +33,17 @@ public class TraitementFeuille {
         Resultat resultat = new Resultat();
 
         int numero_employe = employe_projets.get(0).getNumeroEmploye();
+        boolean est_admin = false;
 
         resultat.setNumeroEmploye(numero_employe);
 
-        // Les règles spécifique a une catégorie d'employée bool est_admin
-        if (numero_employe < 1000) // Employee admin
-        {
+        if (numero_employe < 1000) {
+            est_admin = true;
+        }
+
+        if (est_admin == true) {
             resultat = employeAdmin(employe_projets, resultat);
-
-        } else { // Employee regulier
-
+        } else {
             resultat = employeRegulier(employe_projets, resultat);
         }
 
@@ -52,7 +53,8 @@ public class TraitementFeuille {
     }
 
     /**
-     * Cette fonction applique les règles pour tous les employées
+     * Cette fonction applique les règles pour tous les employées et les ajoutent au
+     * résultat
      * 
      * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la
      *                        feuille de temps
@@ -77,9 +79,9 @@ public class TraitementFeuille {
         resultat.ajouterRegle(r);
 
         /*
-         * méthode code spéciaux de 995 à 999
+         * méthode code spéciaux contenu entre 995 à 999
          */
-        if (projet_speciaux = true) {
+        if (projet_speciaux == true) {
             calculMinutesParProjetSpecial(employe_projets, resultat);
         }
 
@@ -149,7 +151,7 @@ public class TraitementFeuille {
         int[] temps_quotidien_travaille = calculTempsQuotidienJourSemaine(employe_projets);
         r = tempsMinimumQuotidien(temps_quotidien_travaille, REGULIER_TEMPS_REQUIS_QUOTIDIEN_BUREAU, categorie);
         resultat.ajouterRegle(r);
-        
+
         return resultat;
     }
 
@@ -167,7 +169,7 @@ public class TraitementFeuille {
         int minutes_travaillees_bureau = 0;
 
         for (EmployeProjet emp_p : employe_projets) {
-            if (emp_p.getNumeroProjet() <= 900 || emp_p.getNumeroProjet() == 996 || emp_p.getNumeroProjet() ==997) {
+            if (emp_p.getNumeroProjet() <= 900 || emp_p.getNumeroProjet() == 996 || emp_p.getNumeroProjet() == 997) {
                 minutes_travaillees_bureau += emp_p.getTempsTravail();
             }
         }
@@ -327,7 +329,8 @@ public class TraitementFeuille {
 
     /**
      * Cette fonction valide la feuille de temps d'un employé par rapport à la
-     * règle que les employés doivent inscrire un nombre d'heures spécifique et exact dans
+     * règle que les employés doivent inscrire un nombre d'heures spécifique et
+     * exact dans
      * certaines catégories.
      * 
      * @param temps_quotidien_travaille Un tableau du cumul quotidien des heures les
@@ -401,7 +404,51 @@ public class TraitementFeuille {
         return temps_travaille_quotidiennement_projet;
     }
 
-    
+    /**
+     * Cette fonction verrifie si un autres projet existe pour chaque journée de la
+     * semaine de travail
+     * 
+     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la
+     *                        feuille de temps
+     * @param projet          le numéro à valider
+     * @return true si un autre projet existe
+     */
+    public static boolean autreProjetQuotidien(ArrayList<EmployeProjet> employe_projets, int projet) {
+        boolean projet_quotidien = false;
+        for (int i = 0; i < 5; i++) {
+            for (EmployeProjet emp_p : employe_projets) {
+                if (emp_p.getJourDeSemaineTravaille() == i + 1 && emp_p.getNumeroProjet() != projet) {
+                    projet_quotidien = true;
+                    return projet_quotidien;
+                }
+            }
+        }
+        return projet_quotidien;
+    }
+
+    /**
+     * Cette fonction verrifie si un autres projet existe pour chaque journée de
+     * la semaine de travail
+     * 
+     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la
+     *                        feuille de temps
+     * @param projet          le numéro à valider
+     * @return true si un autre projet existe
+     */
+    public static boolean autreProjetQuotidienFerie(ArrayList<EmployeProjet> employe_projets, int projet) {
+        boolean projet_quotidien_ferie = false;
+        for (int i = 0; i < 5; i++) {
+            for (EmployeProjet emp_p : employe_projets) {
+                if (emp_p.getJourDeSemaineTravaille() == i + 1 &&
+                        (emp_p.getNumeroProjet() != projet && emp_p.getNumeroProjet() > 900)) {
+                    projet_quotidien_ferie = true;
+                    return projet_quotidien_ferie;
+                }
+            }
+        }
+        return projet_quotidien_ferie;
+    }
+
     /**
      * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la
      *                        feuille de temps
@@ -419,9 +466,9 @@ public class TraitementFeuille {
         int i = 0;
         for (EmployeProjet emp_p : employe_projets) {
             i = emp_p.getNumeroProjet();
-            
+
             if (i >= 995 || i <= 999) {// seulement pour réduire les traitements aux seuls projets voulu
-                
+
                 // S2 congé parental
                 if (i == 995) {
                     categorie = "congé parental";
@@ -432,12 +479,27 @@ public class TraitementFeuille {
                 if (i == 998) {
                     categorie = "férié";
                     temps_requis = 7 * 60;
+                    Boolean autre_projet = autreProjetQuotidienFerie(employe_projets, 998);
+
+                    if (autre_projet == true) {
+                        r = new Regle(10, false,
+                                "Il est seulement possible d'inscrire du télétravail les jours férié.");
+                        resultat.ajouterRegle(r);
+                    }
                 }
 
-                // S2 Maladie doit être sur semaine et = 420 (JOUR_COMPLET) ne peut pas avoir d'autre projet cette journée
+                // S2 Maladie doit être sur semaine et = 420 (JOUR_COMPLET) ne peut pas avoir
+                // d'autre projet cette journée
                 if (i == 999) {
                     categorie = "maladie";
                     temps_requis = 7 * 60;
+                    Boolean autre_projet = autreProjetQuotidien(employe_projets, 999);
+
+                    if (autre_projet == true) {
+                        r = new Regle(10, false,
+                                "Il y a un second projet inscrit la même journée qu'un congé de maladie.");
+                        resultat.ajouterRegle(r);
+                    }
                 }
 
                 // S3 Transport = 1h max jour ouvrable a inclure au bureau
