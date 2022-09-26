@@ -156,7 +156,7 @@ public class TraitementFeuille {
 
     /**
      * Cette fonction fait cumul le nombre de minutes de travail au bureau pour un
-     * employé incluant le temps de transport 996 et 997
+     * employé incluant le temps de transport 996 et 997, ainsi que les férié 998 et congé de maladie 999
      * 
      * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la
      *                        feuille de temps
@@ -166,9 +166,11 @@ public class TraitementFeuille {
 
     public static int minutesTravailleesBureau(ArrayList<EmployeProjet> employe_projets) {
         int minutes_travaillees_bureau = 0;
-
+        int p = 0;
         for (EmployeProjet emp_p : employe_projets) {
-            if (emp_p.getNumeroProjet() <= 900 || emp_p.getNumeroProjet() == 996 || emp_p.getNumeroProjet() == 997) {
+            p = emp_p.getNumeroProjet();
+            if (p <= 900 || 
+            (p >= 996 && p <= 999)) {
                 minutes_travaillees_bureau += emp_p.getTempsTravail();
             }
         }
@@ -188,14 +190,12 @@ public class TraitementFeuille {
      */
     public static int minutesTeletravail(ArrayList<EmployeProjet> employe_projets) {
         int minutes_teletravail = 0;
-        int i = 0;
+        int p = 0;
         for (EmployeProjet emp_p : employe_projets) {
-            i = emp_p.getNumeroProjet();
-            if (i > 900) {
-                if (i <= 995 || i >= 999) {
+            p = emp_p.getNumeroProjet();
+            if (p > 900) {
+                if (p <= 995 || p >= 999) {
                     minutes_teletravail += emp_p.getTempsTravail();
-                } else {
-                    projet_speciaux = true;
                 }
             }
         }
@@ -416,9 +416,12 @@ public class TraitementFeuille {
         boolean projet_quotidien = false;
         for (int i = 1; i <= 7; i++) {
             for (EmployeProjet emp_p : employe_projets) {
-                if (emp_p.getJourDeSemaineTravaille() == i && emp_p.getNumeroProjet() != projet) {
-                    projet_quotidien = true;
-                    return projet_quotidien;
+                int p = emp_p.getNumeroProjet();
+                if (emp_p.getJourDeSemaineTravaille() == i) {
+                    if (p == projet && p != projet) {
+                        projet_quotidien = true;
+                        return projet_quotidien;
+                    }
                 }
             }
         }
@@ -511,8 +514,8 @@ public class TraitementFeuille {
             if (i == 998) {
                 categorie = "férié";
                 temps_requis = 7 * 60;
-                Boolean autre_projet = autreProjetQuotidienFerie(employe_projets, 998);
-                Boolean fin_de_semaine = finDeSemaine(employe_projets, 998);
+                boolean autre_projet = autreProjetQuotidienFerie(employe_projets, 998);
+                boolean fin_de_semaine = finDeSemaine(employe_projets, 998);
 
                 if (fin_de_semaine == true) {
                     r = new Regle(10, false,
@@ -530,8 +533,8 @@ public class TraitementFeuille {
             if (i == 999) {
                 categorie = "maladie";
                 temps_requis = 7 * 60;
-                Boolean autre_projet = autreProjetQuotidien(employe_projets, 999);
-                Boolean fin_de_semaine = finDeSemaine(employe_projets, 999);
+                boolean autre_projet = autreProjetQuotidien(employe_projets, 999);
+                boolean fin_de_semaine = finDeSemaine(employe_projets, 999);
 
                 if (fin_de_semaine == true) {
                     r = new Regle(10, false,
