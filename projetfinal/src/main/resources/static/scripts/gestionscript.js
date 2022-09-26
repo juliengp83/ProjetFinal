@@ -135,7 +135,7 @@ $(document).ready(function () {
     let card_string_start = "";
     if (estValidee) {
       card_string_start =
-        '<a class="ui orange card card-unapproved"><div class="content">';
+        '<a class="ui yellow card card-unapproved"><div class="content">';
     } else {
       card_string_start =
         '<a class="ui red card card-errors-unapproved"><div class="content">';
