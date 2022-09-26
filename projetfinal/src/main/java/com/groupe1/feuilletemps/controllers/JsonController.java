@@ -25,10 +25,7 @@ import com.groupe1.feuilletemps.utils.EcritureJson;
 import com.groupe1.feuilletemps.utils.LecteurJson;
 import com.groupe1.feuilletemps.utils.TraitementFeuille;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Controller
-@Slf4j
 public class JsonController {
     private final EmployeRepository repo_emp;
     private final ProjetRepository repo_projet;

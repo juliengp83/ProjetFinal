@@ -477,7 +477,6 @@ public class TraitementFeuille {
      * @param resultat        l'objet résultat qui est mis à ajour avec les règles
      *                        spécifique pour les projets spéciaux.
      */
-    // TODO n'est pas terminé. validations supplémentaires a compléter
 
     public static void calculMinutesParProjetSpecial(ArrayList<EmployeProjet> employe_projets, Resultat resultat) {
         Regle r;

@@ -14,10 +14,7 @@ import com.google.gson.Gson;
 import com.groupe1.feuilletemps.data.FeuilleDeTempsRepository;
 import com.groupe1.feuilletemps.modeles.FeuilleDeTemps;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Controller
-@Slf4j
 public class GestionnaireController {
     private final FeuilleDeTempsRepository repo_feuilles;
 
@@ -38,6 +35,16 @@ public class GestionnaireController {
         String feuilleJson = new Gson().toJson(feuillesDemandees);
 
         return ResponseEntity.ok(feuilleJson.toString());
+    }
+
+    @RequestMapping(value = "/approuvefeuille", method = RequestMethod.GET)
+    public ResponseEntity<Boolean> approuverFeuille(@RequestParam String feuilleId) {
+
+        FeuilleDeTemps f= repo_feuilles.findById(Long.valueOf(feuilleId)).orElse(null);
+        f.setEstApprouvee(true);
+        repo_feuilles.save(f);
+
+        return ResponseEntity.ok(true);
     }
  
 

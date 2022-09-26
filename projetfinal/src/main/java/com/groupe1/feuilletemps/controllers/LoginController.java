@@ -14,10 +14,8 @@ import com.groupe1.feuilletemps.modeles.Employe;
 import com.groupe1.feuilletemps.modeles.Projet;
 import com.groupe1.feuilletemps.utils.AES;
 
-import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@Slf4j
 public class LoginController {
 
     private final EmployeRepository employeRepository;
