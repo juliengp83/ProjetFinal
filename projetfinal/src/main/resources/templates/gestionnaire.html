@@ -17,6 +17,7 @@
   </head>
 
   <body id="body">
+    <div id="employes" style="display: none"></div>
     <div id="table-container">
       <div id="table-approved">
         <i class="big close icon"></i>
@@ -205,8 +206,12 @@
               <i class="dropdown icon"></i>
               <div class="default text">semaine</div>
               <div class="menu">
-                <div class="item" data-value="38">Semaine du 18 au 24 septembre 2022</div>
-                <div class="item" data-value="37">Semaine du 11 au 17 septembre 2022</div>
+                <div class="item" data-value="38">
+                  Semaine du 18 au 24 septembre 2022
+                </div>
+                <div class="item" data-value="37">
+                  Semaine du 11 au 17 septembre 2022
+                </div>
               </div>
             </div>
           </div>
@@ -214,7 +219,7 @@
       </div>
       <div class="ui segment">
         <div class="ui cards">
-          <a class="ui green card card-approved">
+          <!-- <a class="ui green card card-approved">
             <div class="content">
               <div class="header">Emile Tremblay</div>
               <div class="meta">ID: 1001</div>
@@ -253,9 +258,16 @@
               <i class="ellipsis horizontal icon"></i>
               En attente du formulaire
             </div>
-          </a>
+          </a> -->
         </div>
       </div>
     </div>
+    <script th:inline="javascript">
+      /*<![CDATA[*/
+
+      const employes = /*[[${employes}]]*/ null;
+      $("#employes").text(JSON.stringify(employes));
+      /*]]>*/
+    </script>
   </body>
 </html>
