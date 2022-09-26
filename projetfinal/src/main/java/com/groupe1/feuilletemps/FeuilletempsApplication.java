@@ -1,15 +1,7 @@
 package com.groupe1.feuilletemps;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import com.groupe1.feuilletemps.data.EmployeRepository;
-import com.groupe1.feuilletemps.data.ProjetRepository;
-import com.groupe1.feuilletemps.modeles.Employe;
-import com.groupe1.feuilletemps.modeles.Projet;
-import com.groupe1.feuilletemps.utils.AES;
 
 @SpringBootApplication
 public class FeuilletempsApplication {
@@ -51,8 +43,8 @@ public class FeuilletempsApplication {
 	// Employe employe2 = new Employe(1112L, "Thralmig", "Deepbrew",
 	// "thralmig@julexmile.com",
 	// "thralmig", AES.encrypt("thralmig123", "bBgLrINTjBINrm7"));
-	// Employe employe3 = new Employe(3L, "Mundaeth", "Dragonbender", "Mundaeth",
-	// "mundaeth", AES.encrypt("mundaeth123", "bBgLrINTjBINrm7"));
+	// Employe employe3 = new Employe(3L, "Mundaeth", "Dragonbender", 
+	// "mundaeth@julexmile.com","mundaeth", AES.encrypt("mundaeth123", "bBgLrINTjBINrm7"));
 	// Employe employe4 = new Employe(4L, "Thromdol", "Hillbreaker",
 	// "thromdol@julexmile.com",
 	// "thromdol", AES.encrypt("thromdol", "bBgLrINTjBINrm7"));
