@@ -81,9 +81,8 @@ public class TraitementFeuille {
         /*
          * méthode code spéciaux contenu entre 995 à 999
          */
-        if (projet_speciaux == true) {
-            calculMinutesParProjetSpecial(employe_projets, resultat);
-        }
+
+        calculMinutesParProjetSpecial(employe_projets, resultat);
 
         return resultat;
     }
@@ -415,9 +414,9 @@ public class TraitementFeuille {
      */
     public static boolean autreProjetQuotidien(ArrayList<EmployeProjet> employe_projets, int projet) {
         boolean projet_quotidien = false;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 1; i <= 7; i++) {
             for (EmployeProjet emp_p : employe_projets) {
-                if (emp_p.getJourDeSemaineTravaille() == i + 1 && emp_p.getNumeroProjet() != projet) {
+                if (emp_p.getJourDeSemaineTravaille() == i && emp_p.getNumeroProjet() != projet) {
                     projet_quotidien = true;
                     return projet_quotidien;
                 }
@@ -437,16 +436,39 @@ public class TraitementFeuille {
      */
     public static boolean autreProjetQuotidienFerie(ArrayList<EmployeProjet> employe_projets, int projet) {
         boolean projet_quotidien_ferie = false;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 1; i <= 7; i++) {
             for (EmployeProjet emp_p : employe_projets) {
-                if (emp_p.getJourDeSemaineTravaille() == i + 1 &&
-                        (emp_p.getNumeroProjet() != projet && emp_p.getNumeroProjet() > 900)) {
+                int p = emp_p.getNumeroProjet();
+                if (emp_p.getJourDeSemaineTravaille() == i &&
+                        (p != projet && p < 900)) {
                     projet_quotidien_ferie = true;
                     return projet_quotidien_ferie;
                 }
             }
         }
         return projet_quotidien_ferie;
+    }
+
+    /**
+     * Cette fonction verrifie si le projet est inscrit une journée de
+     * fin de semaine.
+     * 
+     * @param employe_projets Le tableau d'EmployeProjet extrait de la lecture de la
+     *                        feuille de temps
+     * @param projet          le numéro à valider
+     * @return true si le projet est inscrit un jour de fin de semaine
+     */
+    public static boolean finDeSemaine(ArrayList<EmployeProjet> employe_projets, int projet) {
+        boolean est_fin_de_semaine = false;
+
+        for (EmployeProjet emp_p : employe_projets) {
+            if ((emp_p.getJourDeSemaineTravaille() == 6 && emp_p.getNumeroProjet() == projet)
+                    || (emp_p.getJourDeSemaineTravaille() == 7 && emp_p.getNumeroProjet() == projet)) {
+                est_fin_de_semaine = true;
+                return est_fin_de_semaine;
+            }
+        }
+        return est_fin_de_semaine;
     }
 
     /**
@@ -467,39 +489,12 @@ public class TraitementFeuille {
         for (EmployeProjet emp_p : employe_projets) {
             i = emp_p.getNumeroProjet();
 
-            if (i >= 995 || i <= 999) {// seulement pour réduire les traitements aux seuls projets voulu
+            if (i >= 995 && i <= 997) {// seulement pour réduire les traitements aux seuls projets voulu
 
                 // S2 congé parental
                 if (i == 995) {
                     categorie = "congé parental";
                     temps_requis = 7 * 60;
-                }
-
-                // S2 férié sur semaine = 420 (JOUR_COMPLET) et possible télétravail
-                if (i == 998) {
-                    categorie = "férié";
-                    temps_requis = 7 * 60;
-                    Boolean autre_projet = autreProjetQuotidienFerie(employe_projets, 998);
-
-                    if (autre_projet == true) {
-                        r = new Regle(10, false,
-                                "Il est seulement possible d'inscrire du télétravail les jours férié.");
-                        resultat.ajouterRegle(r);
-                    }
-                }
-
-                // S2 Maladie doit être sur semaine et = 420 (JOUR_COMPLET) ne peut pas avoir
-                // d'autre projet cette journée
-                if (i == 999) {
-                    categorie = "maladie";
-                    temps_requis = 7 * 60;
-                    Boolean autre_projet = autreProjetQuotidien(employe_projets, 999);
-
-                    if (autre_projet == true) {
-                        r = new Regle(10, false,
-                                "Il y a un second projet inscrit la même journée qu'un congé de maladie.");
-                        resultat.ajouterRegle(r);
-                    }
                 }
 
                 // S3 Transport = 1h max jour ouvrable a inclure au bureau
@@ -511,6 +506,44 @@ public class TraitementFeuille {
                 minutes_par_projet_special = calculTempsQuotidienProjet(employe_projets, i);
                 r = tempsRequisQuotidien(minutes_par_projet_special, temps_requis, categorie);
                 resultat.ajouterRegle(r);
+            }
+
+            // S2 férié sur semaine = 420 (JOUR_COMPLET) et possible télétravail
+            if (i == 998) {
+                categorie = "férié";
+                temps_requis = 7 * 60;
+                Boolean autre_projet = autreProjetQuotidienFerie(employe_projets, 998);
+                Boolean fin_de_semaine = finDeSemaine(employe_projets, 998);
+
+                if (fin_de_semaine == true) {
+                    r = new Regle(10, false,
+                            "Un jour férié doit être inscrit seulement la semaine.");
+                    resultat.ajouterRegle(r);
+                }else if (autre_projet == true) {
+                    r = new Regle(10, false,
+                            "Il est seulement possible d'inscrire du télétravail les jours férié.");
+                    resultat.ajouterRegle(r);
+                }
+            }
+
+            // S2 Maladie doit être sur semaine et = 420 (JOUR_COMPLET) ne peut pas avoir
+            // d'autre projet cette journée
+            if (i == 999) {
+                categorie = "maladie";
+                temps_requis = 7 * 60;
+                Boolean autre_projet = autreProjetQuotidien(employe_projets, 999);
+                Boolean fin_de_semaine = finDeSemaine(employe_projets, 999);
+
+                if (fin_de_semaine == true) {
+                    r = new Regle(10, false,
+                            "Un congé de maladie doit être inscrit seulement la semaine.");
+                    resultat.ajouterRegle(r);
+                } else if (autre_projet == true) {
+                    r = new Regle(10, false,
+                            "Il y a un second projet inscrit la même journée qu'un congé de maladie.");
+                    resultat.ajouterRegle(r);
+                }
+
             }
         }
     }
