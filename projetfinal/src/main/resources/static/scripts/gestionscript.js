@@ -222,5 +222,18 @@ $(document).ready(function () {
       const final_str = start_str + end_str;
       $(table_id).find(".message").append(final_str);
     }
+    approuver(formulaire);
+  }
+  // bouton approuver
+  function approuver(formulaire) {
+    $(".btn-approuver").click(function (e) {
+      e.preventDefault();
+      $.ajax({
+        type: "POST",
+        url: "url",
+        data: formulaire,
+        success: function (response) {},
+      });
+    });
   }
 });
