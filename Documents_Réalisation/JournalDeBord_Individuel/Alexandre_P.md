@@ -32,3 +32,28 @@
 ## 1er septembre 2022
 * Regler quelque problème de test et de règles que nous avions
 * Finaliser les fichiers de test et le dossier release pour la fin du sprint 1
+
+***
+## 5 septembre 2022
+* Rencontre pour le scrum poker
+* Modifier, ajouter et mettre à jour le back log du sprint 2 sur Trello
+
+## 12 septembre 
+* Intégration de spring à notre projet
+* Discussion des choses à faire pour la parties spring
+* Apprentissage sur spring et comment l'utiliser pour notre projet
+
+## 13 septembre
+* Encore plus de temps pour apprendre Spring
+
+## 14 septembre
+* Toujours plus de temps pour apprendre Spring
+
+## 15 septembre
+* Ajout des beans de employe et projet, ajouter les repos CRUD, etc.
+
+## 19 septembre
+* Scrum pour parler de ce qui faut faire durant la semaine et planner la rencontre le lundi
+
+## 22 septembre
+* Creation de l'entité feuille de temps et planner le fonctionnement de tout ca

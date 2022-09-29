@@ -1,0 +1,70 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* colors */
+body {
+  --primary-color: #fffdff;
+  --secondary-color: #383145;
+  --accent-color: teal;
+}
+
+#body {
+  background-image: url("../images/blob-scene-haikei2.svg");
+  background-size: cover;
+
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-rows: 1fr;
+}
+
+#content {
+  grid-area: 1 / 2 / 2 / 3;
+  margin-top: 200px;
+}
+
+#table-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 200px;
+  background-color: rgba(0, 0, 0, 0.754);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+}
+
+#table-container > div {
+  width: fit-content;
+  padding: 40px;
+  border-radius: 20px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 30px;
+  background-color: var(--primary-color);
+}
+
+#table-container .oui-non {
+  display: flex;
+  justify-content: space-between;
+  gap: 100px;
+}
+
+#table-container .close.icon {
+  align-self: flex-end;
+}
+#table-container .close.icon:hover {
+  cursor: pointer;
+}
+
+#table-container .message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

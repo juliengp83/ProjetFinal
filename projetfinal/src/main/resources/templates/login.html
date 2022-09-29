@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Application feuille de temps</title>
+    <link th:href="@{/styles/semantic-dist/semantic.css}" rel="stylesheet" />
+    <link th:href="@{/styles/loginstyle.css}" rel="stylesheet" />
+
+    <!-- live server -->
+    <!-- <link href="../static/styles/semantic-dist/semantic.css" rel="stylesheet" />
+    <link href="../static/styles/login_style.css" rel="stylesheet" /> -->
+  </head>
+  <body id="body">
+    <div class="background">
+      <div>
+        <form class="ui inverted form" method="post">
+          <div class="field">
+            <label>Nom d'utilisateur</label>
+            <input
+              type="text"
+              name="username"
+              placeholder="Nom d'utilisateur"
+            />
+          </div>
+          <div class="field">
+            <label>Mot de passe</label>
+            <input type="password" name="password" placeholder="Mot de passe" />
+          </div>
+          <input class="ui teal button" type="submit" value="Se connecter" />
+        </form>
+      </div>
+      <div align="center">
+        <p style="color: rgb(255, 138, 138)" th:text="${msg}"></p>
+      </div>
+    </div>
+  </body>
+</html>

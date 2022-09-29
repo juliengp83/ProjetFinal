@@ -1,0 +1,179 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* colors */
+body {
+  --primary-color: #fffdff;
+  --secondary-color: #383145;
+  --accent-color: teal;
+}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: 0px auto 0px auto;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Fading animation */
+/* .fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+  } */
+
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* BACKGROUD */
+
+#body {
+  background-image: url("../images/blob-scene-haikei2.svg");
+  background-size: cover;
+  background-color: var(--primary-color);
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-rows: 1fr 4fr 2fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.background {
+  grid-area: 2 / 2 / 3 / 3;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Slide content */
+
+.slide-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--secondary-color);
+  max-width: 700px;
+
+  padding: 30px;
+  border-radius: 30px;
+}
+
+.slide-content h2 {
+  padding-bottom: 10px;
+  color: var(--primary-color);
+}
+
+.cards-container {
+  height: 300px;
+  max-width: 600px;
+  overflow-y: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* .carte-vide {
+  width: 500px;
+  height: 500px;
+  opacity: 0;
+} */
+.carte-projet {
+  height: 80px;
+  width: 100%;
+  padding: 20px;
+}
+
+.fields-container {
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* next and prev buttons  */
+
+.next-prev-container {
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+.next-prev-container > div {
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Resultats */
+
+#container-resultats {
+  display: none;
+  justify-content: center;
+  padding-top: 200px;
+  background-color: rgba(0, 0, 0, 0.754);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+}
+
+#container-resultats > div:first-child {
+  max-width: 600px;
+  padding: 40px;
+  border-radius: 20px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--primary-color);
+}
+
+#container-resultats .oui-non {
+  display: flex;
+  justify-content: space-between;
+  gap: 100px;
+}

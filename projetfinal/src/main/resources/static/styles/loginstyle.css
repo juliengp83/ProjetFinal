@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* colors */
+body {
+  --primary-color: #fffdff;
+  --secondary-color: #383145;
+  --accent-color: teal;
+}
+
+#body {
+  background-image: url("../images/blob-scene-haikei2.svg");
+  background-size: cover;
+  background-color: var(--primary-color);
+}
+
+.background {
+  margin-top: 200px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: var(--secondary-color);
+  border-radius: 30px;
+}
+
+.background form:first-child {
+  min-width: 300px;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
