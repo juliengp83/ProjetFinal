@@ -1,29 +1,13 @@
 $(document).ready(function () {
-  // global arrays!!!
+  // global variables
   const employes = JSON.parse($("#employes").text());
   const formulaires = [];
-
-  $(".ui.dropdown").dropdown({
-    action: "activate",
-    onChange: function (value, text, $selectedItem) {
-      $.ajax({
-        type: "GET",
-        url: "getfeuilles?selectedWeek=" + value,
-        success: function (f) {
-          const feuilles_de_temps = JSON.parse(f);
-          formulaires.length = 0;
-          for (const i of feuilles_de_temps) {
-            formulaires.push(i);
-          }
-          appendCards(formulaires);
-        },
-      });
-    },
-  });
-
+  // setup debut
   $("#table-container").hide();
 
-  // -----------------------------ON_CLICK----------------------------------
+  // -----------------------------ON_CLICK_EVENTS----------------------------------
+
+  // cliquer sur une des options du menu va filtrer les cartes a afficher selon l'option selectionnee
   $(".ui.menu > .item").click(function (e) {
     e.preventDefault();
     $(".ui.menu > .item").removeClass("active");
@@ -31,6 +15,22 @@ $(document).ready(function () {
     showCards($(this).attr("id"));
   });
 
+  // changer sa selection de date dans le dropdown va remplacer les cartes par
+  // celles qui correspondent a la nouvelle date selectionnee
+  $(".ui.dropdown").dropdown({
+    action: "activate",
+    onChange: function (value, text, $selectedItem) {
+      $.ajax({
+        type: "GET",
+        url: "getfeuilles?selectedWeek=" + value,
+        success: function (f) {
+          refreshCards(f);
+        },
+      });
+    },
+  });
+
+  // cliquer sur l'icon X d'une fenetre infos va fermer la fenetre
   $("#table-container")
     .find(".close.icon")
     .click(function (e) {
@@ -38,6 +38,7 @@ $(document).ready(function () {
       $(this).closest("#table-container").hide();
     });
 
+  // cliquer sur une carte va afficher sa fenetre d'infos
   function refreshCardClick() {
     $(".ui.segment")
       .find(".ui.card")
@@ -47,8 +48,28 @@ $(document).ready(function () {
         showTable($(this).attr("class"), emp);
       });
   }
-  // -----------------------------CUSTOM_METHODS----------------------------------
 
+  // cliquer sur un bouton class=".btn-approuver" va approuver le formulaire en argument
+  function approuver(formulaire) {
+    $(".btn-approuver").click(function (e) {
+      e.preventDefault();
+      $.ajax({
+        type: "POST",
+        url: "approuvefeuille",
+        data: formulaire,
+        success: function (response) {
+          refreshCards(response);
+        },
+      });
+    });
+  }
+  // -----------------------------DISPLAY_METHODS----------------------------------
+  /**
+   *Affiche les cartes selon l'id du menu en argument
+   *
+   * @param {string} menu_id l'ID du menu selectionne
+   * @return {void}
+   */
   function showCards(menu_id) {
     switch (menu_id) {
       case "menu-all":
@@ -71,7 +92,13 @@ $(document).ready(function () {
         break;
     }
   }
-
+  /**
+   *Affiche la fenetre d'informations sur le formulaire selon la classe de la carte et l'employe en argument
+   *
+   * @param {string} str_classes les classes d'une carte
+   * @param {employe} employe objet employe
+   * @return {void}
+   */
   function showTable(str_classes, employe) {
     $("#table-container > div").hide();
     if (str_classes.match("card-approved") != null) {
@@ -93,7 +120,28 @@ $(document).ready(function () {
     }
   }
 
-  // cards creation
+  // -----------------------------CARD_CREATION_METHODS----------------------------------
+
+  /**
+   *Vide la liste globale formulaires et la repopule avec les donnees de feuilles_de_temps.
+   * Affiche les nouvelles cartes.
+   * @param {formulaires} feuilles_de_temps liste d'objets formulaire
+   * @return {void}
+   */
+  function refreshCards(feuilles_de_temps) {
+    const fs = JSON.parse(feuilles_de_temps);
+    formulaires.length = 0;
+    for (const i of fs) {
+      formulaires.push(i);
+    }
+    appendCards(formulaires);
+  }
+  /**
+   *Cree une carte pour chaque employe de l'array "employes" a partir des infos de feuilles_de_temps
+   *
+   * @param {formulaires} feuilles_de_temps liste d'objets formulaire
+   * @return {void}
+   */
   function appendCards(feuilles_de_temps) {
     $(".ui.cards").empty();
     for (const employe of employes) {
@@ -119,6 +167,12 @@ $(document).ready(function () {
     refreshCardClick();
   }
 
+  /**
+   *Cree une carte class="card-unsent" pour l'employe en argument
+   *
+   * @param {employe} employe l'employe pour lequel la carte sera creee
+   * @return {void}
+   */
   function createCardUnsent(employe) {
     const card_string_start =
       '<a class="ui grey card card-unsent"><div class="content">';
@@ -131,6 +185,13 @@ $(document).ready(function () {
     $(".ui.cards").append(card_string_final);
   }
 
+  /**
+   *Cree une carte class="card-unapproved" ou class="card-errors-unapproved" pour l'employe en argument
+   *selon le boolean estValidee en argument
+   * @param {employe} employe l'employe pour lequel la carte sera creee
+   * @param {boolean} estValidee Doit provenir du formulaire de l'employe
+   * @return {void}
+   */
   function createCardUnapproved(employe, estValidee) {
     let card_string_start = "";
     if (estValidee) {
@@ -149,6 +210,12 @@ $(document).ready(function () {
     $(".ui.cards").append(card_string_final);
   }
 
+  /**
+   *Cree une carte class="card-approved" pour l'employe en argument
+   *
+   * @param {employe} employe l'employe pour lequel la carte sera creee
+   * @return {void}
+   */
   function createCardApproved(employe) {
     const card_string_start =
       '<a class="ui green card card-approved"><div class="content">';
@@ -161,7 +228,14 @@ $(document).ready(function () {
     $(".ui.cards").append(card_string_final);
   }
 
-  // table creation
+  // -----------------------------TABLE_CREATION_METHODS----------------------------------
+
+  /**
+   *Modifie le contenu du div id="table-unsent" selon l'employe en argument
+   *
+   * @param {employe} employe l'employe pour lequel le contenu s'adressera
+   * @return {void}
+   */
   function createTableUnsent(employe) {
     $("#table-unsent").find(".message").empty();
     const start_str =
@@ -177,7 +251,12 @@ $(document).ready(function () {
     const final_str = start_str + end_str;
     $("#table-unsent").find(".message").append(final_str);
   }
-
+  /**
+   *Retourne l'employe dont l'ID est egal a celui dans l'argument meta_txt
+   *
+   * @param {string} meta_txt texte provenant d'un div class="meta" (ex:"ID:101")
+   * @return {employe}
+   */
   function getEmployeFromCard(meta_txt) {
     let id = parseInt(meta_txt.substr(3));
     let employe = null;
@@ -189,7 +268,13 @@ $(document).ready(function () {
     }
     return employe;
   }
-
+  /**
+   *Modifie le contenu du div dont l'id = table_id selon les infos de employe. Utilise la variable globale formulaires
+   *
+   * @param {employe} employe employe pour lequel le contenu s'adressera
+   * @param {string} table_id id du div a modifier
+   * @return {void}
+   */
   function createTableProjets(employe, table_id) {
     let formulaire = null;
     for (const f of formulaires) {
@@ -223,19 +308,5 @@ $(document).ready(function () {
       $(table_id).find(".message").append(final_str);
     }
     approuver(formulaire);
-  }
-  // bouton approuver
-  function approuver(formulaire) {
-    $(".btn-approuver").click(function (e) {
-      e.preventDefault();
-      $.ajax({
-        type: "POST",
-        url: "approuvefeuille",
-        data: formulaire,
-        success: function (response) {
-          console.log(response);
-        },
-      });
-    });
   }
 });
