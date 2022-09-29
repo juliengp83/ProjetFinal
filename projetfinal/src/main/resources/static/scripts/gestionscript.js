@@ -107,7 +107,7 @@ $(document).ready(function () {
         }
       }
       if (isAvailable) {
-        if (obj_feuille.estApprouve) {
+        if (obj_feuille.estApprouvee) {
           createCardApproved(employe);
         } else {
           createCardUnapproved(employe, obj_feuille.estValidee);
@@ -230,9 +230,11 @@ $(document).ready(function () {
       e.preventDefault();
       $.ajax({
         type: "POST",
-        url: "url",
+        url: "approuvefeuille",
         data: formulaire,
-        success: function (response) {},
+        success: function (response) {
+          console.log(response);
+        },
       });
     });
   }
