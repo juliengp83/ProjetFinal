@@ -52,7 +52,8 @@ $(document).ready(function () {
   // cliquer sur un bouton class=".btn-approuver" va approuver le formulaire en argument
   function approuver(formulaire) {
     $(".btn-approuver").click(function (e) {
-      e.preventDefault();
+      e.preventDefault(); 
+      $(this).closest("#table-container").hide();
       $.ajax({
         type: "POST",
         url: "approuvefeuille",
