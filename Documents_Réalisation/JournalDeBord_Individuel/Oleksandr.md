@@ -35,3 +35,36 @@ Lecture, formation video
 29 août 2022
 Revision du code
 Discussion en équipe (Figma, Semantic UI)
+
+1 septembre 2022
+Regler problème de test et de règles que nous avions
+Finaliser les fichiers de test et le dossier release pour la fin du sprint 1
+
+5 septembre 2022
+Rencontre pour le scrum poker
+Nous avons effectué un poker scrum afin de nous familiariser avec le concept et prioriser nos tâches
+Nous avons contribué à définir le backlog du sprint 2 en regard des nouvelles exigences du client
+
+6-11 septembre 2022
+faire des lectures et regarder des vidéos sur sprint pour nous familiariser avec les concepts et le
+templating engine Thymeleaf (ainsi que l'intégration avec Semantic UI);
+
+12 septembre 2022
+Rencontre d'équipe
+Discussion et validation de de l'utilisation de Spring
+Réflexion et précision sur le contenue des pages
+
+13-19 septembre 2022
+Discussion en équipe
+Traduction du modèle relationnel théorique vers le module de Spring Data JPA
+La refactorisation de la classe de Traitement de Feuille et irtégration des nouvelles règles
+
+20-25 septembre 2022
+Rencontre et discussion d'équipe
+L'équipe décidé d'ajouter un bouton 'force submit' qui permettra l'envoi malgré les erreurs cela implique la nécessité
+d'introduire une validation dans la classe JsonController; 
+Développement de la page gestionnaire;
+Préparation de la présentation du 26
+
+26 septembre 2022
+Rencontre d'équipe avec M.Labranche pour présentation du projet.
