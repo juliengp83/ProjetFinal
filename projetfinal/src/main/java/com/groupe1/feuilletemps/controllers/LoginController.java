@@ -24,12 +24,25 @@ public class LoginController {
     public LoginController(EmployeRepository employeRepository) {
         this.employeRepository = employeRepository;
     }
-
+    
+    /** Mapping de requête GET pour la racine du site et qui enverra vers la page de login
+     * 
+     * @return une String contenant "login" qui sera envoyée au ViewResolver afin de servir le template du même nom
+     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String loginPage() {
         return "login";
     }
 
+    /** Mapping de requête POST pour la racine du site qui correspond à la validation des champs entrées par
+     * l'utilisateur lorsqu'il tente de se login. Enverra donc vers la page gestionnaire (hardcodée) ou vers 
+     * une page employée qui connaitra son identité.
+     * 
+     * @param username Le nom d'utilisateur entré
+     * @param password Le mot de passe entré
+     * @param model Le Model qui servira à envoyer des attributs vers le template
+     * @return
+     */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String welcomePage(@RequestParam String username, @RequestParam String password, Model model) {
 

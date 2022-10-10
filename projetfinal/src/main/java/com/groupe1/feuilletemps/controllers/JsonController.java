@@ -41,6 +41,13 @@ public class JsonController {
         this.repo_entree_projet = repo_entree_projet;
     }
 
+    /** Ce mapping de requête reçoit le formulaire rempli de l'employé du body de la requête AJAX et renvoi 
+     *  l'objet Resultat sérialisé à la page. Si ce formulaire ne respecte pas toute les règles on met à jour
+     *  une variable globale qui servira si on décide d'envoyer tout de même le formulaire malgré les erreurs.
+     * 
+     * @param projetsString La liste d'objets EmployeProjet correspondant au formulaire de l'employé pour une semaine
+     * @return L'objet Resultat indiquant si le formulaire respecte les règles de l'entreprise
+     */
     @RequestMapping(value = "/getresultat", method = RequestMethod.POST)
     public ResponseEntity<String> posted(@RequestBody String projetsString) {
         // On assume que le formulaire respecte les regles
@@ -63,7 +70,13 @@ public class JsonController {
         String jsonResultat = EcritureJson.ecrireJsonString(resultat);
         return ResponseEntity.ok(jsonResultat);
     }
-
+    
+    /** Mapping de requête utilisé pour l'envoi du formulaire vers le serveur. On vérifie la variable globale afin
+     *  de savoir s'il s'agit d'un formulaire validé et on le passe à la fonction ajouterFeuilleTemps(String, boolean).
+     * 
+     * @param projetsString La liste d'objets EmployeProjet correspondant au formulaire de l'employé pour une semaine
+     * @return Un booleen true indiquant que la feuille de temps a bien été persistée
+     */
     @RequestMapping(value = "/submitjson", method = RequestMethod.POST)
     public ResponseEntity<Boolean> submit(@RequestBody String projetsString) {
 
@@ -77,6 +90,11 @@ public class JsonController {
         return ResponseEntity.ok(true);
     }
 
+    /** Cette méthode s'occupe de persister la feuille de temps dans la base de données
+     * 
+     * @param projetsString La liste d'objets EmployeProjet correspondant au formulaire de l'employé pour une semaine
+     * @param estValidee détermine si la feuille a été validée ou non par rapport au respect des règles
+     */
     public void ajouterFeuilleTemps(String projetsString, boolean estValidee) {
         ArrayList<EmployeProjet> employe_projets = LecteurJson.lireStringJson(projetsString);
         ArrayList<EntreeProjet> entree_projets = new ArrayList<>();
@@ -89,6 +107,13 @@ public class JsonController {
         repo_feuille.save(feuille_temps);
     }
 
+    /** Cette méthode s'occupe de populer le tableau d'entrée projet relatif à une feuille de temps et les persiste 
+     *  dans la base de données, le ArrayList<EntreeProjet> entree_projets contiendra donc toute les EntreeProjet
+     *  contenues dans le formulaire de l'employé
+     * 
+     * @param employe_projets Un ArrayList<EmployeProjet> correspondant au formulaire de l'employé
+     * @param entree_projets Un ArrayList<EntreeProjet> vide qui sera remplit et persisté avec la feuille de temps
+     */
     public void populerEntreeProjets(ArrayList<EmployeProjet> employe_projets, ArrayList<EntreeProjet> entree_projets) {
         for (EmployeProjet ep : employe_projets) {
             Long numeroProjet = Long.valueOf(ep.getNumeroProjet());
