@@ -83,5 +83,12 @@
 - Préparation de la présentation du 26
 - Burndown chart
   
-## 26 septembre 2022
-## 29 septembre 2022
+## 3 octobre 2022
+- Présentation du sprint 2
+
+## 6 octobre 2022
+- Définition et distribution des tâches restante
+
+## 10 octobre 2022
+- Gestion Trello
+- préparation des documents de remise (screenshot, journal de bord)
