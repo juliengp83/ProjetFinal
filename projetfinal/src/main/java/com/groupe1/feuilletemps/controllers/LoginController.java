@@ -1,6 +1,9 @@
 package com.groupe1.feuilletemps.controllers;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,6 +51,11 @@ public class LoginController {
 
         if (username.equals("gestionnaire") && password.equals("gestionnaire")) {
             Iterable<Employe> employes = employeRepository.findAll();
+            Date dateSemaine = new Date(System.currentTimeMillis() - TimeUnit.DAYS.toMillis(14));
+            SimpleDateFormat formatDate = new SimpleDateFormat("w");
+            String numeroDeSemaine = formatDate.format(dateSemaine);
+            int numeroDeSemaineCourant = Integer.parseInt(numeroDeSemaine);
+            model.addAttribute("numeroDeSemaineCourant", numeroDeSemaineCourant);
             model.addAttribute("employes", employes);
 
             return "gestionnaire";
