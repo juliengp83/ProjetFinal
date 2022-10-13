@@ -67,6 +67,7 @@
 ## 13 ocobtre 2022
 * Présentation du projet
 
+***
 * Personnellement, j'ai vraiment aimé le projet et le challenge que nous nous sommes donnés. Par contre, nous avons fait 
 * vraiment plus pour le sprint 2 alors le sprint 3 fut beaucoup plus court et de mon côté j'avais plein d'entrevue et de 
 * préparation d'entrevue et de stage donc j'ai vraiment mis l'accent sur cela. 
