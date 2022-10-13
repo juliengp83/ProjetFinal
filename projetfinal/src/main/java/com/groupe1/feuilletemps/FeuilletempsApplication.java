@@ -18,7 +18,6 @@ public class FeuilletempsApplication {
 		SpringApplication.run(FeuilletempsApplication.class, args);
 	}
 
-	 	
 	@Bean
 	public CommandLineRunner data_loader(EmployeRepository repo_emp, ProjetRepository repo_proj) {
 		return new CommandLineRunner() {
@@ -46,16 +45,16 @@ public class FeuilletempsApplication {
 				repo_proj.save(p999);
 
 				Employe employe1 = new Employe(1L, "Hamdael", "Steelbeard", "hamdael@julexmile.com",
-					"hamdael", AES.encrypt("hamdael123", "bBgLrINTjBINrm7"));
+						"hamdael", AES.encrypt("hamdael123", "bBgLrINTjBINrm7"));
 				Employe employe2 = new Employe(1112L, "Thralmig", "Deepbrew", "thralmig@julexmile.com",
-					"thralmig", AES.encrypt("thralmig123", "bBgLrINTjBINrm7"));
+						"thralmig", AES.encrypt("thralmig123", "bBgLrINTjBINrm7"));
 				Employe employe3 = new Employe(3L, "Mundaeth", "Dragonbender", "mundaeth@julexmile.com",
-					"mundaeth",	AES.encrypt("mundaeth123", "bBgLrINTjBINrm7"));
+						"mundaeth", AES.encrypt("mundaeth123", "bBgLrINTjBINrm7"));
 				Employe employe4 = new Employe(4L, "Thromdol", "Hillbreaker", "thromdol@julexmile.com",
-				    "thromdol", AES.encrypt("thromdol123", "bBgLrINTjBINrm7"));
-				Employe employe5 = new Employe(5L, "Valgid", "Honordigger", "valgid@julexmile.com", 
-					"valgid", AES.encrypt("valgid123", "bBgLrINTjBINrm7"));				
-					
+						"thromdol", AES.encrypt("thromdol123", "bBgLrINTjBINrm7"));
+				Employe employe5 = new Employe(5L, "Valgid", "Honordigger", "valgid@julexmile.com",
+						"valgid", AES.encrypt("valgid123", "bBgLrINTjBINrm7"));
+
 				employe1.ajouterProjet(p100);
 				employe1.ajouterProjet(p1000);
 
@@ -66,7 +65,7 @@ public class FeuilletempsApplication {
 				employe2.ajouterProjet(p997);
 				employe2.ajouterProjet(p998);
 				employe2.ajouterProjet(p999);
-			
+
 				employe3.ajouterProjet(p1000);
 				employe3.ajouterProjet(p500);
 				employe3.ajouterProjet(p100);
@@ -81,7 +80,7 @@ public class FeuilletempsApplication {
 
 				employe5.ajouterProjet(p1000);
 				employe5.ajouterProjet(p100);
-			
+
 				repo_emp.save(employe1);
 				repo_emp.save(employe2);
 				repo_emp.save(employe3);
@@ -89,31 +88,33 @@ public class FeuilletempsApplication {
 				repo_emp.save(employe5);
 
 				// ajout d'un employe admin et regulier juste pour tester rapidement
-				Employe admin = new Employe(1000L, "Emile", "Tremblay", "EmileX@123.com", "admin",
-						AES.encrypt("", "bBgLrINTjBINrm7"));
-				admin.ajouterProjet(p1000);
-				admin.ajouterProjet(p500);
-				admin.ajouterProjet(p100);
-				admin.ajouterProjet(p995);
-				admin.ajouterProjet(p996);
-				admin.ajouterProjet(p997);
-				admin.ajouterProjet(p998);
-				admin.ajouterProjet(p999);
+				// Employe admin = new Employe(1000L, "Emile", "Tremblay", "EmileX@123.com",
+				// "admin",
+				// AES.encrypt("", "bBgLrINTjBINrm7"));
+				// admin.ajouterProjet(p1000);
+				// admin.ajouterProjet(p500);
+				// admin.ajouterProjet(p100);
+				// admin.ajouterProjet(p995);
+				// admin.ajouterProjet(p996);
+				// admin.ajouterProjet(p997);
+				// admin.ajouterProjet(p998);
+				// admin.ajouterProjet(p999);
 
-				repo_emp.save(admin);
-				Employe regulier = new Employe(1001L, "Emile", "Tremblay", "3@123.com", "reg",
-						AES.encrypt("", "bBgLrINTjBINrm7"));
-				regulier.ajouterProjet(p1000);
-				regulier.ajouterProjet(p500);
-				regulier.ajouterProjet(p100);
-				regulier.ajouterProjet(p995);
-				regulier.ajouterProjet(p996);
-				regulier.ajouterProjet(p997);
-				regulier.ajouterProjet(p998);
-				regulier.ajouterProjet(p999);
-				repo_emp.save(regulier);
+				// repo_emp.save(admin);
+				// Employe regulier = new Employe(1001L, "Emile", "Tremblay", "3@123.com",
+				// "reg",
+				// AES.encrypt("", "bBgLrINTjBINrm7"));
+				// regulier.ajouterProjet(p1000);
+				// regulier.ajouterProjet(p500);
+				// regulier.ajouterProjet(p100);
+				// regulier.ajouterProjet(p995);
+				// regulier.ajouterProjet(p996);
+				// regulier.ajouterProjet(p997);
+				// regulier.ajouterProjet(p998);
+				// regulier.ajouterProjet(p999);
+				// repo_emp.save(regulier);
 			}
-			
+
 		};
 	}
 }
