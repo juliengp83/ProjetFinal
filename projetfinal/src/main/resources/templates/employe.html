@@ -12,7 +12,7 @@
 
     <!-- quick live server pour frontend -->
     <!-- <link href="../static/styles/semantic-dist/semantic.css" rel="stylesheet" />
-    <link href="../static/styles/employe_style.css" rel="stylesheet" />
+    <link href="../static/styles/employestyle.css" rel="stylesheet" />
     <script src="../static/scripts/jquery-3.6.0.min.js"></script>
     <script src="../static/styles/semantic-dist/semantic.js"></script>
     <script src="../static/scripts/script.js" defer></script> -->
@@ -184,7 +184,11 @@
 
         <div class="mySlides fade">
           <div class="slide-content">
-            <i class="check circle icon"></i>
+            <h2>
+              Merci <span th:text="${e.prenom}"></span>, votre formulaire a été
+              envoyé.
+            </h2>
+            <a class="ui teal button" type="button" onclick="location.href = '/'">Se déconnecter</a>
           </div>
         </div>
 

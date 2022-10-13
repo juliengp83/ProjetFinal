@@ -54,3 +54,13 @@ d'introduire une validation dans la classe JsonController afin de
 ## Rencontre 12: (25 septembre 2022)
 - Suite du développement de la page gestionnaire
 - Écriture du cahier de charges sprint 2
+
+## Rencontre 13 (3 octobre 2022)
+- Présentation du sprint 2
+
+## Rencontre 14 (6 octobre 2022)
+- Définition et distribution des tâches restante
+
+## Rencontre 15 (10 octobre 2022)
+- Rencontre final d'avancement
+- Finalisation du projet

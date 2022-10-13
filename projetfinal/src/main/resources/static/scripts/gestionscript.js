@@ -4,6 +4,14 @@ $(document).ready(function () {
   const formulaires = [];
   // setup debut
   $("#table-container").hide();
+  const val = $("#lastWeekNumber").val();
+  $.ajax({
+    type: "GET",
+    url: "getfeuilles?selectedWeek=" + val,
+    success: function (f) {
+      refreshCards(f);
+    },
+  });
 
   // -----------------------------ON_CLICK_EVENTS----------------------------------
 
@@ -52,7 +60,7 @@ $(document).ready(function () {
   // cliquer sur un bouton class=".btn-approuver" va approuver le formulaire en argument
   function approuver(formulaire) {
     $(".btn-approuver").click(function (e) {
-      e.preventDefault(); 
+      e.preventDefault();
       $(this).closest("#table-container").hide();
       $.ajax({
         type: "POST",

@@ -69,3 +69,17 @@ les envoyer à la validation et renvoyer une réponse à la page appelante afin 
 ## 25 septembre 2022
 * Assister Émile avec le côté backend de la page gestionnaire
 * Travailler sur le cahier des charges
+
+## 3 octobre 2022
+* Présentation du sprint 2
+
+
+## 6 octobre 2022
+* Définition de la portée du Sprint 3 et ce que nous voulons implémenter
+* Séparation des tâches
+
+## 12 octobre 2022
+* Faire le cahier des charges du Sprint 3
+* Ajouter les 52 semaines au menu déroulant de la page gestionnaire
+## 13 octobre 2022
+* Présentation du sprint 3

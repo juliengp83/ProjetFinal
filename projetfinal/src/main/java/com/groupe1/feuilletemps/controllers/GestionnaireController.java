@@ -14,10 +14,7 @@ import com.google.gson.Gson;
 import com.groupe1.feuilletemps.data.FeuilleDeTempsRepository;
 import com.groupe1.feuilletemps.modeles.FeuilleDeTemps;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Controller
-@Slf4j
 public class GestionnaireController {
     private final FeuilleDeTempsRepository repo_feuilles;
 
@@ -27,6 +24,13 @@ public class GestionnaireController {
     }
 
 
+    /** Ce mapping de requête est en charge de renvoyer les feuilles de temps sérialisées en JSON de la semaine 
+     *  correspondant au numéro de semaine de l'année passé en paramètre
+     * 
+     * @param selectedWeek Paramètre reçu dans l'URL de l'appel AJAX correspondant au numéro de la semaine pour
+     * laquelle on veut obtenir les feuilles de temps
+     * @return Une string JSON des feuilles de temps sérialisées pour la semaine
+     */
     @RequestMapping(value = "/getfeuilles", method = RequestMethod.GET)
     public ResponseEntity<String> envoyerFeuilles(@RequestParam String selectedWeek) {
 
@@ -40,6 +44,12 @@ public class GestionnaireController {
         return ResponseEntity.ok(feuilleJson.toString());
     }
 
+    /** Ce mapping de requête est en charge d'approuver la feuille de temps dont le id est passé en paramètre et de
+     *  renvoyer la liste des feuilles de temps à la page
+     * 
+     * @param id Paramètre reçu par l'appel AJAX correspondant au id de la feuille de temps à approuver
+     * @return Une String JSON contenant toute les feuilles de temps
+     */
     @RequestMapping(value = "/approuvefeuille", method = RequestMethod.POST)
     public ResponseEntity<String> approuverFeuille(@RequestParam String id) {
 
@@ -55,7 +65,4 @@ public class GestionnaireController {
 
         return ResponseEntity.ok(feuilleJson);
     }
- 
-
-    
 }
