@@ -40,3 +40,4 @@ build/
 java/build/**
 target/test-classes/com/groupe1/MainTest.class
 target/classes/com/groupe1/Main.class
+projetfinal/src/main/resources/application.yml

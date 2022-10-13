@@ -57,3 +57,18 @@
 
 ## 22 septembre
 * Creation de l'entité feuille de temps et planner le fonctionnement de tout ca
+
+## 3 octobre 2022
+* Présentation du sprint 2
+
+## 6 octobre 2022
+* Définition et distribution des tâches restante
+
+## 13 ocobtre 2022
+* Présentation du projet
+
+* Personnellement, j'ai vraiment aimé le projet et le challenge que nous nous sommes donnés. Par contre, nous avons fait 
+* vraiment plus pour le sprint 2 alors le sprint 3 fut beaucoup plus court et de mon côté j'avais plein d'entrevue et de 
+* préparation d'entrevue et de stage donc j'ai vraiment mis l'accent sur cela. 
+* Par contre, c'était une très belle expérience et en stage je rencontre déjà des moments de transfert de connaissances 
+* lors de l'exploration de nouvelles technologies.
